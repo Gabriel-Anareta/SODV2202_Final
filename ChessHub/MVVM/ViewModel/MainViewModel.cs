@@ -20,7 +20,7 @@ namespace ChessClient.MVVM.ViewModel
                 if (_relayCommand == value)
                     return;
                 _relayCommand = value;
-                OnPropertyChanged();
+                OnPropertyChanged(); // notify form elements
             }
         }
 
@@ -33,8 +33,8 @@ namespace ChessClient.MVVM.ViewModel
                 if (_username == value) 
                     return;
                 _username = value; 
-                OnPropertyChanged();
-                ConnectToServerCommand.NotifyCanExecuteChanged();
+                OnPropertyChanged(); // notify form elements
+                ConnectToServerCommand.NotifyCanExecuteChanged(); // notify ConnectToServerCommand
             }
         }
 

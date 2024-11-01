@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChessClient.Net.IO;
+using System;
 using System.Net.Sockets;
 
 namespace ChessClient.Net
@@ -16,7 +17,14 @@ namespace ChessClient.Net
         public void ConnectToServer(string username)
         {
             if (!_client.Connected)
+            {
                 _client.Connect("127.0.0.1", PORT);
+                PacketBuilder connectPacket = new PacketBuilder();
+                connectPacket.WriteOpCode(0); // using opCode 0 temporalily for testing
+                connectPacket.WriteString(username);
+                _client.Client.Send(connectPacket.GetPacketBytes());
+            }
+                
         }
     }
 }
