@@ -22,8 +22,13 @@ namespace ChessServer
 
             _users = new List<Client>();
 
-            Client client = new Client(_listener.AcceptTcpClient());
-            _users.Add(client);
+            while (true)
+            {
+                Client client = new Client(_listener.AcceptTcpClient());
+                _users.Add(client);
+
+                // Broadcast connection to everyone on server
+            }
         }
     }
 }

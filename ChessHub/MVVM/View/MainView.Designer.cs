@@ -31,8 +31,8 @@
             components = new System.ComponentModel.Container();
             splitContainer1 = new SplitContainer();
             tb_Username = new TextBox();
-            btn_Connect = new Button();
             mainViewModelBindingSource = new BindingSource(components);
+            btn_Connect = new Button();
             rtb_Users = new RichTextBox();
             btn_Send = new Button();
             rtb_message = new RichTextBox();
@@ -70,11 +70,16 @@
             // tb_Username
             // 
             tb_Username.BorderStyle = BorderStyle.FixedSingle;
+            tb_Username.DataBindings.Add(new Binding("Text", mainViewModelBindingSource, "Username", true, DataSourceUpdateMode.OnPropertyChanged));
             tb_Username.Location = new Point(0, 1);
             tb_Username.Margin = new Padding(0);
             tb_Username.Name = "tb_Username";
             tb_Username.Size = new Size(229, 27);
             tb_Username.TabIndex = 2;
+            // 
+            // mainViewModelBindingSource
+            // 
+            mainViewModelBindingSource.DataSource = typeof(ChessClient.MVVM.ViewModel.MainViewModel);
             // 
             // btn_Connect
             // 
@@ -89,10 +94,6 @@
             btn_Connect.TabIndex = 1;
             btn_Connect.Text = "Connect";
             btn_Connect.UseVisualStyleBackColor = false;
-            // 
-            // mainViewModelBindingSource
-            // 
-            mainViewModelBindingSource.DataSource = typeof(ChessClient.MVVM.ViewModel.MainViewModel);
             // 
             // rtb_Users
             // 
@@ -143,7 +144,7 @@
             Controls.Add(splitContainer1);
             Name = "MainView";
             Text = "Main View";
-            Load += this.MainView_Load;
+            Load += MainView_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);

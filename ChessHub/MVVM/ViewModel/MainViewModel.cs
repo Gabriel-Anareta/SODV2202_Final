@@ -15,9 +15,8 @@ namespace ChessClient.MVVM.ViewModel
 
         public RelayCommand ConnectToServerCommand 
         {
-            get => _relayCommand;
-            set 
-            {
+            get { return _relayCommand; }
+            set {
                 if (_relayCommand == value)
                     return;
                 _relayCommand = value;
@@ -25,11 +24,27 @@ namespace ChessClient.MVVM.ViewModel
             }
         }
 
+        private string _username;
+
+        public string Username
+        {
+            get { return _username; }
+            set {
+                if (_username == value) 
+                    return;
+                _username = value; 
+                OnPropertyChanged();
+                ConnectToServerCommand.NotifyCanExecuteChanged();
+            }
+        }
 
         public MainViewModel()
         {
             _server = new Server();
-            ConnectToServerCommand = new RelayCommand(_server.ConnectToServer);
+            ConnectToServerCommand = new RelayCommand(
+                obj => _server.ConnectToServer(Username),
+                obj => !string.IsNullOrEmpty(Username)
+            );
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

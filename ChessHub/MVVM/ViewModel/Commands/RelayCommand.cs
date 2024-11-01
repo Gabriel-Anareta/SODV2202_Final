@@ -9,22 +9,22 @@ namespace ChessClient.MVVM.ViewModel.Commands
 {
     public class RelayCommand : ICommand
     {
-        private Action _execute;
-        private Func<bool> _canExecute;
+        private Action<object> _execute;
+        private Func<object, bool> _canExecute;
 
         public event EventHandler CanExecuteChanged;
 
-        public RelayCommand(Action execute, Func<bool> canExecute = null)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
         public bool CanExecute(object? parameter)
-            => _canExecute == null || _canExecute();
+            => _canExecute == null || _canExecute(parameter);
 
         public void Execute(object? parameter)
-            => _execute();
+            => _execute(parameter);
 
         public void NotifyCanExecuteChanged()
             => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
