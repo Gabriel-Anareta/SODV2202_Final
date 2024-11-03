@@ -30,18 +30,18 @@
         {
             components = new System.ComponentModel.Container();
             splitContainer1 = new SplitContainer();
+            lb_Users = new ListBox();
             tb_Username = new TextBox();
-            mainViewModelBindingSource = new BindingSource(components);
+            clientViewModelBindingSource = new BindingSource(components);
             btn_Connect = new Button();
-            rtb_Users = new RichTextBox();
+            lb_Messages = new ListBox();
             btn_Send = new Button();
             rtb_message = new RichTextBox();
-            rtb_messages = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)mainViewModelBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)clientViewModelBindingSource).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -53,38 +53,45 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(lb_Users);
             splitContainer1.Panel1.Controls.Add(tb_Username);
             splitContainer1.Panel1.Controls.Add(btn_Connect);
-            splitContainer1.Panel1.Controls.Add(rtb_Users);
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(lb_Messages);
             splitContainer1.Panel2.Controls.Add(btn_Send);
             splitContainer1.Panel2.Controls.Add(rtb_message);
-            splitContainer1.Panel2.Controls.Add(rtb_messages);
             splitContainer1.Size = new Size(782, 453);
             splitContainer1.SplitterDistance = 225;
             splitContainer1.SplitterWidth = 1;
             splitContainer1.TabIndex = 0;
             // 
+            // lb_Users
+            // 
+            lb_Users.FormattingEnabled = true;
+            lb_Users.Location = new Point(0, 61);
+            lb_Users.Name = "lb_Users";
+            lb_Users.Size = new Size(229, 384);
+            lb_Users.TabIndex = 3;
+            // 
             // tb_Username
             // 
-            tb_Username.BorderStyle = BorderStyle.FixedSingle;
-            tb_Username.DataBindings.Add(new Binding("Text", mainViewModelBindingSource, "Username", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_Username.Location = new Point(0, 1);
+            tb_Username.DataBindings.Add(new Binding("Text", clientViewModelBindingSource, "Username", true, DataSourceUpdateMode.OnPropertyChanged));
+            tb_Username.Location = new Point(0, 0);
             tb_Username.Margin = new Padding(0);
             tb_Username.Name = "tb_Username";
             tb_Username.Size = new Size(229, 27);
             tb_Username.TabIndex = 2;
             // 
-            // mainViewModelBindingSource
+            // clientViewModelBindingSource
             // 
-            mainViewModelBindingSource.DataSource = typeof(ChessClient.MVVM.ViewModel.MainViewModel);
+            clientViewModelBindingSource.DataSource = typeof(ChessClient.MVVM.ViewModel.ClientViewModel);
             // 
             // btn_Connect
             // 
             btn_Connect.BackColor = Color.Silver;
-            btn_Connect.DataBindings.Add(new Binding("Command", mainViewModelBindingSource, "ConnectToServerCommand", true));
+            btn_Connect.DataBindings.Add(new Binding("Command", clientViewModelBindingSource, "ConnectToServerCommand", true));
             btn_Connect.FlatStyle = FlatStyle.Flat;
             btn_Connect.ForeColor = Color.White;
             btn_Connect.Location = new Point(0, 27);
@@ -95,18 +102,18 @@
             btn_Connect.Text = "Connect";
             btn_Connect.UseVisualStyleBackColor = false;
             // 
-            // rtb_Users
+            // lb_Messages
             // 
-            rtb_Users.Location = new Point(0, 61);
-            rtb_Users.Margin = new Padding(0);
-            rtb_Users.Name = "rtb_Users";
-            rtb_Users.Size = new Size(229, 392);
-            rtb_Users.TabIndex = 0;
-            rtb_Users.Text = "";
+            lb_Messages.FormattingEnabled = true;
+            lb_Messages.Location = new Point(0, 0);
+            lb_Messages.Name = "lb_Messages";
+            lb_Messages.Size = new Size(556, 384);
+            lb_Messages.TabIndex = 3;
             // 
             // btn_Send
             // 
             btn_Send.BackColor = Color.Silver;
+            btn_Send.DataBindings.Add(new Binding("Command", clientViewModelBindingSource, "SendMessageToServerCommand", true));
             btn_Send.FlatStyle = FlatStyle.Flat;
             btn_Send.ForeColor = Color.White;
             btn_Send.Location = new Point(459, 396);
@@ -120,21 +127,13 @@
             // 
             // rtb_message
             // 
+            rtb_message.DataBindings.Add(new Binding("Text", clientViewModelBindingSource, "Message", true, DataSourceUpdateMode.OnPropertyChanged));
             rtb_message.Location = new Point(0, 396);
             rtb_message.Margin = new Padding(0);
             rtb_message.Name = "rtb_message";
             rtb_message.Size = new Size(459, 57);
             rtb_message.TabIndex = 1;
             rtb_message.Text = "";
-            // 
-            // rtb_messages
-            // 
-            rtb_messages.Location = new Point(0, 0);
-            rtb_messages.Margin = new Padding(0);
-            rtb_messages.Name = "rtb_messages";
-            rtb_messages.Size = new Size(556, 396);
-            rtb_messages.TabIndex = 0;
-            rtb_messages.Text = "";
             // 
             // MainView
             // 
@@ -150,19 +149,21 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)mainViewModelBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)clientViewModelBindingSource).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private SplitContainer splitContainer1;
-        private RichTextBox rtb_Users;
-        private RichTextBox rtb_messages;
         private Button btn_Connect;
-        private TextBox tb_Username;
         private Button btn_Send;
         private RichTextBox rtb_message;
-        private BindingSource mainViewModelBindingSource;
+        private TextBox tb_Username;
+        private BindingSource clientViewModelBindingSource;
+        private DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn uIDDataGridViewTextBoxColumn;
+        private ListBox lb_Users;
+        private ListBox lb_Messages;
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessClient.Net.IO
+namespace ChessServer.Net.IO
 {
     public class PacketBuilder
     {
         private MemoryStream _memStream;
-        
+
         public PacketBuilder()
         {
             _memStream = new MemoryStream();

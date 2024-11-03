@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChessServer.Net.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,13 +12,14 @@ namespace ChessServer
     internal class Program
     {
         private const int PORT = 5000;
-        private static TcpListener _listener;
+        private const string HOST = "127.0.0.1";
 
+        private static TcpListener _listener;
         private static List<Client> _users;
         
         static void Main(string[] args)
         {
-            _listener = new TcpListener(IPAddress.Parse("127.0.0.1"), PORT);
+            _listener = new TcpListener(IPAddress.Parse(HOST), PORT);
             _listener.Start(); // implement blacklog ?
 
             _users = new List<Client>();
@@ -28,7 +30,49 @@ namespace ChessServer
                 _users.Add(client);
 
                 // Broadcast connection to everyone on server
+                BroadcastConnection();
             }
+        }
+
+        private static void BroadcastConnection() // broadcast all connected users to all clients
+        {
+            foreach (Client userClient in _users)
+            {
+                foreach (Client user in _users)
+                {
+                    PacketBuilder broadcastPacket = new PacketBuilder();
+                    broadcastPacket.WriteOpCode(1);
+                    broadcastPacket.WriteMessage(user.Username);
+                    broadcastPacket.WriteMessage(user.UID.ToString());
+                    userClient.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
+                }
+            }
+        }
+
+        public static void BroadcastMessage(string message)
+        {
+            foreach (Client user in _users)
+            {
+                PacketBuilder broadcastPacket = new PacketBuilder();
+                broadcastPacket.WriteOpCode(5);
+                broadcastPacket.WriteMessage(message);
+                user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
+            }
+        }
+
+        public static void BroadcastDisconnect(Guid uid)
+        {
+            Client disconnectedUser = _users.Where(user => user.UID == uid).FirstOrDefault();
+            _users.Remove(disconnectedUser);
+            foreach (Client user in _users)
+            {
+                PacketBuilder broadcastPacket = new PacketBuilder();
+                broadcastPacket.WriteOpCode(10);
+                broadcastPacket.WriteMessage(uid.ToString());
+                user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
+            }
+
+            BroadcastMessage($"[{DateTime.Now}]: {disconnectedUser.Username} Disconnected!");
         }
     }
 }

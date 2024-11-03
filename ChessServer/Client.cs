@@ -27,6 +27,38 @@ namespace ChessServer
             Username = _packetReader.ReadMessage();
 
             Console.WriteLine($"[{DateTime.Now}]: Client has connected with the username: {Username}");
+
+            Task.Run(() => ProcessPackets());
+        }
+
+        private void ValidateOpCode()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ProcessPackets()
+        {
+            while (true)
+            {
+                try
+                {
+                    byte opCode = _packetReader.ReadByte();
+                    switch (opCode)
+                    {
+                        case 5:
+                            string message = _packetReader.ReadMessage();
+                            Console.WriteLine($"[{DateTime.Now}]: {Username} sent message: {message}");
+                            Program.BroadcastMessage(message);
+                            break;
+                    }
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine($"[{DateTime.Now}]: {UID} Disconnected!");
+                    Program.BroadcastDisconnect(UID);
+                    ClientSocket.Close();
+                }
+            }
         }
     }
 }
