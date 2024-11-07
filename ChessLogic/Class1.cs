@@ -1,4 +1,4 @@
-﻿namespace ChessLogic
+﻿namespace ChessModel
 {
     public class Class1
     {
