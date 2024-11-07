@@ -29,5 +29,9 @@ namespace ChessModel
             copy.HasMoved = this.HasMoved;
             return copy;
         }
+
+        public override IEnumerable<Move> GetMoves(Position from, Board board)
+            => MovesInDirections(from, board, Directions)
+                .Select(to => new NormalMove(from, to));
     }
 }

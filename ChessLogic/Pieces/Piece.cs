@@ -21,6 +21,12 @@ namespace ChessModel
         /// <returns>A new instance of the respective piece type</returns>
         public abstract Piece Copy();
 
+        /// <summary>
+        /// Gets all valid moves a piece can make from their current position
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="board"></param>
+        /// <returns>An IEnumerable with all the moves piece can make from their current position</returns>
         public abstract IEnumerable<Move> GetMoves(Position from, Board board);
 
         /// <summary>
