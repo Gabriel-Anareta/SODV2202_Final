@@ -21,6 +21,11 @@ namespace ChessModel
         /// <param name="board"></param>
         public abstract void Execute(Board board);
 
+        /// <summary>
+        /// Checks the validity of a current move on check positions
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns>True if the position does not bring the king into check or if the move takes the king out of check</returns>
         public virtual bool IsValidMove(Board board)
         {
             PlayerColor color = board[From].Color;
