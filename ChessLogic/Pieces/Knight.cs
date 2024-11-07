@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChessModel
 {
+    /// <summary>
+    /// Represents a knight - implements piece
+    /// </summary>
+    /// <param name="color"></param>
     public class Knight(PlayerColor color) : Piece
     {
         public override PieceType Type => PieceType.Knight;
