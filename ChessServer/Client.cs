@@ -50,6 +50,11 @@ namespace ChessServer
                             Console.WriteLine($"[{DateTime.Now}]: {Username} sent message: {message}");
                             Program.BroadcastMessage(message);
                             break;
+                        case 10:
+                            Console.WriteLine($"[{DateTime.Now}]: {UID} Disconnected!");
+                            Program.BroadcastDisconnect(UID);
+                            ClientSocket.Close();
+                            break;
                     }
                 }
                 catch(Exception)

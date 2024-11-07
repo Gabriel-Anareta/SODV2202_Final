@@ -11,6 +11,14 @@ namespace ChessServer
 {
     internal class Program
     {
+        /*
+        opCode key:
+        0 - connect client
+        1 - broadcasted client connection
+        5 - broadcasted message
+        10 - broadcasted client disconnection
+         */
+
         private const int PORT = 5000;
         private const string HOST = "127.0.0.1";
 
@@ -63,6 +71,9 @@ namespace ChessServer
         public static void BroadcastDisconnect(Guid uid)
         {
             Client disconnectedUser = _users.Where(user => user.UID == uid).FirstOrDefault();
+            if (disconnectedUser == null)
+                return;
+
             _users.Remove(disconnectedUser);
             foreach (Client user in _users)
             {

@@ -6,8 +6,17 @@ namespace ChessClient.Net
 {
     public sealed class Server
     {
+        /*
+        opCode key:
+        0 - connect client
+        1 - broadcasted client connection
+        5 - broadcasted message
+        10 - broadcasted client disconnection
+         */
+
         private const int PORT = 5000;
         private const string HOST = "127.0.0.1";
+
         private TcpClient _client;
         public PacketReader PacketReader;
 
@@ -15,38 +24,40 @@ namespace ChessClient.Net
         public event Action MessageRecievedEvent;
         public event Action UserDisconnectedEvent;
 
-
         public Server()
         {
             _client = new TcpClient();
         }
 
+        public bool ClientIsConnected()
+            => _client.Connected;
+
         public void ConnectToServer(string username)
         {
-            if (_client.Connected)
+            if (ClientIsConnected())
+                return;
+
+            if (string.IsNullOrEmpty(username))
                 return;
 
             _client.Connect(HOST, PORT);
             PacketReader = new PacketReader(_client.GetStream());
 
-            if (!string.IsNullOrEmpty(username))
-            {
-                PacketBuilder connectPacket = new PacketBuilder();
-                connectPacket.WriteOpCode(0); // using opCode 0 temporalily for testing
-                connectPacket.WriteMessage(username);
-                _client.Client.Send(connectPacket.GetPacketBytes());
-            }
+            PacketBuilder connectPacket = new PacketBuilder();
+            connectPacket.WriteOpCode(0); // using opCode 0 temporalily for testing
+            connectPacket.WriteMessage(username);
+            _client.Client.Send(connectPacket.GetPacketBytes());
 
             ReadPackets();
         }
 
-        public void SendMessageToServer(string message)
+        public void SendMessageToServer(string message, byte opCode)
         {
-            if (!_client.Connected)
+            if (!ClientIsConnected())
                 return;
 
             PacketBuilder messagePacket = new PacketBuilder();
-            messagePacket.WriteOpCode(5); // using opCode 5 temporalily for testing
+            messagePacket.WriteOpCode(opCode);
             messagePacket.WriteMessage(message);
             _client.Client.Send(messagePacket.GetPacketBytes());
         }

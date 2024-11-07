@@ -18,17 +18,16 @@ namespace ChessClient
                 new MainView(),
                 new MainView()
             };
-            
+
             foreach (var form in forms)
             {
-                form.FormClosed += onFormClosed;
+                //form.FormClosing += OnFormClosing;
                 form.Show();
-            }
+            }  
         }
 
-        private void onFormClosed(object? sender, EventArgs e)
-        {
-            // handle form closing - send a disconnect
-        }
+        public static event EventHandler FormClosing;
+        private void OnFormClosing(object? sender, EventArgs e)
+            => FormClosing?.Invoke(sender, e);
     }
 }

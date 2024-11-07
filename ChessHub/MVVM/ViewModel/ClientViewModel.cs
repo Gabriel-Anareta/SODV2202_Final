@@ -14,16 +14,12 @@ namespace ChessClient.MVVM.ViewModel
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
+        private Server _server;
+
         public List<UserModel> Users { get; set; }
         public List<string> Messages { get; set; }
 
-        private RelayCommand _relayCommand;
-        private Server _server;
-
-        // backing fields
         private string _username;
-        private string _message;
-
         public string Username
         {
             get { return _username; }
@@ -35,6 +31,8 @@ namespace ChessClient.MVVM.ViewModel
                 ConnectToServerCommand.NotifyCanExecuteChanged(); // notify ConnectToServerCommand
             }
         }
+
+        private string _message;
         public string Message
         {
             get { return _message; }
@@ -48,7 +46,6 @@ namespace ChessClient.MVVM.ViewModel
         }
 
         private RelayCommand _sendMessageToServerCommand;
-
         public RelayCommand SendMessageToServerCommand
         {
             get { return _sendMessageToServerCommand; }
@@ -56,24 +53,27 @@ namespace ChessClient.MVVM.ViewModel
                 if (_sendMessageToServerCommand == value)
                     return;
                 _sendMessageToServerCommand = value;
-                OnPropertyChanged();
+                OnPropertyChanged(); // notify form elements
             }
         }
 
+        private RelayCommand _connectToServerCommand;
         public RelayCommand ConnectToServerCommand
         {
-            get { return _relayCommand; }
+            get { return _connectToServerCommand; }
             set
             {
-                if (_relayCommand == value)
+                if (_connectToServerCommand == value)
                     return;
-                _relayCommand = value;
+                _connectToServerCommand = value;
                 OnPropertyChanged(); // notify form elements
             }
         }
 
         public ClientViewModel()
         {
+            AppContext.FormClosing += SendDisconnectToServer;
+            
             _server = new Server();
             _server.ConnectedEvent += UserConnected;
             _server.MessageRecievedEvent += MessageSent;
@@ -85,16 +85,20 @@ namespace ChessClient.MVVM.ViewModel
             ConnectToServerCommand = new RelayCommand(
                 obj => {
                     _server.ConnectToServer(Username);
-                    _server.SendMessageToServer($"[{DateTime.Now}]: {Username} has connected!");
-
+                    _server.SendMessageToServer($"[{DateTime.Now}]: {Username} has connected!", 5);
                 },
                 obj => !string.IsNullOrEmpty(Username)
             );
 
             SendMessageToServerCommand = new RelayCommand(
-                obj => _server.SendMessageToServer($"[{Username}]: {Message}"),
+                obj => _server.SendMessageToServer($"[{Username}]: {Message}", 5),
                 obj => !string.IsNullOrEmpty(Message)
             );
+        }
+        
+        private void SendDisconnectToServer(object? sender, EventArgs e)
+        {
+            _server.SendMessageToServer($"[{DateTime.Now}]: {Username} has disconnected", 10);
         }
 
         private void UserConnected()
@@ -103,10 +107,10 @@ namespace ChessClient.MVVM.ViewModel
             string uid = _server.PacketReader.ReadMessage();
 
             if (!Users.Any(user => user.UID == uid))
-            {
-                Users.Add(new UserModel(username, uid));
-                OnUsersChanged();
-            }
+                return;
+
+            Users.Add(new UserModel(username, uid));
+            OnUsersChanged();
         }
 
         private void MessageSent()
@@ -124,7 +128,7 @@ namespace ChessClient.MVVM.ViewModel
             OnUsersChanged();
         }
 
-
+        
         public event Action UsersChanged;
         private void OnUsersChanged()
             => UsersChanged?.Invoke();
