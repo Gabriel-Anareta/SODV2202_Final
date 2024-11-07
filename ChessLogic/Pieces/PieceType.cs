@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 namespace ChessModel
 {
     /// <summary>
-    /// Defines piece, player, and square colors
+    /// Defines a piece's type
     /// </summary>
-    public enum PlayerColor 
+    public enum PieceType
     {
-        White,
-        Black,
-        Red,
-        Green,
-        Yellow,
-        Blue,
+        Pawn,
+        Rook,
+        Knight,
+        Bishop,
+        Queen,
+        King,
         None
     }
 }

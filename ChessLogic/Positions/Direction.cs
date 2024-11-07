@@ -28,7 +28,7 @@ namespace ChessModel
         /// </summary>
         /// <param name="dir1"></param>
         /// <param name="dir2"></param>
-        /// <returns>Returns a new direction with the two direction values</returns>
+        /// <returns>A new direction with the two direction values</returns>
         public static Direction operator +(Direction dir1, Direction dir2)
         {
             return new Direction(dir1.FileDelta + dir2.FileDelta, dir1.RankDelta + dir2.RankDelta);
@@ -39,7 +39,7 @@ namespace ChessModel
         /// </summary>
         /// <param name="scalar"></param>
         /// <param name="dir"></param>
-        /// <returns>Returns a new scaled version of a direction</returns>
+        /// <returns>A new scaled version of a direction</returns>
         public static Direction operator *(int scalar, Direction dir)
         {
             return new Direction(scalar * dir.FileDelta, scalar * dir.RankDelta);
