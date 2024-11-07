@@ -1,5 +1,8 @@
 ﻿namespace ChessModel
 {
+    /// <summary>
+    /// Represents a classic 8x8 chess board
+    /// </summary>
     public class Board2Player : Board
     {
         public override int FILES => 8;
