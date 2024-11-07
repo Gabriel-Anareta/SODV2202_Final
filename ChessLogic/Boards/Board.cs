@@ -64,7 +64,7 @@ namespace ChessModel
         /// </summary>
         /// <param name="pos"></param>
         /// <returns>True if the given position references a null value</returns>
-        protected bool IsEmptyPosition(Position pos)
+        public bool IsEmptyPosition(Position pos)
             => this[pos] == null;
 
         /// <summary>
