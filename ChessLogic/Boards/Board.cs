@@ -79,6 +79,42 @@ namespace ChessModel
         /// <returns>A string formatted with the respective Fen form of the board</returns>
         public abstract string BoardToFen();
 
+        /// <summary>
+        /// Checks if a player is in check
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns>Returns true if the given player is in check</returns>
+        public bool IsInCheck(PlayerColor player)
+        {
+            return PiecePositionsFor(player)
+                .Any(pos => this[pos].CanCaptureOpponentKing(pos, this));
+        }
+
+        /// <summary>
+        /// Gets positions of all the pieces that a player currently has in play
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns>An IEnumerable that holds the positions of all the pieces that a player currently has in play</returns>
+        internal IEnumerable<Position> PiecePositionsFor(PlayerColor player)
+            => PiecePositions().Where(pos => this[pos].Color == player);
+
+        /// <summary>
+        /// Gets positions of all pieces on the board
+        /// </summary>
+        /// <returns>An IEnumerable that holds the positions of all the pieces</returns>
+        protected IEnumerable<Position> PiecePositions()
+        {
+            for (int file = 0; file < FILES; file++)
+            {
+                for (int rank = 0; rank < RANKS; rank++)
+                {
+                    Position pos = new Position(file, rank);
+                    if (!IsEmptyPosition(pos))
+                        yield return pos;
+                }
+            }
+        }
+
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
         protected void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
             => CollectionChanged?.Invoke(this, e);
