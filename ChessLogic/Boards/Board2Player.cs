@@ -56,7 +56,12 @@
 
         public override Board Copy()
         {
-            throw new NotImplementedException();
+            Board2Player copy = new Board2Player();
+
+            foreach (Position pos in PiecePositions())
+                copy[pos] = this[pos].Copy();
+
+            return copy;
         }
 
         public override string BoardToFen()
