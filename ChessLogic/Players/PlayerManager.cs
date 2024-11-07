@@ -8,6 +8,11 @@ namespace ChessModel
 {
     public static class PlayerManager
     {
+        /// <summary>
+        /// Gets the next player in order
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns>Returns a PlayerColor that is next in the order</returns>
         public static PlayerColor Next(this PlayerColor color)
         {
             return color switch
