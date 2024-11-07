@@ -20,5 +20,13 @@ namespace ChessModel
         /// </summary>
         /// <param name="board"></param>
         public abstract void Execute(Board board);
+
+        public virtual bool IsValidMove(Board board)
+        {
+            PlayerColor color = board[From].Color;
+            Board copy = board.Copy();
+            Execute(copy);
+            return !copy.IsInCheck(color);
+        }
     }
 }
