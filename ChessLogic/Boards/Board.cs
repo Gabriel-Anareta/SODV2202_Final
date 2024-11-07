@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +11,7 @@ namespace ChessModel
     /// <summary>
     /// Implements base board functionality and properties
     /// </summary>
-    public abstract class Board
+    public abstract class Board : INotifyCollectionChanged
     {
         public abstract int FILES { get; }
         public abstract int RANKS { get; }
@@ -24,7 +26,13 @@ namespace ChessModel
         public Piece this[int file, int rank]
         {
             get { return Pieces[file, rank]; }
-            set { Pieces[file, rank] = value; }
+            set 
+            {
+                if (Pieces[file, rank] == value)
+                    return;
+                Pieces[file, rank] = value;
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
+            }
         }
 
         /// <summary>
@@ -35,9 +43,15 @@ namespace ChessModel
         public Piece this[Position pos]
         {
             get { return this[pos.File, pos.Rank]; }
-            set { this[pos.File, pos.Rank] = value; }
+            set 
+            { 
+                if (this[pos.File, pos.Rank] == value)
+                    return;
+                this[pos.File, pos.Rank] = value;
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
+            }
         }
-
+        
         /// <summary>
         /// Initializes the board with the starting positions of pieces
         /// </summary>
@@ -70,5 +84,9 @@ namespace ChessModel
         /// </summary>
         /// <returns>A string formatted with the respective Fen form of the board</returns>
         public abstract string BoardToFen();
+
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
+        protected void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+            => CollectionChanged?.Invoke(this, e);
     }
 }
