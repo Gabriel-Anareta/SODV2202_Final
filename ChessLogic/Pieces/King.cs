@@ -33,5 +33,36 @@ namespace ChessModel
             copy.HasMoved = this.HasMoved;
             return copy;
         }
+
+        public override IEnumerable<Move> GetMoves(Position from, Board board)
+        {
+            foreach (Position pos in ValidMoves(from, board))
+            {
+                yield return new NormalMove(from, pos);
+            }
+        }
+
+        public override bool CanCaptureOpponentKing(Position from, Board board)
+        {
+            return ValidMoves(from, board)
+                .Any(pos =>
+                    board[pos] != null
+                    && board[pos].Type == PieceType.King
+                );
+        }
+
+        private IEnumerable<Position> ValidMoves(Position pos, Board board)
+        {
+            foreach (Direction dir in _allDirections)
+            {
+                Position to = pos + dir;
+
+                if (!board.IsValidPosition(to))
+                    continue;
+
+                if (board.IsEmptyPosition(pos) || board[pos].Color == Color)
+                    yield return to;
+            }
+        }
     }
 }
