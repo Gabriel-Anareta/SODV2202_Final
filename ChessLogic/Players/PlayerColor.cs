@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessModel
 {
-    public enum PlayerColor
+    public enum PlayerColor // used to define piece and player colors as well as square colors
     {
         White,
         Black,
