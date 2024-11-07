@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessModel.Moves
+namespace ChessModel
 {
     /// <summary>
     /// Represents the type of a move

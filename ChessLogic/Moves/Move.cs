@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessModel.Moves
+namespace ChessModel
 {
     /// <summary>
     /// Represents a move on a board
