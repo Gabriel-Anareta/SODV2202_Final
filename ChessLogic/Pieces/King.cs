@@ -7,7 +7,7 @@
     public class King(PlayerColor color) : Piece
     {
         public override PieceType Type => PieceType.King;
-        public override PlayerColor Color { get; } = color;
+        public override PlayerColor Color { get; }
 
         private static readonly List<Direction> _allDirections = new List<Direction>
         {
@@ -34,6 +34,12 @@
             {
                 yield return new NormalMove(from, pos);
             }
+
+            if (CanCaslte(from, board, MoveType.CastleKingSide))
+                yield return new Castle(from, MoveType.CastleKingSide, Color);
+
+            if (CanCaslte(from, board, MoveType.CastleQueenSide))
+                yield return new Castle(from, MoveType.CastleQueenSide, Color);
         }
 
         public override bool CanCaptureOpponentKing(Position from, Board board)
@@ -57,6 +63,27 @@
                 if (board.IsEmptyPosition(pos) || board[pos].Color == Color)
                     yield return to;
             }
+        }
+
+        private static bool IsUnmovedRook(Position rookPos, Board board)
+        {
+            if (board[rookPos] == null)
+                return false;
+
+            return !board[rookPos].HasMoved;
+        }
+
+        public bool CanCaslte(Position from, Board board, MoveType moveType)
+        {
+            if (HasMoved)
+                return false;
+
+            Position rookPos = moveType.RookPos(Color, from);
+            List<Position> betweenPos = moveType.BetweenPos(Color, from);
+
+            return
+                IsUnmovedRook(rookPos, board)
+                && betweenPos.All(pos => board.IsEmptyPosition(pos));
         }
     }
 }
