@@ -11,6 +11,8 @@ namespace ChessModel
         public abstract int RANKS { get; }
         public abstract Piece?[,] Pieces { get; }
 
+        protected Dictionary<PlayerColor, Position> _enPassantSquares;
+
         /// <summary>
         /// Allows referencing of the board pieces like an array
         /// </summary>
@@ -80,15 +82,29 @@ namespace ChessModel
         public abstract string BoardToFen();
 
         /// <summary>
+        /// Gets the EnPassantSquare for a given player
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns>Position identified by color</returns>
+        public Position GetEnPassantSquare(PlayerColor color)
+            => _enPassantSquares[color];
+
+        /// <summary>
+        /// Sets the EnPassanSquare for a given color
+        /// </summary>
+        /// <param name="color"></param>
+        /// <param name="pos"></param>
+        public void SetEnPassantSquare(PlayerColor color, Position pos)
+            => _enPassantSquares[color] = pos;
+
+        /// <summary>
         /// Checks if a player is in check
         /// </summary>
         /// <param name="player"></param>
         /// <returns>Returns true if the given player is in check</returns>
         public bool IsInCheck(PlayerColor player)
-        {
-            return PiecePositionsFor(player)
+            => PiecePositionsFor(player)
                 .Any(pos => this[pos].CanCaptureOpponentKing(pos, this));
-        }
 
         /// <summary>
         /// Gets positions of all the pieces that a player currently has in play

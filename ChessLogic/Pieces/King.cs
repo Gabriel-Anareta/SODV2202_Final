@@ -31,9 +31,7 @@
         public override IEnumerable<Move> GetMoves(Position from, Board board)
         {
             foreach (Position pos in ValidMoves(from, board))
-            {
                 yield return new NormalMove(from, pos);
-            }
 
             if (CanCaslte(from, board, MoveType.CastleKingSide))
                 yield return new Castle(from, MoveType.CastleKingSide, Color);
