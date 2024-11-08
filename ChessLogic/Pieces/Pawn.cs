@@ -74,7 +74,7 @@
             Position forward2 = forward1 + _relativeForward;
 
             if (!HasMoved && CanMoveTo(forward2, board))
-                yield return new NormalMove(from, forward2);
+                yield return new DoublePawnPush(from, forward2, Color);
         }
 
         private IEnumerable<Move> DiagonalMoves(Position from, Board board)
@@ -82,6 +82,9 @@
             foreach (Direction dir in new List<Direction> { _relativeLeft, _relativeRight })
             {
                 Position to = from + dir + _relativeForward;
+
+                if (to == board.GetEnPassantSquare(Color.Opposite()))
+                    yield return new EnPassant(from, to);
 
                 if (!CanCaptureAt(to, board))
                     continue;
@@ -117,9 +120,7 @@
         }
 
         private bool CanMoveTo(Position pos, Board board)
-        {
-            return board.IsValidPosition(pos) && board.IsEmptyPosition(pos);
-        }
+            => board.IsValidPosition(pos) && board.IsEmptyPosition(pos);
 
         private bool CanCaptureAt(Position pos, Board board)
         {
