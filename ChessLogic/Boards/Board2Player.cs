@@ -9,6 +9,15 @@
         public override int RANKS => 8;
         public override Piece?[,] Pieces => new Piece?[FILES, RANKS];
 
+        public Board2Player()
+        {
+            _enPassantSquares = new Dictionary<PlayerColor, Position>
+            {
+                { PlayerColor.White, null },
+                { PlayerColor.Black, null }
+            };
+        }
+
         public override Board InitialState()
         {
             Board2Player board = new Board2Player();
