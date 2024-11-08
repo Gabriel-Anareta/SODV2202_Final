@@ -49,42 +49,71 @@
 
         public override IEnumerable<Move> GetMoves(Position from, Board board)
             => ForwardMoves(from, board)
-                .Concat(DiagonalMoves(from, board))
-                .Select(to => new NormalMove(from, to));
+                .Concat(DiagonalMoves(from, board));
 
         public override bool CanCaptureOpponentKing(Position from, Board board)
-        {
-            return DiagonalMoves(from, board)
-                .Any(pos =>
-                    board[pos] != null
-                    && board[pos].Type == PieceType.King
+            => DiagonalMoves(from, board)
+                .Any(move =>
+                    board[move.To] != null
+                    && board[move.To].Type == PieceType.King
                 );
-        }
 
-        private IEnumerable<Position> ForwardMoves(Position from, Board board)
+        private IEnumerable<Move> ForwardMoves(Position from, Board board)
         {
             Position forward1 = from + _relativeForward;
 
-            if (CanMoveTo(forward1, board))
-            {
-                yield return forward1;
+            if (!CanMoveTo(forward1, board))
+                yield break;
 
-                Position forward2 = forward1 + _relativeForward;
+            if (CanPromoteAt(forward1))
+                foreach (Move promtionMove in PromotionMoves(from, forward1))
+                    yield return promtionMove;
+            else
+                yield return new NormalMove(from, forward1);
 
-                if (!HasMoved && CanMoveTo(forward2, board))
-                    yield return forward2;
-            }
+            Position forward2 = forward1 + _relativeForward;
+
+            if (!HasMoved && CanMoveTo(forward2, board))
+                yield return new NormalMove(from, forward2);
         }
 
-        private IEnumerable<Position> DiagonalMoves(Position from, Board board)
+        private IEnumerable<Move> DiagonalMoves(Position from, Board board)
         {
             foreach (Direction dir in new List<Direction> { _relativeLeft, _relativeRight })
             {
                 Position to = from + dir + _relativeForward;
 
-                if (CanCaptureAt(to, board))
-                    yield return to;
+                if (!CanCaptureAt(to, board))
+                    continue;
+
+                if (CanPromoteAt(to))
+                    foreach (Move promtionMove in PromotionMoves(from, to))
+                        yield return promtionMove;
+                else
+                    yield return new NormalMove(from, to);
             }
+        }
+
+        private IEnumerable<Move> PromotionMoves(Position from, Position to)
+        {
+            yield return new PawnPromotion(from, to, PieceType.Knight);
+            yield return new PawnPromotion(from, to, PieceType.Bishop);
+            yield return new PawnPromotion(from, to, PieceType.Rook);
+            yield return new PawnPromotion(from, to, PieceType.Queen);
+        }
+
+        private bool CanPromoteAt(Position pos)
+        {
+            return Color switch
+            {
+                PlayerColor.White => pos.Rank == 7,
+                PlayerColor.Black => pos.Rank == 0,
+                PlayerColor.Red => throw new NotImplementedException(),
+                PlayerColor.Green => throw new NotImplementedException(),
+                PlayerColor.Yellow => throw new NotImplementedException(),
+                PlayerColor.Blue => throw new NotImplementedException(),
+                _ => false
+            };
         }
 
         private bool CanMoveTo(Position pos, Board board)
