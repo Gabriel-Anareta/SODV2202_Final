@@ -56,6 +56,7 @@ namespace ChessModel
         /// <param name="move"></param>
         public void ExecuteMove(Move move)
         {
+            GameBoard.SetEnPassantSquare(CurrentPlayer, null);
             move.Execute(GameBoard);
             CurrentPlayer = PlayerManager.Next(CurrentPlayer);
             CheckGameOver();
