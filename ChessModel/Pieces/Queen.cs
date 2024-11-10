@@ -1,13 +1,17 @@
-﻿namespace ChessModel
+﻿
+using System.Security.AccessControl;
+
+namespace ChessModel
 {
     /// <summary>
     /// Represents a queen - implements piece
     /// </summary>
     /// <param name="color"></param>
-    public class Queen(PlayerColor color) : Piece
+    public class Queen : Piece
     {
-        public override PieceType Type => PieceType.Queen;
-        public override PlayerColor Color { get; } = color;
+        public override PieceType Type { get; }
+        public override PlayerColor Color { get; }
+        public override Image Image { get; }
 
         private static readonly List<Direction> Directions = new List<Direction>
         {
@@ -20,6 +24,13 @@
             Direction.SouthEast,
             Direction.SouthWest
         };
+
+        public Queen(PlayerColor color)
+        {
+            Type = PieceType.Queen;
+            Color = color;
+            Image = color.GetImage(Type);
+        }
 
         public override Piece Copy()
         {

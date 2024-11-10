@@ -1,4 +1,5 @@
-﻿namespace ChessModel
+﻿
+namespace ChessModel
 {
     /// <summary>
     /// Represents a change to a position given by a change in file and change in rank
@@ -16,6 +17,23 @@
 
         public int FileDelta { get; set; } = fileDelta;
         public int RankDelta { get; set; } = rankDelta;
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Direction direction &&
+                   FileDelta == direction.FileDelta &&
+                   RankDelta == direction.RankDelta;
+        }
+
+        public static bool operator ==(Direction? left, Direction? right)
+        {
+            return EqualityComparer<Direction>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Direction? left, Direction? right)
+        {
+            return !(left == right);
+        }
 
         /// <summary>
         /// overloaded + operation on direction
@@ -38,5 +56,20 @@
         {
             return new Direction(scalar * dir.FileDelta, scalar * dir.RankDelta);
         }
+
+        public static Direction RelRight(Direction dir)
+        {
+            if (dir == Direction.North)
+                return Direction.East;
+            if (dir == Direction.East)
+                return Direction.North;
+            if (dir == Direction.South)
+                return Direction.West;
+            if (dir == Direction.South)
+                return Direction.North;
+            return new Direction(0, 0);
+        }
+
+        
     }
 }

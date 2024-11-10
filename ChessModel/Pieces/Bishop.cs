@@ -1,13 +1,15 @@
-﻿namespace ChessModel
+﻿
+namespace ChessModel
 {
     /// <summary>
     /// Represents a bishop - implements piece
     /// </summary>
     /// <param name="color"></param>
-    public class Bishop(PlayerColor color) : Piece
+    public class Bishop : Piece
     {
-        public override PieceType Type => PieceType.Bishop;
-        public override PlayerColor Color { get; } = color;
+        public override PieceType Type { get; }
+        public override PlayerColor Color { get; }
+        public override Image Image { get; }
 
         private static readonly List<Direction> Directions = new List<Direction>
         {
@@ -16,6 +18,13 @@
             Direction.SouthEast,
             Direction.SouthWest
         };
+
+        public Bishop(PlayerColor color)
+        {
+            Type = PieceType.Bishop;
+            Color = color;
+            Image = color.GetImage(Type);
+        }
 
         public override Piece Copy()
         {

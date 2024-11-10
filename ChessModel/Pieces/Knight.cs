@@ -4,10 +4,18 @@
     /// Represents a knight - implements piece
     /// </summary>
     /// <param name="color"></param>
-    public class Knight(PlayerColor color) : Piece
+    public class Knight : Piece
     {
-        public override PieceType Type => PieceType.Knight;
-        public override PlayerColor Color { get; } = color;
+        public override PieceType Type { get; }
+        public override PlayerColor Color { get; }
+        public override Image Image { get; }
+
+        public Knight(PlayerColor color)
+        {
+            Type = PieceType.Knight;
+            Color = color;
+            Image = color.GetImage(Type);
+        }
 
         public override Piece Copy()
         {

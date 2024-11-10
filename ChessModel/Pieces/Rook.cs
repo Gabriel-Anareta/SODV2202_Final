@@ -1,13 +1,15 @@
-﻿namespace ChessModel
+﻿
+namespace ChessModel
 {
     /// <summary>
     /// Represents a rook - implements piece
     /// </summary>
     /// <param name="color"></param>
-    public class Rook(PlayerColor color) : Piece
+    public class Rook : Piece
     {
-        public override PieceType Type => PieceType.Rook;
-        public override PlayerColor Color { get; } = color;
+        public override PieceType Type { get; }
+        public override PlayerColor Color { get; }
+        public override Image Image { get; }
 
         private static readonly List<Direction> Directions = new List<Direction>
         {
@@ -16,6 +18,13 @@
             Direction.East,
             Direction.West
         };
+
+        public Rook(PlayerColor color)
+        {
+            Type = PieceType.Rook;
+            Color = color;
+            Image = color.GetImage(Type);
+        }
 
         public override Piece Copy()
         {

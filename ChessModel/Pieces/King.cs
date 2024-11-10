@@ -1,13 +1,15 @@
-﻿namespace ChessModel
+﻿
+namespace ChessModel
 {
     /// <summary>
     /// Represents a king - implements piece
     /// </summary>
     /// <param name="color"></param>
-    public class King(PlayerColor color) : Piece
+    public class King : Piece
     {
-        public override PieceType Type => PieceType.King;
+        public override PieceType Type { get; }
         public override PlayerColor Color { get; }
+        public override Image Image { get; }
 
         private static readonly List<Direction> _allDirections = new List<Direction>
         {
@@ -20,6 +22,13 @@
             Direction.SouthEast,
             Direction.SouthWest
         };
+
+        public King(PlayerColor color)
+        {
+            Type = PieceType.King;
+            Color = color;
+            Image = color.GetImage(Type);
+        }
 
         public override Piece Copy()
         {

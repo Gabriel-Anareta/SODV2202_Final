@@ -1,44 +1,39 @@
-﻿namespace ChessModel
+﻿
+namespace ChessModel
 {
     /// <summary>
     /// Represents a pawn - implements piece
     /// </summary>
     /// <param name="color"></param>
-    public class Pawn(PlayerColor color) : Piece
+    public class Pawn : Piece
     {
-        public override PieceType Type => PieceType.Pawn;
-        public override PlayerColor Color { get; } = color;
+        public override PieceType Type { get; }
+        public override PlayerColor Color { get; }
+        public override Image Image { get; }
 
-        private readonly Direction _relativeForward = color switch
+        private readonly Direction _relativeForward;
+        private readonly Direction _relativeRight;
+        private readonly Direction _relativeLeft;
+
+        public Pawn(PlayerColor color)
         {
-            PlayerColor.White => Direction.North,
-            PlayerColor.Black => Direction.South,
-            PlayerColor.Red => Direction.North,
-            PlayerColor.Green => Direction.West,
-            PlayerColor.Yellow => Direction.South,
-            PlayerColor.Blue => Direction.East,
-            _ => new Direction(0, 0)
-        };
-        private readonly Direction _relativeLeft = color switch
-        {
-            PlayerColor.White => Direction.West,
-            PlayerColor.Black => Direction.East,
-            PlayerColor.Red => Direction.West,
-            PlayerColor.Green => Direction.South,
-            PlayerColor.Yellow => Direction.East,
-            PlayerColor.Blue => Direction.North,
-            _ => new Direction(0, 0)
-        };
-        private readonly Direction _relativeRight = color switch
-        {
-            PlayerColor.White => Direction.East,
-            PlayerColor.Black => Direction.West,
-            PlayerColor.Red => Direction.East,
-            PlayerColor.Green => Direction.North,
-            PlayerColor.Yellow => Direction.West,
-            PlayerColor.Blue => Direction.South,
-            _ => new Direction(0, 0)
-        };
+            Type = PieceType.Pawn;
+            Color = color;
+            Image = color.GetImage(Type);
+
+            _relativeForward = color switch
+            {
+                PlayerColor.White => Direction.North,
+                PlayerColor.Black => Direction.South,
+                PlayerColor.Red => Direction.North,
+                PlayerColor.Green => Direction.West,
+                PlayerColor.Yellow => Direction.South,
+                PlayerColor.Blue => Direction.East,
+                _ => new Direction(0, 0)
+            };
+            _relativeRight = Direction.RelRight(_relativeForward);
+            _relativeLeft = -1 * _relativeRight;
+        }
 
         public override Piece Copy()
         {

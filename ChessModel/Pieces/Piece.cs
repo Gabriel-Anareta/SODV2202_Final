@@ -7,6 +7,7 @@
     {
         public abstract PieceType Type { get; }
         public abstract PlayerColor Color { get; }
+        public abstract Image Image { get; }
         public bool HasMoved { get; set; } = false;
 
         /// <summary>
