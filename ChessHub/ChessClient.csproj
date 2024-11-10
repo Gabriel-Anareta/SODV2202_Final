@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChessLogic\ChessModel.csproj" />
+    <ProjectReference Include="..\ChessModel\ChessModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
