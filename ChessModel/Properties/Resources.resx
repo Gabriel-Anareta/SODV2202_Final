@@ -157,4 +157,76 @@
   <data name="EmptyPiece" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmptyPiece.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Bishop_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bishop_Blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Bishop_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bishop_Green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Bishop_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bishop_Red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Bishop_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bishop_Yellow.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="King_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\King_Blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="King_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\King_Green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="King_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\King_Red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="King_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\King_Yellow.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Knight_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Knight_Blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Knight_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Knight_Green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Knight_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Knight_Red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Knight_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Knight_Yellow.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Pawn_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pawn_Blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Pawn_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pawn_Green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Pawn_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pawn_Red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Pawn_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pawn_Yellow.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Queen_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Queen_Blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Queen_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Queen_Green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Queen_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Queen_Red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Queen_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Queen_Yellow.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Rook_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rook_Blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Rook_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rook_Green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Rook_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rook_Red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Rook_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rook_Yellow.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

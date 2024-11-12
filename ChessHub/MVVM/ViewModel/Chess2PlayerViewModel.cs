@@ -21,7 +21,7 @@ namespace ChessClient.MVVM.ViewModel
         public Action ConfirmPromotion;
         public Action ShowGameOver;
 
-        private readonly GameState _gameState;
+        private readonly GameState2Player _gameState;
         private readonly Dictionary<Position, Move> _moveCache;
         private Position? _selectedPos;
         private Move? _currentMove;
@@ -42,7 +42,7 @@ namespace ChessClient.MVVM.ViewModel
 
         public Chess2PlayerViewModel(PlayerColor color)
         {
-            _gameState = new GameState(new Board2Player().InitialState(), PlayerColor.White);
+            _gameState = new GameState2Player(new Board2Player().InitialState(), PlayerColor.White);
             _moveCache = new Dictionary<Position, Move>();
             _selectedPos = null;
             _currentMove = null;

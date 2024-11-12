@@ -72,12 +72,6 @@
         public abstract Board Copy();
 
         /// <summary>
-        /// Creates a Fen string from the current board
-        /// </summary>
-        /// <returns>A string formatted with the respective Fen form of the board</returns>
-        public abstract string BoardToFen();
-
-        /// <summary>
         /// Gets the EnPassantSquare for a given player
         /// </summary>
         /// <param name="color"></param>

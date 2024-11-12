@@ -13,7 +13,7 @@ namespace ChessModel
 
         public Board2Player()
         {
-            Pieces = new Binding2DArray<Piece>(8, 8, new EmptyPiece());
+            Pieces = new Binding2DArray<Piece>(FILES, RANKS, new EmptyPiece());
             _enPassantSquares = new Dictionary<PlayerColor, Position>
             {
                 { PlayerColor.White, null },
@@ -74,11 +74,6 @@ namespace ChessModel
                 copy[pos] = this[pos].Copy();
 
             return copy;
-        }
-
-        public override string BoardToFen()
-        {
-            throw new NotImplementedException();
         }
     }
 }

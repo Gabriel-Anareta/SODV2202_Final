@@ -71,12 +71,52 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Bishop_Blue {
+            get {
+                object obj = ResourceManager.GetObject("Bishop_Blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Bishop_Green {
+            get {
+                object obj = ResourceManager.GetObject("Bishop_Green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Bishop_Red {
+            get {
+                object obj = ResourceManager.GetObject("Bishop_Red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Bishop_White {
             get {
                 object obj = ResourceManager.GetObject("Bishop_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Bishop_Yellow {
+            get {
+                object obj = ResourceManager.GetObject("Bishop_Yellow", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -101,12 +141,52 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] King_Blue {
+            get {
+                object obj = ResourceManager.GetObject("King_Blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] King_Green {
+            get {
+                object obj = ResourceManager.GetObject("King_Green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] King_Red {
+            get {
+                object obj = ResourceManager.GetObject("King_Red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap King_White {
             get {
                 object obj = ResourceManager.GetObject("King_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] King_Yellow {
+            get {
+                object obj = ResourceManager.GetObject("King_Yellow", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -121,12 +201,52 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Knight_Blue {
+            get {
+                object obj = ResourceManager.GetObject("Knight_Blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Knight_Green {
+            get {
+                object obj = ResourceManager.GetObject("Knight_Green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Knight_Red {
+            get {
+                object obj = ResourceManager.GetObject("Knight_Red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Knight_White {
             get {
                 object obj = ResourceManager.GetObject("Knight_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Knight_Yellow {
+            get {
+                object obj = ResourceManager.GetObject("Knight_Yellow", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -141,12 +261,52 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Pawn_Blue {
+            get {
+                object obj = ResourceManager.GetObject("Pawn_Blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Pawn_Green {
+            get {
+                object obj = ResourceManager.GetObject("Pawn_Green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Pawn_Red {
+            get {
+                object obj = ResourceManager.GetObject("Pawn_Red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Pawn_White {
             get {
                 object obj = ResourceManager.GetObject("Pawn_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Pawn_Yellow {
+            get {
+                object obj = ResourceManager.GetObject("Pawn_Yellow", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -161,12 +321,52 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Queen_Blue {
+            get {
+                object obj = ResourceManager.GetObject("Queen_Blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Queen_Green {
+            get {
+                object obj = ResourceManager.GetObject("Queen_Green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Queen_Red {
+            get {
+                object obj = ResourceManager.GetObject("Queen_Red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Queen_White {
             get {
                 object obj = ResourceManager.GetObject("Queen_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Queen_Yellow {
+            get {
+                object obj = ResourceManager.GetObject("Queen_Yellow", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -181,12 +381,52 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Rook_Blue {
+            get {
+                object obj = ResourceManager.GetObject("Rook_Blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Rook_Green {
+            get {
+                object obj = ResourceManager.GetObject("Rook_Green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Rook_Red {
+            get {
+                object obj = ResourceManager.GetObject("Rook_Red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Rook_White {
             get {
                 object obj = ResourceManager.GetObject("Rook_White", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Rook_Yellow {
+            get {
+                object obj = ResourceManager.GetObject("Rook_Yellow", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
