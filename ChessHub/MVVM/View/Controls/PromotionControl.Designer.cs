@@ -87,6 +87,7 @@
             pb_Queen.Location = new Point(3, 3);
             pb_Queen.Name = "pb_Queen";
             pb_Queen.Size = new Size(74, 73);
+            pb_Queen.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Queen.TabIndex = 0;
             pb_Queen.TabStop = false;
             pb_Queen.Click += Piece_Click;
@@ -97,6 +98,7 @@
             pb_Rook.Location = new Point(83, 3);
             pb_Rook.Name = "pb_Rook";
             pb_Rook.Size = new Size(74, 73);
+            pb_Rook.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Rook.TabIndex = 1;
             pb_Rook.TabStop = false;
             pb_Rook.Click += Piece_Click;
@@ -107,6 +109,7 @@
             pb_Knight.Location = new Point(163, 3);
             pb_Knight.Name = "pb_Knight";
             pb_Knight.Size = new Size(74, 73);
+            pb_Knight.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Knight.TabIndex = 2;
             pb_Knight.TabStop = false;
             pb_Knight.Click += Piece_Click;
@@ -117,6 +120,7 @@
             pb_Bishop.Location = new Point(243, 3);
             pb_Bishop.Name = "pb_Bishop";
             pb_Bishop.Size = new Size(74, 73);
+            pb_Bishop.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Bishop.TabIndex = 3;
             pb_Bishop.TabStop = false;
             pb_Bishop.Click += Piece_Click;
@@ -127,6 +131,7 @@
             pb_Pawn.Location = new Point(323, 3);
             pb_Pawn.Name = "pb_Pawn";
             pb_Pawn.Size = new Size(77, 73);
+            pb_Pawn.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Pawn.TabIndex = 4;
             pb_Pawn.TabStop = false;
             pb_Pawn.Click += Piece_Click;

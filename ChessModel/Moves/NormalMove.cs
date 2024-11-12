@@ -15,7 +15,7 @@
         {
             Piece piece = board[From];
             board[To] = piece;
-            board[From] = null;
+            board[From] = new EmptyPiece();
             piece.HasMoved = true;
         }
     }

@@ -67,7 +67,7 @@ namespace ChessModel
                 if (!board.IsValidPosition(to))
                     continue;
 
-                if (board.IsEmptyPosition(pos) || board[pos].Color == Color)
+                if (board.IsEmptyPosition(to) || board[pos].Color != Color)
                     yield return to;
             }
         }

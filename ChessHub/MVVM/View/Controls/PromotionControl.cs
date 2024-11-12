@@ -5,12 +5,13 @@ namespace ChessClient.MVVM.View.Controls
 {
     public partial class PromotionControl : UserControl
     {
-        public RelayCommand AcceptPromotion;
+        public Action<PieceType> AcceptPromotion;
         private PlayerColor _color;
         
-        public PromotionControl(PlayerColor color)
+        public PromotionControl(PlayerColor color, Action<PieceType> command)
         {
             InitializeComponent();
+            AcceptPromotion = command;
             _color = color;
             pb_Queen.Image = color.GetImage(PieceType.Queen);
             pb_Rook.Image = color.GetImage(PieceType.Rook);
@@ -21,14 +22,15 @@ namespace ChessClient.MVVM.View.Controls
 
         private void Piece_Click(object sender, EventArgs e)
         {
-            AcceptPromotion.Execute(((PictureBox)sender).Name switch
+            PieceType type = ((PictureBox)sender).Name switch
             {
-                "pb_Queen" => new Queen(_color),
-                "pb_Rook" => new Rook(_color),
-                "pb_Knight" => new Knight(_color),
-                "pb_Bishop" => new Bishop(_color),
-                "pb_Pawn" => new Pawn(_color)
-            });
+                "pb_Queen" => PieceType.Queen,
+                "pb_Rook" => PieceType.Rook,
+                "pb_Knight" => PieceType.Knight,
+                "pb_Bishop" => PieceType.Bishop,
+                "pb_Pawn" => PieceType.Pawn
+            };
+            AcceptPromotion.Invoke(type);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace ChessClient.MVVM.ViewModel
         public Action<Dictionary<Position, Move>> HideHighlights;
         public Action<Dictionary<Position, Move>> ShowHighlights;
         public Action<PlayerColor> ChoosePromotion;
+        public Action<PieceType> PromotionSelected;
         public Action ConfirmPromotion;
         public Action ShowGameOver;
 
@@ -39,41 +40,25 @@ namespace ChessClient.MVVM.ViewModel
             }
         }
 
-        private RelayCommand _promotionSelectedCommand;
-
-        public RelayCommand PromotionSelectedCommand
-        {
-            get { return _promotionSelectedCommand; }
-            set 
-            {
-                if (_promotionSelectedCommand == value)
-                    return;
-                _promotionSelectedCommand = value; 
-                OnPropertyChanged();
-            }
-        }
-
-
-        public Chess2PlayerViewModel()
+        public Chess2PlayerViewModel(PlayerColor color)
         {
             _gameState = new GameState(new Board2Player().InitialState(), PlayerColor.White);
             _moveCache = new Dictionary<Position, Move>();
             _selectedPos = null;
             _currentMove = null;
+            _clientColor = color;
 
             PieceSelectedCommand = new RelayCommand(
                 obj => PieceSelected(obj),
                 obj => _clientColor == _gameState.CurrentPlayer
             );
 
-            PromotionSelectedCommand = new RelayCommand(
-                obj => {
-                    _menuOnScreen = false;
-                    ConfirmPromotion.Invoke();
-                    Piece piece = obj as Piece;
-                    HandleMove(new PawnPromotion(_currentMove.From, _currentMove.To, piece.Type));
-                }
-            );
+            PromotionSelected = piece =>
+            {
+                _menuOnScreen = false;
+                ConfirmPromotion.Invoke();
+                HandleMove(new PawnPromotion(_currentMove.From, _currentMove.To, piece));
+            };
         }
 
         public BindingSource[,] GetBindings()

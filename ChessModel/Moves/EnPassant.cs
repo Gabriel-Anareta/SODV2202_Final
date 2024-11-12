@@ -18,7 +18,7 @@
         public override void Execute(Board board)
         {
             new NormalMove(From, To).Execute(board);
-            board[_capturedPos] = null;
+            board[_capturedPos] = new EmptyPiece();
         }
     }
 }

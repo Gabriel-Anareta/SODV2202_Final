@@ -21,8 +21,8 @@
             promotionPiece.HasMoved = true;
 
             // Update board positions
-            board[From] = null;
             board[To] = promotionPiece;
+            board[From] = new EmptyPiece();
         }
 
         private Piece CreatePromotionPiece(PlayerColor color)

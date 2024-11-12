@@ -52,7 +52,7 @@
             return color switch
             {
                 PlayerColor.White => type.KSQS(new Position(5, kingPos.Rank), new Position(3, kingPos.Rank)),
-                PlayerColor.Black => new Position(3, kingPos.Rank),
+                PlayerColor.Black => type.KSQS(new Position(5, kingPos.Rank), new Position(3, kingPos.Rank)),
                 PlayerColor.Red => throw new NotImplementedException(),
                 PlayerColor.Green => throw new NotImplementedException(),
                 PlayerColor.Yellow => throw new NotImplementedException(),

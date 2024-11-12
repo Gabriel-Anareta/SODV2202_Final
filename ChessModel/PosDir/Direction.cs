@@ -6,10 +6,10 @@ namespace ChessModel
     /// </summary>
     public class Direction(int fileDelta, int rankDelta)
     {
-        public static readonly Direction North = new Direction(1, 0);
-        public static readonly Direction East = new Direction(0, 1);
-        public static readonly Direction South = new Direction(-1, 0);
-        public static readonly Direction West = new Direction(0, -1);
+        public static readonly Direction North = new Direction(0, 1);
+        public static readonly Direction East = new Direction(1, 0);
+        public static readonly Direction South = -1 * North;
+        public static readonly Direction West = -1 * East;
         public static readonly Direction NorthEast = North + East;
         public static readonly Direction NorthWest = North + West;
         public static readonly Direction SouthEast = South + East;
@@ -69,7 +69,5 @@ namespace ChessModel
                 return Direction.North;
             return new Direction(0, 0);
         }
-
-        
     }
 }

@@ -3,12 +3,18 @@
     /// <summary>
     /// Handles the game logic of the chess game
     /// </summary>
-    public class GameState(Board board, PlayerColor player)
+    public class GameState
     {
-        public Board GameBoard { get; set; } = board;
-        public PlayerColor CurrentPlayer { get; set; } = player;
+        public Board GameBoard { get; set; }
+        public PlayerColor CurrentPlayer { get; set; }
         public List<PlayerColor> Players { get; set; }
         public Result? EndResult { get; private set; } = null;
+
+        public GameState(Board board, PlayerColor player)
+        {
+            GameBoard = board;
+            CurrentPlayer = player;
+        }
 
         /// <summary>
         /// Checks the current state of the game

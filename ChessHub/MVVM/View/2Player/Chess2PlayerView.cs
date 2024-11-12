@@ -13,14 +13,14 @@ namespace ChessClient.MVVM.View._2Player
         private PromotionControl promCtrl;
         //private Panel container;
 
-        public Chess2PlayerView()
+        public Chess2PlayerView(PlayerColor color)
         {
             InitializeComponent();
 
             this.ClientSize = new Size(800, 800);
             this.Paint += DrawSquares;
 
-            _viewModel = new Chess2PlayerViewModel();
+            _viewModel = new Chess2PlayerViewModel(color);
             _viewModel.ShowHighlights += ShowHighlights;
             _viewModel.HideHighlights += HideHighlights;
             _viewModel.ChoosePromotion += ShowPromotion;
@@ -85,22 +85,21 @@ namespace ChessClient.MVVM.View._2Player
             Color color = Color.FromArgb(150, 125, 255, 125);
             foreach (Position to in moveCache.Keys)
                 if (_viewModel.IsEmpty(to))
-                    _pieces[to.File, to.Rank].BackColor = Color.FromArgb(150, 125, 255, 125);
+                    _pieces[to.Rank, to.File].BackColor = Color.FromArgb(150, 125, 255, 125);
                 else
-                    _pieces[to.File, to.Rank].BackColor = Color.FromArgb(150, 255, 125, 125);
+                    _pieces[to.Rank, to.File].BackColor = Color.FromArgb(150, 255, 125, 125);
         }
 
         private void HideHighlights(Dictionary<Position, Move> moveCache)
         {
             foreach (Position to in moveCache.Keys)
-                _pieces[to.File, to.Rank].BackColor = Color.Transparent;
+                _pieces[to.Rank, to.File].BackColor = Color.Transparent;
         }
 
         private void ShowPromotion(PlayerColor color)
         {
-            promCtrl = new PromotionControl(color);
+            promCtrl = new PromotionControl(color, _viewModel.PromotionSelected);
             promCtrl.Location = new Point(this.ClientSize.Width / 2 - promCtrl.Width / 2, this.ClientSize.Height / 2 - promCtrl.Height / 2);
-            promCtrl.DataBindings.Add("AcceptPromotion", _viewModel, "PromotionSelectedCommand");
 
             Controls.Add(promCtrl);
             promCtrl.BringToFront();

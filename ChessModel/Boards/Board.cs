@@ -1,7 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
-
-namespace ChessModel
+﻿namespace ChessModel
 {
     /// <summary>
     /// Implements base board functionality and properties
@@ -46,14 +43,6 @@ namespace ChessModel
                 this[pos.File, pos.Rank] = value;
             }
         }
-
-        private void SetPiece(Piece piece, Piece value)
-        {
-            if (piece == value)
-                return;
-            piece = value;
-            //OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
-        }
         
         /// <summary>
         /// Initializes the board with the starting positions of pieces
@@ -74,7 +63,7 @@ namespace ChessModel
         /// <param name="pos"></param>
         /// <returns>True if the given position references a null value</returns>
         public bool IsEmptyPosition(Position pos)
-            => this[pos] == null;
+            => this[pos].Type == PieceType.None;
 
         /// <summary>
         /// Creates a copy of the current board
@@ -110,7 +99,7 @@ namespace ChessModel
         /// <param name="player"></param>
         /// <returns>Returns true if the given player is in check</returns>
         public bool IsInCheck(PlayerColor player)
-            => PiecePositionsFor(player)
+            => PiecePositionsFor(player.Opposite())
                 .Any(pos => this[pos].CanCaptureOpponentKing(pos, this));
 
         /// <summary>
