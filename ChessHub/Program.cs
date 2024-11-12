@@ -1,3 +1,4 @@
+using ChessClient.MVVM.View._2Player;
 using ChessClient.MVVM.ViewModel;
 
 namespace ChessHub
@@ -13,7 +14,8 @@ namespace ChessHub
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new ChessClient.AppContext());
+            //Application.Run(new ChessClient.AppContext());
+            Application.Run(new Chess2PlayerView());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ChessModel
+﻿using System.ComponentModel;
+
+namespace ChessModel
 {
     /// <summary>
     /// Represents a classic 8x8 chess board
@@ -7,12 +9,11 @@
     {
         public override int FILES => 8;
         public override int RANKS => 8;
-        public override Piece?[,] Pieces => new Piece?[FILES, RANKS];
+        public override Binding2DArray<Piece> Pieces { get; set; }
 
         public Board2Player()
         {
-            //foreach (Piece piece in Pieces)
-            //    piece = new
+            Pieces = new Binding2DArray<Piece>(8, 8, new EmptyPiece());
             _enPassantSquares = new Dictionary<PlayerColor, Position>
             {
                 { PlayerColor.White, null },
@@ -47,7 +48,7 @@
             board[6, 7] = new Knight(PlayerColor.Black);
             board[7, 7] = new Rook(PlayerColor.Black);
 
-            for (int file = 0; file <= board.FILES; file++)
+            for (int file = 0; file < board.FILES; file++)
             {
                 board[file, 1] = new Pawn(PlayerColor.White);
                 board[file, 6] = new Pawn(PlayerColor.Black);

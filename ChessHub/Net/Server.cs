@@ -66,7 +66,7 @@ namespace ChessClient.Net
         {
             Task.Run(() => // Avoids locking up the app while packets are being read
             {
-                while (true)
+                while (ClientIsConnected())
                 {
                     int opCode = PacketReader.ReadByte();
                     switch (opCode)

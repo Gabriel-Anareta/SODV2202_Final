@@ -1,15 +1,16 @@
 ﻿using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace ChessModel
 {
     /// <summary>
     /// Implements base board functionality and properties
     /// </summary>
-    public abstract class Board : INotifyCollectionChanged
+    public abstract class Board
     {
         public abstract int FILES { get; }
         public abstract int RANKS { get; }
-        public abstract Piece?[,] Pieces { get; }
+        public abstract Binding2DArray<Piece> Pieces { get; set; }
 
         protected Dictionary<PlayerColor, Position> _enPassantSquares;
 
@@ -27,7 +28,6 @@ namespace ChessModel
                 if (Pieces[file, rank] == value)
                     return;
                 Pieces[file, rank] = value;
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
             }
         }
 
@@ -40,12 +40,19 @@ namespace ChessModel
         {
             get { return this[pos.File, pos.Rank]; }
             set 
-            { 
+            {
                 if (this[pos.File, pos.Rank] == value)
                     return;
                 this[pos.File, pos.Rank] = value;
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
             }
+        }
+
+        private void SetPiece(Piece piece, Piece value)
+        {
+            if (piece == value)
+                return;
+            piece = value;
+            //OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
         }
         
         /// <summary>
@@ -130,9 +137,5 @@ namespace ChessModel
                 }
             }
         }
-
-        public event NotifyCollectionChangedEventHandler? CollectionChanged;
-        protected void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-            => CollectionChanged?.Invoke(this, e);
     }
 }

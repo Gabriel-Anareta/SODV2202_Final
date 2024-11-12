@@ -105,13 +105,29 @@
                 PlayerColor.Red => _redImages[type],
                 PlayerColor.Green => _greenImages[type],
                 PlayerColor.Yellow => _yellowImages[type],
-                _ => _blueImages[type]
+                PlayerColor.Blue => _blueImages[type],
+                _ => Properties.Resources.EmptyPiece.byteArrayToImage()                                                                                
             };
         }
 
         public static Image GetImage(this PieceType piece, PlayerColor color)
         {
             return color.GetImage(piece);
+        }
+
+        private static Image byteArrayToImage(this byte[] byteArrayIn)
+        {
+            try
+            {
+                using (var ms = new MemoryStream(byteArrayIn))
+                {
+                    return Image.FromStream(ms);
+                }
+            }
+            catch 
+            {
+                return null;
+            }
         }
     }
 }

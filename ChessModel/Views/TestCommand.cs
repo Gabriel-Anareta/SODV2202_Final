@@ -1,41 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ChessClient.MVVM.ViewModel.Commands
+namespace ChessModel.Views
 {
-    public class RelayCommand : ICommand
+    public class TestCommand : ICommand
     {
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
-        private Action<object> _onFailure;
 
         public event EventHandler CanExecuteChanged;
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null, Action<object> onFailure = null)
+        public TestCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
-            if (_canExecute == null)
-                _onFailure = obj => { };
-            else
-                _onFailure = onFailure;
         }
 
         public bool CanExecute(object? parameter)
             => _canExecute == null || _canExecute(parameter);
 
         public void Execute(object? parameter)
-        {
-            if (CanExecute(parameter))
-                _execute(parameter);
-            else
-                _onFailure(parameter);
-        }
+            => _execute(parameter);
 
         public void NotifyCanExecuteChanged()
             => CanExecuteChanged?.Invoke(this, EventArgs.Empty);

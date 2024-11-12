@@ -1,14 +1,8 @@
 ﻿using ChessClient.MVVM.Model;
 using ChessClient.MVVM.ViewModel.Commands;
 using ChessClient.Net;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 
 namespace ChessClient.MVVM.ViewModel
 {

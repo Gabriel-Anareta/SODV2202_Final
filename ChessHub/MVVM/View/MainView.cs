@@ -1,7 +1,5 @@
 using ChessClient.MVVM.ViewModel;
-using ChessClient.Net;
-using Microsoft.VisualBasic;
-using System.Runtime.CompilerServices;
+using ChessClient.MVVM.View;
 
 namespace ChessHub
 {
@@ -27,17 +25,16 @@ namespace ChessHub
 
         private void ClientViewModel_UsersChanged()
         {
-            if (this.InvokeRequired)
-                this.Invoke(() => {
-                    RefreshDatasource(lb_Users, clientViewModel.Users);
-                    lb_Users.DisplayMember = "Username";
-                });
+            this.InvokeOnThread(() =>
+            {
+                RefreshDatasource(lb_Users, clientViewModel.Users);
+                lb_Users.DisplayMember = "Username";
+            });
         }
 
         private void ClientViewModel_MessagesChanged()
         {
-            if (this.InvokeRequired)
-                this.Invoke(() => RefreshDatasource(lb_Messages, clientViewModel.Messages));
+            this.InvokeOnThread(() => RefreshDatasource(lb_Messages, clientViewModel.Messages));
         }
 
         private void RefreshDatasource<T>(ListBox control, List<T> source)
