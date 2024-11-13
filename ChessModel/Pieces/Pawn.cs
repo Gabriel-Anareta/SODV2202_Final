@@ -78,9 +78,16 @@ namespace ChessModel
             {
                 Position to = from + dir + _relativeForward;
 
-                if (to == board.GetEnPassantSquare(Color.Opposite()))
-                    yield return new EnPassant(from, to);
+                foreach (PlayerColor color in Color.Opponents())
+                {
+                    DoublePawnPush doublePawn = ((DoublePawnPush)board.GetEnPassantMove(color));
+                    if (doublePawn == null)
+                        continue;
 
+                    if (to == doublePawn.EnPassantSquare)
+                        yield return new EnPassant(from, to, doublePawn.To);
+                }
+                    
                 if (!CanCaptureAt(to, board))
                     continue;
 
@@ -107,10 +114,10 @@ namespace ChessModel
             {
                 PlayerColor.White => pos.Rank == 7,
                 PlayerColor.Black => pos.Rank == 0,
-                PlayerColor.Red => throw new NotImplementedException(),
-                PlayerColor.Green => throw new NotImplementedException(),
-                PlayerColor.Yellow => throw new NotImplementedException(),
-                PlayerColor.Blue => throw new NotImplementedException(),
+                PlayerColor.Red => pos.Rank == 7,
+                PlayerColor.Green => pos.File == 6,
+                PlayerColor.Yellow => pos.Rank == 6,
+                PlayerColor.Blue => pos.File == 7,
                 _ => false
             };
         }

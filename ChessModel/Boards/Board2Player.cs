@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace ChessModel
+﻿namespace ChessModel
 {
     /// <summary>
     /// Represents a classic 8x8 chess board
@@ -14,14 +12,18 @@ namespace ChessModel
         public Board2Player()
         {
             Pieces = new Binding2DArray<Piece>(FILES, RANKS, new EmptyPiece());
-            _enPassantSquares = new Dictionary<PlayerColor, Position>
+            _enPassantSquares = new Dictionary<PlayerColor, Move>
             {
                 { PlayerColor.White, null },
                 { PlayerColor.Black, null }
             };
         }
 
-        public override Board InitialState()
+        /// <summary>
+        /// Initializes the board with the starting positions of pieces
+        /// </summary>
+        /// <returns>A new board with all initialized pieces</returns>
+        public Board2Player InitialState()
         {
             Board2Player board = new Board2Player();
             board = AddStartPieces(board);

@@ -9,7 +9,7 @@
         public abstract int RANKS { get; }
         public abstract Binding2DArray<Piece> Pieces { get; set; }
 
-        protected Dictionary<PlayerColor, Position> _enPassantSquares;
+        protected Dictionary<PlayerColor, Move> _enPassantSquares;
 
         /// <summary>
         /// Allows referencing of the board pieces like an array
@@ -43,12 +43,6 @@
                 this[pos.File, pos.Rank] = value;
             }
         }
-        
-        /// <summary>
-        /// Initializes the board with the starting positions of pieces
-        /// </summary>
-        /// <returns>A new board with all initialized pieces</returns>
-        public abstract Board InitialState();
 
         /// <summary>
         /// Checks whether a position is in the valid bounds of the board
@@ -76,7 +70,7 @@
         /// </summary>
         /// <param name="color"></param>
         /// <returns>Position identified by color</returns>
-        public Position GetEnPassantSquare(PlayerColor color)
+        public Move GetEnPassantMove(PlayerColor color)
             => _enPassantSquares[color];
 
         /// <summary>
@@ -84,8 +78,8 @@
         /// </summary>
         /// <param name="color"></param>
         /// <param name="pos"></param>
-        public void SetEnPassantSquare(PlayerColor color, Position pos)
-            => _enPassantSquares[color] = pos;
+        public void SetEnPassantSquare(PlayerColor color, Move move)
+            => _enPassantSquares[color] = move;
 
         /// <summary>
         /// Checks if a player is in check

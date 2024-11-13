@@ -23,39 +23,39 @@
         };
         private static readonly Dictionary<PieceType, Image> _redImages = new Dictionary<PieceType, Image>
         {
-            { PieceType.King, null },
-            { PieceType.Queen, null },
-            { PieceType.Rook, null },
-            { PieceType.Knight, null },
-            { PieceType.Bishop, null },
-            { PieceType.Pawn, null }
+            { PieceType.King, Properties.Resources.King_Red.byteArrayToImage() },
+            { PieceType.Queen, Properties.Resources.Queen_Red.byteArrayToImage() },
+            { PieceType.Rook, Properties.Resources.Rook_Red.byteArrayToImage() },
+            { PieceType.Knight, Properties.Resources.Knight_Red.byteArrayToImage() },
+            { PieceType.Bishop, Properties.Resources.Bishop_Red.byteArrayToImage() },
+            { PieceType.Pawn, Properties.Resources.Pawn_Red.byteArrayToImage() }
         };
         private static readonly Dictionary<PieceType, Image> _greenImages = new Dictionary<PieceType, Image>
         {
-            { PieceType.King, null },
-            { PieceType.Queen, null },
-            { PieceType.Rook, null },
-            { PieceType.Knight, null },
-            { PieceType.Bishop, null },
-            { PieceType.Pawn, null }
+            { PieceType.King, Properties.Resources.King_Green.byteArrayToImage() },
+            { PieceType.Queen, Properties.Resources.Queen_Green.byteArrayToImage() },
+            { PieceType.Rook, Properties.Resources.Rook_Green.byteArrayToImage() },
+            { PieceType.Knight, Properties.Resources.Knight_Green.byteArrayToImage() },
+            { PieceType.Bishop, Properties.Resources.Bishop_Green.byteArrayToImage() },
+            { PieceType.Pawn, Properties.Resources.Pawn_Green.byteArrayToImage() }
         };
         private static readonly Dictionary<PieceType, Image> _yellowImages = new Dictionary<PieceType, Image>
         {
-            { PieceType.King, null },
-            { PieceType.Queen, null },
-            { PieceType.Rook, null },
-            { PieceType.Knight, null },
-            { PieceType.Bishop, null },
-            { PieceType.Pawn, null }
+            { PieceType.King, Properties.Resources.King_Yellow.byteArrayToImage() },
+            { PieceType.Queen, Properties.Resources.Queen_Yellow.byteArrayToImage() },
+            { PieceType.Rook, Properties.Resources.Rook_Yellow.byteArrayToImage() },
+            { PieceType.Knight, Properties.Resources.Knight_Yellow.byteArrayToImage() },
+            { PieceType.Bishop, Properties.Resources.Bishop_Yellow.byteArrayToImage() },
+            { PieceType.Pawn, Properties.Resources.Pawn_Yellow.byteArrayToImage() }
         };
         private static readonly Dictionary<PieceType, Image> _blueImages = new Dictionary<PieceType, Image>
         {
-            { PieceType.King, null },
-            { PieceType.Queen, null },
-            { PieceType.Rook, null },
-            { PieceType.Knight, null },
-            { PieceType.Bishop, null },
-            { PieceType.Pawn, null }
+            { PieceType.King, Properties.Resources.King_Blue.byteArrayToImage() },
+            { PieceType.Queen, Properties.Resources.Queen_Blue.byteArrayToImage() },
+            { PieceType.Rook, Properties.Resources.Rook_Blue.byteArrayToImage() },
+            { PieceType.Knight, Properties.Resources.Knight_Blue.byteArrayToImage() },
+            { PieceType.Bishop, Properties.Resources.Bishop_Blue.byteArrayToImage() },
+            { PieceType.Pawn, Properties.Resources.Pawn_Blue.byteArrayToImage() }
         };
 
         /// <summary>
@@ -93,6 +93,49 @@
                 PlayerColor.Yellow => PlayerColor.Red,
                 PlayerColor.Blue => PlayerColor.Green,
                 _ => PlayerColor.None
+            };
+        }
+
+        public static List<PlayerColor> Opponents(this PlayerColor color)
+        {
+            return color switch
+            {
+                PlayerColor.White => new List<PlayerColor>
+                {
+                    PlayerColor.Black
+                },   
+                PlayerColor.Black => new List<PlayerColor>
+                {
+                    PlayerColor.White
+                },   
+                PlayerColor.Red => new List<PlayerColor>
+                {
+                    PlayerColor.Yellow,
+                    PlayerColor.Green,
+                    PlayerColor.Blue
+                },  
+                PlayerColor.Green => new List<PlayerColor>
+                {
+                    PlayerColor.Yellow,
+                    PlayerColor.Blue,
+                    PlayerColor.Red
+                },
+                PlayerColor.Yellow => new List<PlayerColor>
+                {
+                    PlayerColor.Blue,
+                    PlayerColor.Red,
+                    PlayerColor.Green
+                },
+                PlayerColor.Blue => new List<PlayerColor>
+                {
+                    PlayerColor.Red,
+                    PlayerColor.Green,
+                    PlayerColor.Yellow
+                }, 
+                _ => new List<PlayerColor>
+                {
+                    PlayerColor.None
+                }
             };
         }
 

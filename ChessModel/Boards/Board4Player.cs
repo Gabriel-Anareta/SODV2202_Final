@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ChessModel.Boards
+﻿namespace ChessModel
 {
     public class Board4Player : Board
     {
@@ -15,7 +9,7 @@ namespace ChessModel.Boards
         public Board4Player()
         {
             Pieces = new Binding2DArray<Piece>(FILES, RANKS, new EmptyPiece());
-            _enPassantSquares = new Dictionary<PlayerColor, Position>
+            _enPassantSquares = new Dictionary<PlayerColor, Move>
             {
                 { PlayerColor.Red, null },
                 { PlayerColor.Green, null },
@@ -24,7 +18,11 @@ namespace ChessModel.Boards
             };
         }
 
-        public override Board InitialState()
+        /// <summary>
+        /// Initializes the board with the starting positions of pieces
+        /// </summary>
+        /// <returns>A new board with all initialized pieces</returns>
+        public Board4Player InitialState()
         {
             Board4Player board = new Board4Player();
             board = AddStartPieces(board);
@@ -33,41 +31,41 @@ namespace ChessModel.Boards
 
         private Board4Player AddStartPieces(Board4Player board)
         {
-            board[0, 0] = new Rook(PlayerColor.Red);
-            board[1, 0] = new Knight(PlayerColor.Red);
-            board[2, 0] = new Bishop(PlayerColor.Red);
-            board[3, 0] = new Queen(PlayerColor.Red);
-            board[4, 0] = new King(PlayerColor.Red);
+            board[3, 0] = new Rook(PlayerColor.Red);
+            board[4, 0] = new Knight(PlayerColor.Red);
             board[5, 0] = new Bishop(PlayerColor.Red);
-            board[6, 0] = new Knight(PlayerColor.Red);
-            board[7, 0] = new Rook(PlayerColor.Red);
+            board[6, 0] = new Queen(PlayerColor.Red);
+            board[7, 0] = new King(PlayerColor.Red);
+            board[8, 0] = new Bishop(PlayerColor.Red);
+            board[9, 0] = new Knight(PlayerColor.Red);
+            board[10, 0] = new Rook(PlayerColor.Red);
 
-            board[0, 13] = new Rook(PlayerColor.Yellow);
-            board[1, 13] = new Knight(PlayerColor.Yellow);
-            board[2, 13] = new Bishop(PlayerColor.Yellow);
-            board[3, 13] = new Queen(PlayerColor.Yellow);
-            board[4, 13] = new King(PlayerColor.Yellow);
+            board[3, 13] = new Rook(PlayerColor.Yellow);
+            board[4, 13] = new Knight(PlayerColor.Yellow);
             board[5, 13] = new Bishop(PlayerColor.Yellow);
-            board[6, 13] = new Knight(PlayerColor.Yellow);
-            board[7, 13] = new Rook(PlayerColor.Yellow);
+            board[6, 13] = new King(PlayerColor.Yellow);
+            board[7, 13] = new Queen(PlayerColor.Yellow);
+            board[8, 13] = new Bishop(PlayerColor.Yellow);
+            board[9, 13] = new Knight(PlayerColor.Yellow);
+            board[10, 13] = new Rook(PlayerColor.Yellow);
 
-            board[0, 0] = new Rook(PlayerColor.Blue);
-            board[0, 1] = new Knight(PlayerColor.Blue);
-            board[0, 2] = new Bishop(PlayerColor.Blue);
-            board[0, 3] = new Queen(PlayerColor.Blue);
-            board[0, 4] = new King(PlayerColor.Blue);
+            board[0, 3] = new Rook(PlayerColor.Blue);
+            board[0, 4] = new Knight(PlayerColor.Blue);
             board[0, 5] = new Bishop(PlayerColor.Blue);
-            board[0, 6] = new Knight(PlayerColor.Blue);
-            board[0, 7] = new Rook(PlayerColor.Blue);
+            board[0, 6] = new Queen(PlayerColor.Blue);
+            board[0, 7] = new King(PlayerColor.Blue);
+            board[0, 8] = new Bishop(PlayerColor.Blue);
+            board[0, 9] = new Knight(PlayerColor.Blue);
+            board[0, 10] = new Rook(PlayerColor.Blue);
 
-            board[13, 0] = new Rook(PlayerColor.Green);
-            board[13, 1] = new Knight(PlayerColor.Green);
-            board[13, 2] = new Bishop(PlayerColor.Green);
-            board[13, 3] = new Queen(PlayerColor.Green);
-            board[13, 4] = new King(PlayerColor.Green);
+            board[13, 3] = new Rook(PlayerColor.Green);
+            board[13, 4] = new Knight(PlayerColor.Green);
             board[13, 5] = new Bishop(PlayerColor.Green);
-            board[13, 6] = new Knight(PlayerColor.Green);
-            board[13, 7] = new Rook(PlayerColor.Green);
+            board[13, 6] = new King(PlayerColor.Green);
+            board[13, 7] = new Queen(PlayerColor.Green);
+            board[13, 8] = new Bishop(PlayerColor.Green);
+            board[13, 9] = new Knight(PlayerColor.Green);
+            board[13, 10] = new Rook(PlayerColor.Green);
 
             for (int file = 3; file < board.FILES - 3; file++)
             {

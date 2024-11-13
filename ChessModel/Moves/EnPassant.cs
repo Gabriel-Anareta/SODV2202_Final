@@ -8,11 +8,11 @@
 
         private readonly Position _capturedPos;
 
-        public EnPassant(Position from, Position to)
+        public EnPassant(Position from, Position to, Position capturePos)
         {
             From = from;
             To = to;
-            _capturedPos = new Position(To.File, From.Rank);
+            _capturedPos = capturePos;
         }
 
         public override void Execute(Board board)

@@ -62,10 +62,10 @@ namespace ChessModel
             if (dir == Direction.North)
                 return Direction.East;
             if (dir == Direction.East)
-                return Direction.North;
+                return Direction.South;
             if (dir == Direction.South)
                 return Direction.West;
-            if (dir == Direction.South)
+            if (dir == Direction.West)
                 return Direction.North;
             return new Direction(0, 0);
         }

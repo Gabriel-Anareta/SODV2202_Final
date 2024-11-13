@@ -3,11 +3,11 @@ using ChessModel;
 
 namespace ChessClient.MVVM.ViewModel
 {
-    public class Chess2PlayerViewModel : ChessViewModel
+    public class Chess4PlayerViewModel : ChessViewModel
     {
-        public Chess2PlayerViewModel(PlayerColor color)
+        public Chess4PlayerViewModel(PlayerColor color)
         {
-            GameState = new GameState2Player(new Board2Player().InitialState(), PlayerColor.White);
+            GameState = new GameState4Player(new Board4Player().InitialState(), color);
             MoveCache = new Dictionary<Position, Move>();
             SelectedPos = null;
             CurrentMove = null;
@@ -25,5 +25,8 @@ namespace ChessClient.MVVM.ViewModel
                 HandleMove(new PawnPromotion(CurrentMove.From, CurrentMove.To, piece));
             };
         }
+
+        public bool IsDeadSpace(int file, int rank)
+            => ((Board4Player)GameState.GameBoard).PositionInDeadSpace(new Position(file, rank));
     }
 }
