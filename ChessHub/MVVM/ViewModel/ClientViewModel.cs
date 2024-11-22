@@ -66,7 +66,7 @@ namespace ChessClient.MVVM.ViewModel
 
         public ClientViewModel()
         {
-            AppContext.FormClosing += SendDisconnectToServer;
+            //AppContext.FormClosing += SendDisconnectToServer;
             
             _server = new Server();
             _server.ConnectedEvent += UserConnected;

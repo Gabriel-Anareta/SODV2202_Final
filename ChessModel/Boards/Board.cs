@@ -87,8 +87,12 @@
         /// <param name="player"></param>
         /// <returns>Returns true if the given player is in check</returns>
         public bool IsInCheck(PlayerColor player)
-            => PiecePositionsFor(player.Opposite())
-                .Any(pos => this[pos].CanCaptureOpponentKing(pos, this));
+        {
+            foreach (PlayerColor opponent in player.Opponents())
+                if (PiecePositionsFor(opponent).Any(pos => this[pos].CanCaptureOpponentKing(pos, this, player)))
+                    return true;
+            return false;
+        }
 
         /// <summary>
         /// Gets positions of all the pieces that a player currently has in play

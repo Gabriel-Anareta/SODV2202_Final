@@ -11,6 +11,7 @@ namespace ChessModel
         public Board GameBoard { get; set; }
         public PlayerColor CurrentPlayer { get; set; }
         public Result? EndResult { get; protected set; } = null;
+        
 
         /// <summary>
         /// Checks the current state of the game

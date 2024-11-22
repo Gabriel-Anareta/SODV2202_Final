@@ -1,33 +1,35 @@
-﻿using ChessClient.MVVM.ViewModel;
-using ChessClient.Net;
-using ChessHub;
-using System.Windows.Forms;
-using ChessClient.Net.IO;
+﻿using ChessClient.MVVM.View.Menu;
+using ChessClient.MVVM.View.ViewUtils;
 
 namespace ChessClient
 {
     public class AppContext : ApplicationContext
     {
-        private Server _server;
+        private MainMenuView _mainMenu;
+        private List<Form> _connectionLobbies;
 
         public AppContext()
         {
-            _server = new Server();
-            
-            List<Form> forms = new List<Form>() {
-                new MainView(),
-                new MainView()
-            };
-
-            foreach (var form in forms)
-            {
-                //form.FormClosing += OnFormClosing;
-                form.Show();
-            }  
+            _mainMenu = new MainMenuView();
+            _mainMenu.CreateGame += OpenConnectionLobbies;
+            _mainMenu.Show();
         }
 
-        public static event EventHandler FormClosing;
-        private void OnFormClosing(object? sender, EventArgs e)
-            => FormClosing?.Invoke(sender, e);
+        private void OpenConnectionLobbies(BoardType type)
+        {
+            _mainMenu.Close();
+            _connectionLobbies = new List<Form>();
+            
+            switch (type) 
+            {
+                case BoardType.Board2Player:
+                    break;
+                case BoardType.Board4Player:
+                    break;
+            }
+
+            foreach (Form lobby in _connectionLobbies)
+                lobby.Show();
+        }
     }
 }

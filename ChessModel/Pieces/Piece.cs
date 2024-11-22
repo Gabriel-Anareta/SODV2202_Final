@@ -30,12 +30,13 @@
         /// <param name="from"></param>
         /// <param name="board"></param>
         /// <returns>True if this piece can capture and opposing king</returns>
-        public virtual bool CanCaptureOpponentKing(Position from, Board board)
+        public virtual bool CanCaptureOpponentKing(Position from, Board board, PlayerColor checkColor)
         {
             return GetMoves(from, board)
                 .Any(move =>
                     board[move.To] != null
                     && board[move.To].Type == PieceType.King
+                    && board[move.To].Color == checkColor
                 );
         }
 

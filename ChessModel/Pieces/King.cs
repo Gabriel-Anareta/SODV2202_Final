@@ -49,12 +49,13 @@ namespace ChessModel
                 yield return new Castle(from, MoveType.CastleQueenSide, Color);
         }
 
-        public override bool CanCaptureOpponentKing(Position from, Board board)
+        public override bool CanCaptureOpponentKing(Position from, Board board, PlayerColor checkColor)
         {
             return ValidMoves(from, board)
                 .Any(pos =>
                     board[pos] != null
                     && board[pos].Type == PieceType.King
+                    && board[pos].Color == checkColor
                 );
         }
 

@@ -25,7 +25,10 @@ namespace ChessClient.MVVM.ViewModel.Commands
             => _canExecute == null || _canExecute(parameter);
 
         public void Execute(object? parameter)
-            => _execute(parameter);
+        {
+            if (CanExecute(parameter))
+                _execute(parameter);
+        }
 
         public void NotifyCanExecuteChanged()
             => CanExecuteChanged?.Invoke(this, EventArgs.Empty);

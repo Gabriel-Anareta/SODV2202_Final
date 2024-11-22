@@ -46,11 +46,12 @@ namespace ChessModel
             => ForwardMoves(from, board)
                 .Concat(DiagonalMoves(from, board));
 
-        public override bool CanCaptureOpponentKing(Position from, Board board)
+        public override bool CanCaptureOpponentKing(Position from, Board board, PlayerColor checkColor)
             => DiagonalMoves(from, board)
                 .Any(move =>
                     board[move.To] != null
                     && board[move.To].Type == PieceType.King
+                    && board[move.To].Color == checkColor
                 );
 
         private IEnumerable<Move> ForwardMoves(Position from, Board board)
