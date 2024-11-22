@@ -52,7 +52,7 @@ namespace ChessModel
         public void ExecuteMove(Move move)
         {
             GameBoard.SetEnPassantSquare(CurrentPlayer, null);
-            move.Execute(GameBoard);
+            move.Execute(GameBoard, true);
             CurrentPlayer = PlayerManager.Next(CurrentPlayer);
             CheckGameOver();
         }

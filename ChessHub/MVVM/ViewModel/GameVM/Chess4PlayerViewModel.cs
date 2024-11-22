@@ -17,8 +17,8 @@ namespace ChessClient.MVVM.ViewModel
             ClientColor = color;
 
             PieceSelectedCommand = new RelayCommand(
-                obj => PieceSelected(obj),
-                obj => ClientColor == GameState.CurrentPlayer
+                obj => PieceSelected(obj)
+                //obj => ClientColor == GameState.CurrentPlayer
             );
 
             PromotionSelected = piece =>

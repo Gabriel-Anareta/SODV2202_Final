@@ -14,7 +14,7 @@
 
         private PieceType _promotedTo = promotedTo;
 
-        public override void Execute(Board board)
+        public override void Execute(Board board, bool raisingCaptures = false)
         {
             // Create promotion piece
             Piece promotionPiece = CreatePromotionPiece(board[From].Color);

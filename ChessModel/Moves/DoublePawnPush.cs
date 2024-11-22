@@ -23,7 +23,7 @@
             };
         }
 
-        public override void Execute(Board board)
+        public override void Execute(Board board, bool raisingCaptures = false)
         {
             PlayerColor color = board[From].Color;
             board.SetEnPassantSquare(color, this);

@@ -21,7 +21,7 @@
             _rookTo = castleType.RookTo(color, From);
         }
 
-        public override void Execute(Board board)
+        public override void Execute(Board board, bool raisingCaptures = false)
         {
             new NormalMove(From, To).Execute(board);
             new NormalMove(_rookFrom, _rookTo).Execute(board);

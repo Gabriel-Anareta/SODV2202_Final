@@ -11,12 +11,16 @@
         public override Position From { get; } = from;
         public override Position To { get; } = to;
 
-        public override void Execute(Board board)
+        public override void Execute(Board board, bool raisingCaptures = false)
         {
-            Piece piece = board[From];
-            board[To] = piece;
+            Piece pieceFrom = board[From];
+            Piece pieceTo = board[To];
+            board[To] = pieceFrom;
             board[From] = new EmptyPiece();
-            piece.HasMoved = true;
+            pieceFrom.HasMoved = true;
+
+            if (pieceTo.Type != PieceType.None && raisingCaptures)
+                OnCapturedPiece(pieceFrom.Color, pieceTo.Color, pieceTo.Type);
         }
     }
 }

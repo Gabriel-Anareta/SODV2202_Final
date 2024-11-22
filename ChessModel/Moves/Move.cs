@@ -9,11 +9,14 @@
         public abstract Position From { get; }
         public abstract Position To { get; }
 
+        public delegate void Capture(PlayerColor movingPlayer, PlayerColor capturedPlayer, PieceType capturedPiece);
+        public static event Capture CapturedPieceEvent;
+
         /// <summary>
         /// Executes the current move on the given board
         /// </summary>
         /// <param name="board"></param>
-        public abstract void Execute(Board board);
+        public abstract void Execute(Board board, bool raiseCaptures = false);
 
         /// <summary>
         /// Checks the validity of a current move on check positions
@@ -27,5 +30,8 @@
             Execute(copy);
             return !copy.IsInCheck(color);
         }
+
+        protected void OnCapturedPiece(PlayerColor movingPlayer, PlayerColor capturedPlayer, PieceType capturedPiece)
+            => CapturedPieceEvent?.Invoke(movingPlayer, capturedPlayer, capturedPiece);
     }
 }
