@@ -11,6 +11,14 @@
             CurrentPlayer = player;
         }
 
+        public override void ExecuteMove(Move move)
+        {
+            GameBoard.SetEnPassantSquare(CurrentPlayer, null);
+            move.Execute(GameBoard, true);
+            CurrentPlayer = PlayerManager.Next(CurrentPlayer);
+            CheckGameOver();
+        }
+
         protected override void CheckGameOver()
         {
             if (!ValidMovesFor(CurrentPlayer).Any())

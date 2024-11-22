@@ -25,9 +25,12 @@ namespace ChessModel
         /// </summary>
         /// <param name="pos"></param>
         /// <returns>An IEnumerable holding all positions that can be reached from the current location of a piece</returns>
-        public IEnumerable<Move> ValidMovesFor(Position pos)
+        public IEnumerable<Move> ValidMovesFor(Position pos, PlayerColor color = PlayerColor.None)
         {
-            if (GameBoard.IsEmptyPosition(pos) || GameBoard[pos].Color != CurrentPlayer)
+            if (color == PlayerColor.None)
+                color = CurrentPlayer;
+            
+            if (GameBoard.IsEmptyPosition(pos) || GameBoard[pos].Color != color)
                 return Enumerable.Empty<Move>();
 
             Piece piece = GameBoard[pos];
@@ -49,13 +52,7 @@ namespace ChessModel
         /// Executes the given move and updates the game state
         /// </summary>
         /// <param name="move"></param>
-        public void ExecuteMove(Move move)
-        {
-            GameBoard.SetEnPassantSquare(CurrentPlayer, null);
-            move.Execute(GameBoard, true);
-            CurrentPlayer = PlayerManager.Next(CurrentPlayer);
-            CheckGameOver();
-        }
+        public abstract void ExecuteMove(Move move);
 
         /// <summary>
         /// Checks for a game over state

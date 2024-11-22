@@ -120,6 +120,11 @@
             };
         }
 
+        /// <summary>
+        /// Gets all opponents of this player
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns>A List of PlayerColors containing all opponents of this player</returns>
         public static List<PlayerColor> Opponents(this PlayerColor color)
         {
             return color switch
