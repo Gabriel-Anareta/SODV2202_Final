@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace ChessServer
 
         private static TcpListener _listener;
         private static List<Client> _users;
+        private static int? _requiredUsers = null;
         
         static void Main(string[] args)
         {
@@ -35,10 +37,14 @@ namespace ChessServer
             while (true)
             {
                 Client client = new Client(_listener.AcceptTcpClient());
+
                 _users.Add(client);
 
                 // Broadcast connection to everyone on server
                 BroadcastConnection();
+
+                if (_requiredUsers != null && _users.Count == _requiredUsers + 1)
+                    StartGame();
             }
         }
 
@@ -46,8 +52,14 @@ namespace ChessServer
         {
             foreach (Client userClient in _users)
             {
+                if (userClient.Username == "App Context")
+                    continue;
+
                 foreach (Client user in _users)
                 {
+                    if (user.Username == "App Context")
+                        continue;
+
                     PacketBuilder broadcastPacket = new PacketBuilder();
                     broadcastPacket.WriteOpCode(1);
                     broadcastPacket.WriteMessage(user.Username);
@@ -61,6 +73,9 @@ namespace ChessServer
         {
             foreach (Client user in _users)
             {
+                if (user.Username == "App Context")
+                    continue;
+
                 PacketBuilder broadcastPacket = new PacketBuilder();
                 broadcastPacket.WriteOpCode(5);
                 broadcastPacket.WriteMessage(message);
@@ -77,6 +92,9 @@ namespace ChessServer
             _users.Remove(disconnectedUser);
             foreach (Client user in _users)
             {
+                if (user.Username == "App Context")
+                    continue;
+
                 PacketBuilder broadcastPacket = new PacketBuilder();
                 broadcastPacket.WriteOpCode(10);
                 broadcastPacket.WriteMessage(uid.ToString());
@@ -85,5 +103,18 @@ namespace ChessServer
 
             BroadcastMessage($"[{DateTime.Now}]: {disconnectedUser.Username} Disconnected!");
         }
+
+        public static void StartGame()
+        {
+            Client app = _users.Find(user => user.Username == "App Context");
+
+            PacketBuilder StartPacket = new PacketBuilder();
+            StartPacket.WriteOpCode(21);
+            StartPacket.WriteMessage("Start Game");
+            app.ClientSocket.Client.Send(StartPacket.GetPacketBytes());
+        }
+
+        public static void SetRequiredUsers(int count)
+            => _requiredUsers = count;
     }
 }

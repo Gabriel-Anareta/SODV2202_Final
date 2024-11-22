@@ -12,6 +12,7 @@ namespace ChessClient.Net
         1 - broadcasted client connection
         5 - broadcasted message
         10 - broadcasted client disconnection
+        20 - send required users to server
          */
 
         private const int PORT = 5000;
@@ -23,6 +24,9 @@ namespace ChessClient.Net
         public event Action ConnectedEvent;
         public event Action MessageRecievedEvent;
         public event Action UserDisconnectedEvent;
+        public event Action StartGameEvent;
+
+        public string Username { get; private set; }
 
         public Server()
         {
@@ -47,6 +51,8 @@ namespace ChessClient.Net
             connectPacket.WriteOpCode(0); // using opCode 0 temporalily for testing
             connectPacket.WriteMessage(username);
             _client.Client.Send(connectPacket.GetPacketBytes());
+
+            Username = username;
 
             ReadPackets();
         }
@@ -79,6 +85,9 @@ namespace ChessClient.Net
                             break;
                         case 10:
                             UserDisconnectedEvent?.Invoke();
+                            break;
+                        case 21:
+                            StartGameEvent?.Invoke();
                             break;
                     }
                 }

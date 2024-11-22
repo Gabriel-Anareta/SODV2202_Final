@@ -1,5 +1,6 @@
 ﻿using ChessClient.MVVM.View.Controls;
 using ChessClient.MVVM.ViewModel;
+using ChessClient.Net;
 using ChessModel;
 
 namespace ChessClient.MVVM.View._4Player
@@ -12,14 +13,15 @@ namespace ChessClient.MVVM.View._4Player
         private PromotionControl promCtrl;
         //private Panel container;
 
-        public Chess4PlayerView(PlayerColor color)
+        public Chess4PlayerView(PlayerColor color, Server server)
         {
             InitializeComponent();
 
             this.ClientSize = new Size(812, 812);
+            this.Text = $"Player: {color} / Name: {server.Username}";
             this.Paint += DrawSquares;
 
-            _viewModel = new Chess4PlayerViewModel(color);
+            _viewModel = new Chess4PlayerViewModel(color, server);
             _viewModel.ShowHighlights += ShowHighlights;
             _viewModel.HideHighlights += HideHighlights;
             _viewModel.ChoosePromotion += ShowPromotion;

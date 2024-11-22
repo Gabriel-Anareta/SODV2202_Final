@@ -31,14 +31,14 @@ namespace ChessClient.MVVM.View.Menu
             mainMenuControl.StartClicked += OpenGameCollection;
             mainMenuControl.HelpClicked += OpenInfoPage;
             mainMenuControl.Dock = DockStyle.Fill;
-            SetEnabled(mainMenuControl, true);
+            mainMenuControl.SetEnabled(true);
 
             gameCollection = new GameCollection();
             gameCollection.OptionSelected += CreateGameLobby;
             gameCollection.Left = (this.ClientSize.Width - gameCollection.Width) / 2;
             gameCollection.Top = (this.ClientSize.Height - gameCollection.Height) / 2;
             //gameCollection.Margin = new Padding(50);
-            SetEnabled(gameCollection, false);
+            gameCollection.SetEnabled(false);
         }
 
         private void DrawBackground(object? sender, PaintEventArgs e)
@@ -75,17 +75,18 @@ namespace ChessClient.MVVM.View.Menu
 
         private void OpenInfoPage()
         {
-            SetEnabled(mainMenuControl, false);
+            mainMenuControl.SetEnabled(false);
         }
 
         private void OpenGameCollection()
         {
-            SetEnabled(mainMenuControl, false);
-            SetEnabled(gameCollection, true);
+            mainMenuControl.SetEnabled(false);
+            gameCollection.SetEnabled(true);
         }
 
         private void CreateGameLobby(BoardType type)
         {
+            offsetTimer.Stop();
             CreateGame.Invoke(type);
         }
 
@@ -93,12 +94,6 @@ namespace ChessClient.MVVM.View.Menu
         {
             _drawOffset = _drawOffset != _tileSize ? _drawOffset + 1 : 0;
             this.Refresh();
-        }
-
-        private void SetEnabled(Control control, bool state)
-        {
-            control.Enabled = state;
-            control.Visible = state;
         }
     }
 }

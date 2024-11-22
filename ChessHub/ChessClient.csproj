@@ -27,8 +27,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MVVM\View\ConnectLobbies\Controls\" />
-  </ItemGroup>
-
 </Project>

@@ -55,6 +55,11 @@ namespace ChessServer
                             Program.BroadcastDisconnect(UID);
                             ClientSocket.Close();
                             break;
+                        case 20:
+                            string requiredUsers = _packetReader.ReadMessage();
+                            Console.WriteLine($"[{DateTime.Now}]: Required Users set to {requiredUsers}");
+                            Program.SetRequiredUsers(int.Parse(requiredUsers));
+                            break;
                     }
                 }
                 catch(Exception)

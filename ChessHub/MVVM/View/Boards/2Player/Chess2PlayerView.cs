@@ -1,6 +1,7 @@
 ﻿using ChessModel;
 using ChessClient.MVVM.ViewModel;
 using ChessClient.MVVM.View.Controls;
+using ChessClient.Net;
 
 namespace ChessClient.MVVM.View._2Player
 {
@@ -12,14 +13,15 @@ namespace ChessClient.MVVM.View._2Player
         private PromotionControl promCtrl;
         //private Panel container;
 
-        public Chess2PlayerView(PlayerColor color)
+        public Chess2PlayerView(PlayerColor color, Server server)
         {
             InitializeComponent();
 
             this.ClientSize = new Size(800, 800);
+            this.Text = $"Player: {color} / Name: {server.Username}";
             this.Paint += DrawSquares;
 
-            _viewModel = new Chess2PlayerViewModel(color);
+            _viewModel = new Chess2PlayerViewModel(color, server);
             _viewModel.ShowHighlights += ShowHighlights;
             _viewModel.HideHighlights += HideHighlights;
             _viewModel.ChoosePromotion += ShowPromotion;
@@ -28,6 +30,13 @@ namespace ChessClient.MVVM.View._2Player
             _pieces = new BoardSquare[8, 8];
 
             InitializeBoard();
+        }
+
+        private void Chess2PlayerView_Load(object sender, EventArgs e)
+        {
+            for (int file = 0; file < 8; file++)
+                for (int rank = 0; rank < 8; rank++)
+                    Controls.Add(_pieces[file, rank]);
         }
 
         private void InitializeBoard()
@@ -45,12 +54,11 @@ namespace ChessClient.MVVM.View._2Player
                     _pieces[file, rank].Location = new Point(tileSize * rank, size.Height - tileSize * (file + 1));
                     _pieces[file, rank].DataBindings.Add(
                         "Command",
-                        _viewModel, 
-                        nameof(_viewModel.PieceSelectedCommand), 
-                        true, 
+                        _viewModel,
+                        nameof(_viewModel.PieceSelectedCommand),
+                        true,
                         DataSourceUpdateMode.OnPropertyChanged
                     );
-                    Controls.Add(_pieces[file, rank]);
                 }
             }
         }
