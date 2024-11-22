@@ -11,6 +11,16 @@
         Bishop,
         Queen,
         King,
+        PromotedRook,
+        PromotedKnight,
+        PromotedBishop,
+        PromotedQueen,
+        DeadPawn,
+        DeadRook,
+        DeadKnight,
+        DeadBishop,
+        DeadQueen,
+        DeadKing,
         None
     }
 }

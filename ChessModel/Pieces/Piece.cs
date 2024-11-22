@@ -5,7 +5,7 @@
     /// </summary>
     public abstract class Piece
     {
-        public abstract PieceType Type { get; }
+        public abstract PieceType Type { get; set; }
         public abstract PlayerColor Color { get; }
         public abstract Image Image { get; }
         public bool HasMoved { get; set; } = false;

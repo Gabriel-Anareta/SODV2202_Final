@@ -29,10 +29,10 @@
         {
             return _promotedTo switch
             {
-                PieceType.Knight => new Knight(color),
-                PieceType.Bishop => new Bishop(color),
-                PieceType.Rook => new Rook(color),
-                PieceType.Queen => new Queen(color),
+                PieceType.PromotedKnight => new Knight(color) { Type = PieceType.PromotedRook },
+                PieceType.PromotedBishop => new Bishop(color) { Type = PieceType.PromotedBishop },
+                PieceType.PromotedRook => new Rook(color) { Type = PieceType.PromotedRook },
+                PieceType.PromotedQueen => new Queen(color) { Type = PieceType.PromotedQueen },
                 _ => new Pawn(color)
             };
         }

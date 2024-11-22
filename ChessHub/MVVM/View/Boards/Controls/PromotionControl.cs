@@ -24,10 +24,10 @@ namespace ChessClient.MVVM.View.Controls
         {
             PieceType type = ((PictureBox)sender).Name switch
             {
-                "pb_Queen" => PieceType.Queen,
-                "pb_Rook" => PieceType.Rook,
-                "pb_Knight" => PieceType.Knight,
-                "pb_Bishop" => PieceType.Bishop,
+                "pb_Queen" => PieceType.PromotedQueen,
+                "pb_Rook" => PieceType.PromotedRook,
+                "pb_Knight" => PieceType.PromotedKnight,
+                "pb_Bishop" => PieceType.PromotedBishop,
                 "pb_Pawn" => PieceType.Pawn
             };
             AcceptPromotion.Invoke(type);

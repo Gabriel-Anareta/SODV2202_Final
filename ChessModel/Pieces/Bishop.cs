@@ -7,7 +7,7 @@ namespace ChessModel
     /// <param name="color"></param>
     public class Bishop : Piece
     {
-        public override PieceType Type { get; }
+        public override PieceType Type { get; set; }
         public override PlayerColor Color { get; }
         public override Image Image { get; }
 
