@@ -81,6 +81,16 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bishop_Dead {
+            get {
+                object obj = ResourceManager.GetObject("Bishop_Dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Bishop_Green {
@@ -151,6 +161,16 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap King_Dead {
+            get {
+                object obj = ResourceManager.GetObject("King_Dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] King_Green {
@@ -207,6 +227,16 @@ namespace ChessModel.Properties {
             get {
                 object obj = ResourceManager.GetObject("Knight_Blue", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Knight_Dead {
+            get {
+                object obj = ResourceManager.GetObject("Knight_Dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -271,6 +301,16 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pawn_Dead {
+            get {
+                object obj = ResourceManager.GetObject("Pawn_Dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Pawn_Green {
@@ -331,6 +371,16 @@ namespace ChessModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Queen_Dead {
+            get {
+                object obj = ResourceManager.GetObject("Queen_Dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Queen_Green {
@@ -387,6 +437,16 @@ namespace ChessModel.Properties {
             get {
                 object obj = ResourceManager.GetObject("Rook_Blue", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rook_Dead {
+            get {
+                object obj = ResourceManager.GetObject("Rook_Dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
