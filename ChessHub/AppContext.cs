@@ -1,4 +1,5 @@
-﻿using ChessClient.MVVM.View;
+﻿using ChessClient.MVVM.Model;
+using ChessClient.MVVM.View;
 using ChessClient.MVVM.View._2Player;
 using ChessClient.MVVM.View._4Player;
 using ChessClient.MVVM.View.ConnectLobbies;
@@ -12,6 +13,7 @@ namespace ChessClient
     public class AppContext : ApplicationContext
     {
         private Server _appServer;
+        private List<string> _usernames;
         
         private MainMenuView _mainMenu;
         private List<ConnectingLobby> _connectionLobbies;
@@ -41,6 +43,7 @@ namespace ChessClient
             _appServer.ConnectToServer("App Context");
 
             _servers = new List<Server>();
+            _usernames = new List<string>();
             _gameBoards = new List<Form>();
             
             _mainMenu = new MainMenuView();
@@ -69,16 +72,20 @@ namespace ChessClient
             for (int i = 0; i < _requiredUsers; i++)
             {
                 ConnectingLobby lobby = new ConnectingLobby();
-                lobby.PlayerConnected += StoreServers;
+                lobby.PlayerConnected += (server, username) =>
+                {
+                    lobby.InvokeOnThread(() =>
+                    {
+                        _servers.Add(server);
+                        _usernames.Add(username);
+                    });
+                };
                 _connectionLobbies.Add(lobby);
             }
 
             foreach (ConnectingLobby lobby in _connectionLobbies)
                 lobby.Show();
         }
-
-        private void StoreServers(Server server)
-            => _servers.Add(server);
 
         private void CreateGames()
         {
@@ -94,10 +101,10 @@ namespace ChessClient
                 switch (_selectedType)
                 {
                     case BoardType.Board2Player:
-                        _gameBoards.Add(new Chess2PlayerView(_player2Colors[i], _servers[i]));
+                        _gameBoards.Add(new Chess2PlayerView(_player2Colors[i], _servers[i], _usernames));
                         break;
                     case BoardType.Board4Player:
-                        _gameBoards.Add(new Chess4PlayerView(_player4Colors[i], _servers[i]));
+                        _gameBoards.Add(new Chess4PlayerView(_player4Colors[i], _servers[i], _usernames));
                         break;
                 }
             }

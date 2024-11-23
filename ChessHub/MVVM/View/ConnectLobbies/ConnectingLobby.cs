@@ -6,7 +6,7 @@ namespace ChessClient.MVVM.View.ConnectLobbies
 {
     public partial class ConnectingLobby : Form
     {
-        public Action<Server> PlayerConnected { get; set; }
+        public Action<Server, string> PlayerConnected { get; set; }
         
         private ConnectViewModel viewModel;
         private UsernameInput usernameInput;
@@ -66,6 +66,6 @@ namespace ChessClient.MVVM.View.ConnectLobbies
             => connectedUsers.SetTimer(false);
 
         private void OnPlayerConnected(Server server)
-            => PlayerConnected.Invoke(server);
+            => PlayerConnected.Invoke(server, viewModel.Username);
     }
 }
