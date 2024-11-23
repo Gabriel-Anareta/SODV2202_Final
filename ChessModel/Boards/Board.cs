@@ -118,5 +118,62 @@
                 }
             }
         }
+
+        public PieceCount CountPieces()
+        {
+            PieceCount count = GenerateCounter();
+
+            foreach (Position pos in PiecePositions())
+                count.IncrementPieceCount(this[pos].Color, this[pos].Type);
+
+            return count;
+        }
+
+        protected abstract PieceCount GenerateCounter();
+
+
+        public bool InsufficientMaterial()
+        {
+            PieceCount count = CountPieces();
+
+            return (
+                IsKingVKing(count)
+                || IsKingBishopVKing(count)
+                || IsKingKnightVKing(count)
+                || IsKingBishopVKingBishop(count)
+            );
+        }
+
+        private bool IsKingVKing(PieceCount count)
+            => count.TotalPieces == 2;
+
+        private bool IsKingBishopVKing(PieceCount count)
+            => count.TotalPieces == 3 && count.Any(PieceType.Bishop, count => count == 1);
+            
+        private bool IsKingKnightVKing(PieceCount count)
+            => count.TotalPieces == 3 && count.Any(PieceType.Knight, count => count == 1);
+
+        private bool IsKingBishopVKingBishop(PieceCount count)
+        {
+            if (count.TotalPieces != 4) 
+                return false;
+
+            if (count.Any(PieceType.Bishop, count => count != 1))
+                return false;
+
+            if (count.Any(PieceType.King, count => count != 1))
+                return false;
+
+            List<Position> typePos = AllPiecePos(PieceType.Bishop);
+            if (typePos.Count != 2)
+                return false;
+
+            return typePos[0].SquareColor() == typePos[1].SquareColor();
+        }
+
+        protected Position FindPiece(PlayerColor color, PieceType type)
+            => PiecePositionsFor(color).First(pos => this[pos].Type == type);
+
+        protected abstract List<Position> AllPiecePos(PieceType type);
     }
 }

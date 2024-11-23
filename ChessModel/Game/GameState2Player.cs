@@ -31,6 +31,9 @@
                 else
                     EndResult = Result.Draw(EndReason.Stalemate);
             }
+            
+            if (GameBoard.InsufficientMaterial())
+                EndResult = Result.Draw(EndReason.InsufficientMaterial);
         }
     }
 }

@@ -73,7 +73,7 @@
             foreach (PlayerColor opponent in CurrentPlayer.Opponents())
                 opponentsAreInPlay = opponentsAreInPlay && PlayerStates[opponent].IsInPlay;
 
-            if (!opponentsAreInPlay)
+            if (!opponentsAreInPlay || GameBoard.InsufficientMaterial())
                 RaiseGameOver();
         }
 

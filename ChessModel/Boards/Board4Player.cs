@@ -113,5 +113,21 @@
 
             return copy;
         }
+
+        protected override PieceCount GenerateCounter()
+            => new PieceCount4P();
+
+        protected override List<Position> AllPiecePos(PieceType type)
+        {
+            return (
+                new List<Position>
+                {
+                    FindPiece(PlayerColor.Red, type),
+                    FindPiece(PlayerColor.Green, type),
+                    FindPiece(PlayerColor.Yellow, type),
+                    FindPiece(PlayerColor.Blue, type)
+                }
+            );
+        }
     }
 }

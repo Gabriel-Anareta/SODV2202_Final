@@ -77,5 +77,19 @@
 
             return copy;
         }
+
+        protected override PieceCount GenerateCounter()
+            => new PieceCount2P();
+
+        protected override List<Position> AllPiecePos(PieceType type)
+        {
+            return (
+                new List<Position>
+                {
+                    FindPiece(PlayerColor.White, type),
+                    FindPiece(PlayerColor.Black, type)
+                }
+            );
+        }
     }
 }

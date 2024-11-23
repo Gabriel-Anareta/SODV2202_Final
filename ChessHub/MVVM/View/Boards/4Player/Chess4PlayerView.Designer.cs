@@ -119,7 +119,7 @@
             lbl_ScoreYellow.Name = "lbl_ScoreYellow";
             lbl_ScoreYellow.Size = new Size(101, 92);
             lbl_ScoreYellow.TabIndex = 9;
-            lbl_ScoreYellow.Text = "RedScore";
+            lbl_ScoreYellow.Text = "YellowScore";
             lbl_ScoreYellow.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbl_ScoreGreen
@@ -134,7 +134,7 @@
             lbl_ScoreGreen.Name = "lbl_ScoreGreen";
             lbl_ScoreGreen.Size = new Size(101, 92);
             lbl_ScoreGreen.TabIndex = 8;
-            lbl_ScoreGreen.Text = "RedScore";
+            lbl_ScoreGreen.Text = "GreenScore";
             lbl_ScoreGreen.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lbl_ScoreRed
