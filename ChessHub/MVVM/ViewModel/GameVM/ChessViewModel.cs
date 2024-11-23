@@ -1,4 +1,5 @@
-﻿using ChessClient.MVVM.View.Controls;
+﻿using ChessClient.MVVM.Model;
+using ChessClient.MVVM.View.Controls;
 using ChessClient.MVVM.ViewModel.Commands;
 using ChessClient.Net;
 using ChessModel;
@@ -7,20 +8,21 @@ using System.Runtime.CompilerServices;
 
 namespace ChessClient.MVVM.ViewModel
 {
-    public abstract class ChessViewModel
+    public abstract class ChessViewModel : INotifyPropertyChanged
     {
         protected Server Server;
         protected PlayerColor ClientColor;
+        protected List<string> Users;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public Action<Dictionary<Position, Move>> HideHighlights;
         public Action<Dictionary<Position, Move>> ShowHighlights;
-        public Action<PlayerColor> ChoosePromotion;
+        public Action ChoosePromotion;
         public Action<PieceType> PromotionSelected;
         public Action ConfirmPromotion;
-        public Action ShowGameOver;
+        public Action<Result> ShowGameOver;
 
-        protected GameState GameState;
+        public GameState GameState { get; protected set; }
         protected Dictionary<Position, Move> MoveCache;
         protected Position? SelectedPos;
         protected Move? CurrentMove;
@@ -85,14 +87,14 @@ namespace ChessClient.MVVM.ViewModel
         {
             CurrentMove = move;
             MenuOnScreen = true;
-            ChoosePromotion.Invoke(ClientColor);
+            ChoosePromotion.Invoke();
         }
 
         protected void HandleMove(Move move)
         {
             GameState.ExecuteMove(move);
-            //if (_gameState.IsGameOver())
-            //    ShowGameOver(_gameState.EndResult);
+            if (GameState.IsGameOver())
+                ShowGameOver(GameState.EndResult);
         }
 
         protected void CacheMoves(IEnumerable<Move> moves)

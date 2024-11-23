@@ -6,6 +6,9 @@ namespace ChessClient.MVVM.ViewModel
 {
     public class Chess2PlayerViewModel : ChessViewModel
     {
+        public string UsernameWhite { get; set; }
+        public string UsernameBlack { get; set; }
+
         public Chess2PlayerViewModel(PlayerColor color, Server server)
         {
             Server = server;
@@ -17,8 +20,8 @@ namespace ChessClient.MVVM.ViewModel
             ClientColor = color;
 
             PieceSelectedCommand = new RelayCommand(
-                obj => PieceSelected(obj),
-                obj => ClientColor == GameState.CurrentPlayer
+                obj => PieceSelected(obj)
+                //obj => ClientColor == GameState.CurrentPlayer
             );
 
             PromotionSelected = piece =>
