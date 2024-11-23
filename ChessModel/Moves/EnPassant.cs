@@ -24,7 +24,7 @@
             board[_capturedPos] = new EmptyPiece();
 
             if (raisingCaptures)
-                OnCapturedPiece(fromPiece.Color, capturedPiece.Color, capturedPiece.Type);
+                OnCapturedPiece(fromPiece, capturedPiece);
         }
     }
 }

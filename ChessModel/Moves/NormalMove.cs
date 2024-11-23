@@ -13,14 +13,14 @@
 
         public override void Execute(Board board, bool raisingCaptures = false)
         {
-            Piece pieceFrom = board[From];
-            Piece pieceTo = board[To];
-            board[To] = pieceFrom;
+            Piece fromPiece = board[From];
+            Piece toPiece = board[To];
+            board[To] = fromPiece;
             board[From] = new EmptyPiece();
-            pieceFrom.HasMoved = true;
+            fromPiece.HasMoved = true;
 
-            if (pieceTo.Type != PieceType.None && raisingCaptures)
-                OnCapturedPiece(pieceFrom.Color, pieceTo.Color, pieceTo.Type);
+            if (toPiece.Type != PieceType.None && raisingCaptures)
+                OnCapturedPiece(fromPiece, toPiece);
         }
     }
 }

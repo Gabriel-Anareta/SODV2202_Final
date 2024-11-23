@@ -9,7 +9,7 @@
         public abstract Position From { get; }
         public abstract Position To { get; }
 
-        public delegate void Capture(PlayerColor movingPlayer, PlayerColor capturedPlayer, PieceType capturedPiece);
+        public delegate void Capture(Piece capturingPiece, Piece capturedPiece);
         public static event Capture CapturedPieceEvent;
 
         /// <summary>
@@ -31,7 +31,7 @@
             return !copy.IsInCheck(color);
         }
 
-        protected void OnCapturedPiece(PlayerColor movingPlayer, PlayerColor capturedPlayer, PieceType capturedPiece)
-            => CapturedPieceEvent?.Invoke(movingPlayer, capturedPlayer, capturedPiece);
+        protected void OnCapturedPiece(Piece capturingPiece, Piece capturedPiece)
+            => CapturedPieceEvent?.Invoke(capturingPiece, capturedPiece);
     }
 }
