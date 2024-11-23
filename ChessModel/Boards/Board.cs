@@ -99,7 +99,7 @@
         /// </summary>
         /// <param name="player"></param>
         /// <returns>An IEnumerable that holds the positions of all the pieces that a player currently has in play</returns>
-        internal IEnumerable<Position> PiecePositionsFor(PlayerColor player)
+        public IEnumerable<Position> PiecePositionsFor(PlayerColor player)
             => PiecePositions().Where(pos => this[pos].Color == player);
 
         /// <summary>

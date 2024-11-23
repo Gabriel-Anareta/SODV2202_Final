@@ -13,8 +13,11 @@
 
         public override void ExecuteMove(Move move)
         {
+            // Execute move
             GameBoard.SetEnPassantSquare(CurrentPlayer, null);
             move.Execute(GameBoard, true);
+
+            // Update game state
             CurrentPlayer = PlayerManager.Next(CurrentPlayer);
             CheckGameOver();
         }
@@ -24,7 +27,7 @@
             if (!ValidMovesFor(CurrentPlayer).Any())
             {
                 if (GameBoard.IsInCheck(CurrentPlayer))
-                    EndResult = Result.Win(CurrentPlayer.Next());
+                    EndResult = Result.Win(CurrentPlayer.Next(), EndReason.Checkmate);
                 else
                     EndResult = Result.Draw(EndReason.Stalemate);
             }
