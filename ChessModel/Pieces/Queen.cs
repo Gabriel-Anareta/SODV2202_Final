@@ -9,10 +9,6 @@ namespace ChessModel
     /// <param name="color"></param>
     public class Queen : Piece
     {
-        public override PieceType Type { get; set; }
-        public override PlayerColor Color { get; }
-        public override Image Image { get; }
-
         private static readonly List<Direction> Directions = new List<Direction>
         {
             Direction.North,

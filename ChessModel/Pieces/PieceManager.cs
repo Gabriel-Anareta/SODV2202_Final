@@ -81,7 +81,32 @@
             { PieceType.PromotedKnight, Properties.Resources.Knight_Blue.byteArrayToImage() },
             { PieceType.PromotedBishop, Properties.Resources.Bishop_Blue.byteArrayToImage() },
         };
-
+        private static readonly Dictionary<PieceType, Image> _deadPieceImageMap = new Dictionary<PieceType, Image>
+        {
+            { PieceType.King, Properties.Resources.King_Dead },
+            { PieceType.Queen, Properties.Resources.Queen_Dead },
+            { PieceType.Rook, Properties.Resources.Rook_Dead },
+            { PieceType.Knight, Properties.Resources.Knight_Dead },
+            { PieceType.Bishop, Properties.Resources.Bishop_Dead },
+            { PieceType.Pawn, Properties.Resources.Pawn_Dead },
+            { PieceType.PromotedQueen, Properties.Resources.Queen_Dead },
+            { PieceType.PromotedRook, Properties.Resources.Rook_Dead },
+            { PieceType.PromotedKnight, Properties.Resources.Knight_Dead },
+            { PieceType.PromotedBishop, Properties.Resources.Bishop_Dead },
+        };
+        private static readonly Dictionary<PieceType, PieceType> _deadPieceTypeMap = new Dictionary<PieceType, PieceType>
+        {
+            { PieceType.King, PieceType.DeadKing },
+            { PieceType.Queen, PieceType.DeadQueen },
+            { PieceType.Rook, PieceType.DeadRook },
+            { PieceType.Knight, PieceType.DeadKnight },
+            { PieceType.Bishop, PieceType.DeadBishop },
+            { PieceType.Pawn, PieceType.DeadPawn },
+            { PieceType.PromotedQueen, PieceType.DeadQueen },
+            { PieceType.PromotedRook, PieceType.DeadRook },
+            { PieceType.PromotedKnight, PieceType.DeadKnight },
+            { PieceType.PromotedBishop, PieceType.DeadBishop },
+        };
         private static readonly Dictionary<PieceType, int> _piecePoints = new Dictionary<PieceType, int>
         {
             { PieceType.King, 20 },
@@ -94,6 +119,16 @@
             { PieceType.PromotedRook, 1 },
             { PieceType.PromotedKnight, 1 },
             { PieceType.PromotedBishop, 1 },
+            { PieceType.DeadPawn, 0 },
+            { PieceType.DeadRook, 0 },
+            { PieceType.DeadKnight, 0 },
+            { PieceType.DeadBishop, 0 },
+            { PieceType.DeadQueen, 0 },
+            { PieceType.DeadKing, 20 },
+            { PieceType.DeadPromotedRook, 0 },
+            { PieceType.DeadPromotedKnight, 0 },
+            { PieceType.DeadPromotedBishop, 0 },
+            { PieceType.DeadPromotedQueen, 0 }
         };
 
         public static Image GetImage(this PlayerColor color, PieceType type)
@@ -113,6 +148,15 @@
         public static Image GetImage(this PieceType piece, PlayerColor color)
             => color.GetImage(piece);
 
+        public static int GetPiecePoints(this PieceType piece)
+            => _piecePoints[piece];
+
+        public static Image GetDeadImage(this PieceType piece)
+            => _deadPieceImageMap[piece];
+
+        public static PieceType GetDeadType(this PieceType piece)
+            => _deadPieceTypeMap[piece];
+
         private static Image byteArrayToImage(this byte[] byteArrayIn)
         {
             try
@@ -127,8 +171,5 @@
                 return null;
             }
         }
-
-        public static int GetPiecePoints(this PieceType piece)
-            => _piecePoints[piece];
     }
 }

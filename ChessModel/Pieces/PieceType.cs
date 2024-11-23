@@ -21,6 +21,10 @@
         DeadBishop,
         DeadQueen,
         DeadKing,
+        DeadPromotedRook,
+        DeadPromotedKnight,
+        DeadPromotedBishop,
+        DeadPromotedQueen,
         None
     }
 }

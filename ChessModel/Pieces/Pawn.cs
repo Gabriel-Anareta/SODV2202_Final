@@ -7,10 +7,6 @@ namespace ChessModel
     /// <param name="color"></param>
     public class Pawn : Piece
     {
-        public override PieceType Type { get; set; }
-        public override PlayerColor Color { get; }
-        public override Image Image { get; }
-
         private readonly Direction _relativeForward;
         private readonly Direction _relativeRight;
         private readonly Direction _relativeLeft;

@@ -1,13 +1,28 @@
-﻿namespace ChessModel
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace ChessModel
 {
     /// <summary>
     /// Implements base piece functionality and properties
     /// </summary>
-    public abstract class Piece
+    public abstract class Piece : INotifyPropertyChanged
     {
-        public abstract PieceType Type { get; set; }
-        public abstract PlayerColor Color { get; }
-        public abstract Image Image { get; }
+        public PieceType Type { get; set; }
+        public PlayerColor Color { get; set; }
+
+        private Image _image;
+        public Image Image 
+        {
+            get { return _image; }
+            set
+            {
+                if (_image == value)
+                    return;
+                _image = value;
+                OnPropertyChanged();
+            }
+        }
         public bool HasMoved { get; set; } = false;
 
         /// <summary>
@@ -75,5 +90,9 @@
                 yield break;
             }
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string prop = "")
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

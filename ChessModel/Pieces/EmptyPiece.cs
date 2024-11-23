@@ -8,10 +8,6 @@ namespace ChessModel
 {
     public class EmptyPiece : Piece
     {
-        public override PieceType Type { get; set; }
-        public override PlayerColor Color { get; }
-        public override Image Image { get; }
-
         public EmptyPiece()
         {
             Type = PieceType.None;

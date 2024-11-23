@@ -7,10 +7,6 @@ namespace ChessModel
     /// <param name="color"></param>
     public class King : Piece
     {
-        public override PieceType Type { get; set; }
-        public override PlayerColor Color { get; }
-        public override Image Image { get; }
-
         private static readonly List<Direction> _allDirections = new List<Direction>
         {
             Direction.North,
