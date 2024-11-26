@@ -1,4 +1,5 @@
-﻿using ChessClient.MVVM.View.Controls;
+﻿using ChessClient.MVVM.View.Boards.Controls;
+using ChessClient.MVVM.View.Controls;
 using ChessClient.MVVM.ViewModel;
 using ChessClient.Net;
 using ChessModel;
@@ -12,6 +13,7 @@ namespace ChessClient.MVVM.View.ViewUtils
         private Form _boundedForm;
         private Panel _boardDisplay;
         private PromotionControl _promCtrl;
+        private GameOverControl _gameOverCtrl;
         private BoardSquare[,] _pieces;
         private int _squaresOnSide;
 
@@ -87,6 +89,7 @@ namespace ChessClient.MVVM.View.ViewUtils
         {
             Size size = _boardDisplay.Size;
             int tileSize = size.Width / _squaresOnSide;
+            BindingSource[,] bindings = ViewModel.GetBindings();
 
             for (int file = 0; file < _squaresOnSide; file++)
             {
@@ -95,8 +98,7 @@ namespace ChessClient.MVVM.View.ViewUtils
                     if (checkSquare(file, rank))
                         continue;
                     
-                    BindingSource imageSource = ViewModel.GetBindings()[rank, file];
-                    _pieces[file, rank] = new BoardSquare(rank, file, imageSource);
+                    _pieces[file, rank] = new BoardSquare(rank, file, bindings[rank, file]);
                     _pieces[file, rank].Size = new Size(tileSize, tileSize);
                     _pieces[file, rank].Location = new Point(
                         tileSize * rank,
@@ -173,12 +175,14 @@ namespace ChessClient.MVVM.View.ViewUtils
 
         public void ShowHighlights(Dictionary<Position, Move> moveCache)
         {
-            Color color = Color.FromArgb(150, 125, 255, 125);
+            Color greenHighlight = Color.FromArgb(150, 125, 255, 125);
+            Color redHighlight = Color.FromArgb(150, 255, 125, 125);
+
             foreach (Position to in moveCache.Keys)
                 if (ViewModel.IsEmpty(to))
-                    _pieces[to.Rank, to.File].BackColor = Color.FromArgb(150, 125, 255, 125);
+                    _pieces[to.Rank, to.File].BackColor = greenHighlight;
                 else
-                    _pieces[to.Rank, to.File].BackColor = Color.FromArgb(150, 255, 125, 125);
+                    _pieces[to.Rank, to.File].BackColor = redHighlight;
         }
 
         public void HideHighlights(Dictionary<Position, Move> moveCache)
@@ -189,21 +193,41 @@ namespace ChessClient.MVVM.View.ViewUtils
 
         public void ShowPromotion()
         {
-            _promCtrl.Location = new Point(
-                _boundedForm.ClientSize.Width / 2 - _promCtrl.Width / 2, 
-                _boundedForm.ClientSize.Height / 2 - _promCtrl.Height / 2
+            _promCtrl.Size = new Size(
+                _boardDisplay.Width * 3 / 4,
+                _boardDisplay.Height / 4
             );
 
-            _boundedForm.Controls.Add(_promCtrl);
-            _promCtrl.BringToFront();
+            AddControlToContainer(_boardDisplay, _promCtrl);
         }
 
         public void HidePromotion()
-            => _boundedForm.Controls.Remove(_promCtrl);
+            => _boardDisplay.Controls.Remove(_promCtrl);
 
         private void ShowGameOver(Result result)
         {
+            _gameOverCtrl.Size = new Size(
+                _boardDisplay.Width * 3 / 4,
+                _boardDisplay.Height / 4
+            );
 
+            AddControlToContainer(_boardDisplay, _gameOverCtrl);
+        }
+
+        private void AddControlToContainer(Control container, Control control)
+        {
+            control.Location = CenterControl(container, control);
+
+            container.Controls.Add(_promCtrl);
+            control.BringToFront();
+        }
+
+        private Point CenterControl(Control container, Control control)
+        {
+            return new Point(
+                container.Width / 2 - control.Width / 2,
+                container.Height / 2 - control.Height / 2
+            );
         }
     }
 }

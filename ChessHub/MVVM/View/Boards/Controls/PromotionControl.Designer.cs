@@ -57,7 +57,7 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50.5952377F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 49.4047623F));
-            tableLayoutPanel1.Size = new Size(409, 172);
+            tableLayoutPanel1.Size = new Size(441, 195);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -74,11 +74,11 @@
             tableLayoutPanel2.Controls.Add(pb_Bishop, 3, 0);
             tableLayoutPanel2.Controls.Add(pb_Pawn, 4, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 90);
+            tableLayoutPanel2.Location = new Point(3, 101);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(403, 79);
+            tableLayoutPanel2.Size = new Size(435, 91);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // pb_Queen
@@ -86,7 +86,7 @@
             pb_Queen.Dock = DockStyle.Fill;
             pb_Queen.Location = new Point(3, 3);
             pb_Queen.Name = "pb_Queen";
-            pb_Queen.Size = new Size(74, 73);
+            pb_Queen.Size = new Size(81, 85);
             pb_Queen.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Queen.TabIndex = 0;
             pb_Queen.TabStop = false;
@@ -95,9 +95,9 @@
             // pb_Rook
             // 
             pb_Rook.Dock = DockStyle.Fill;
-            pb_Rook.Location = new Point(83, 3);
+            pb_Rook.Location = new Point(90, 3);
             pb_Rook.Name = "pb_Rook";
-            pb_Rook.Size = new Size(74, 73);
+            pb_Rook.Size = new Size(81, 85);
             pb_Rook.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Rook.TabIndex = 1;
             pb_Rook.TabStop = false;
@@ -106,9 +106,9 @@
             // pb_Knight
             // 
             pb_Knight.Dock = DockStyle.Fill;
-            pb_Knight.Location = new Point(163, 3);
+            pb_Knight.Location = new Point(177, 3);
             pb_Knight.Name = "pb_Knight";
-            pb_Knight.Size = new Size(74, 73);
+            pb_Knight.Size = new Size(81, 85);
             pb_Knight.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Knight.TabIndex = 2;
             pb_Knight.TabStop = false;
@@ -117,9 +117,9 @@
             // pb_Bishop
             // 
             pb_Bishop.Dock = DockStyle.Fill;
-            pb_Bishop.Location = new Point(243, 3);
+            pb_Bishop.Location = new Point(264, 3);
             pb_Bishop.Name = "pb_Bishop";
-            pb_Bishop.Size = new Size(74, 73);
+            pb_Bishop.Size = new Size(81, 85);
             pb_Bishop.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Bishop.TabIndex = 3;
             pb_Bishop.TabStop = false;
@@ -128,9 +128,9 @@
             // pb_Pawn
             // 
             pb_Pawn.Dock = DockStyle.Fill;
-            pb_Pawn.Location = new Point(323, 3);
+            pb_Pawn.Location = new Point(351, 3);
             pb_Pawn.Name = "pb_Pawn";
-            pb_Pawn.Size = new Size(77, 73);
+            pb_Pawn.Size = new Size(81, 85);
             pb_Pawn.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Pawn.TabIndex = 4;
             pb_Pawn.TabStop = false;
@@ -144,7 +144,7 @@
             label1.ForeColor = Color.FromArgb(255, 192, 128);
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(403, 87);
+            label1.Size = new Size(435, 98);
             label1.TabIndex = 1;
             label1.Text = "Choose A Piece";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -157,7 +157,7 @@
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(tableLayoutPanel1);
             Name = "PromotionControl";
-            Size = new Size(409, 172);
+            Size = new Size(441, 195);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);

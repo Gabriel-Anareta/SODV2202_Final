@@ -99,6 +99,8 @@ namespace ChessClient.MVVM.ViewModel
         
         private void OnPlayerEliminated(PlayerColor player)
         {
+            GameState.ColorsInPlay--;
+            
             foreach (Position pos in GameState.GameBoard.PiecePositionsFor(player))
             {
                 Piece piece = GameState.GameBoard[pos];
