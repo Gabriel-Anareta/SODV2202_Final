@@ -131,7 +131,6 @@
 
         protected abstract PieceCount GenerateCounter();
 
-
         public bool InsufficientMaterial()
         {
             PieceCount count = CountPieces();

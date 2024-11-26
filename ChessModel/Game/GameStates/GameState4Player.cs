@@ -19,8 +19,41 @@
             
             GameBoard = board;
             CurrentPlayer = player;
+            ColorsInPlay = 4;
 
             Move.CapturedPieceEvent += OnCapturedPiece;
+        }
+
+        public PlayerColor GetWinner()
+        {
+            List<PlayerColor> winners = new List<PlayerColor>();
+            int highestScore = 0;
+            foreach (var state in PlayerStates)
+            {
+                if (winners.Count == 0)
+                {
+                    winners.Add(state.Key);
+                    highestScore = state.Value.Score;
+                    continue;
+                }
+
+                if (state.Value.Score > highestScore)
+                {
+                    winners.Clear();
+                    winners.Add(state.Key);
+                    highestScore = state.Value.Score;
+                }
+
+                if (state.Value.Score == highestScore)
+                {
+                    winners.Add(state.Key);
+                }
+            }
+
+            if (winners.Count > 1)
+                return PlayerColor.None;
+
+            return winners.First();
         }
         
         public override void ExecuteMove(Move move)
@@ -69,17 +102,12 @@
 
         protected override void CheckGameOver()
         {
-            bool opponentsAreInPlay = true;
-            foreach (PlayerColor opponent in CurrentPlayer.Opponents())
-                opponentsAreInPlay = opponentsAreInPlay && PlayerStates[opponent].IsInPlay;
-
-            if (!opponentsAreInPlay || GameBoard.InsufficientMaterial())
-                RaiseGameOver();
-        }
-
-        private void RaiseGameOver()
-        {
-            
+            if (ColorsInPlay == 1)
+                EndResult = Result.Draw(EndReason.AllOpponentsEliminated);
+            else if (GameBoard.InsufficientMaterial())
+                EndResult = Result.Draw(EndReason.InsufficientMaterial);
+            else if (FiftyMoveRule(ColorsInPlay))
+                EndResult = Result.Draw(EndReason.FiftyMoveRule);
         }
 
         private void CheckElimination(PlayerColor player, ref int kingsCheckmated)
@@ -97,6 +125,7 @@
         private void EliminatePlayer(PlayerColor player)
         {
             PlayerStates[player].IsInPlay = false;
+            ColorsInPlay--;
             PlayerEliminated?.Invoke(player);
         }
 

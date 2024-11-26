@@ -48,5 +48,8 @@
         {
             return new Position(pos.File + dir.FileDelta, pos.Rank + dir.RankDelta);
         }
+
+        public override string ToString()
+            => $"{(FileValue)File}{Rank}";
     }
 }

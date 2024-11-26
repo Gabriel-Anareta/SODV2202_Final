@@ -7,6 +7,7 @@
         HighestPoints,
         FiftyMoveRule,
         InsufficientMaterial,
-        ThreefoldRepition
+        ThreefoldRepition,
+        AllOpponentsEliminated
     }
 }

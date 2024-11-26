@@ -23,12 +23,12 @@
             };
         }
 
-        public override void Execute(Board board, bool raisingCaptures = false)
+        public override bool Execute(Board board, bool raisingCaptures = false)
         {
             PlayerColor color = board[From].Color;
             board.SetEnPassantSquare(color, this);
 
-            new NormalMove(From, To).Execute(board);
+            return new NormalMove(From, To).Execute(board);
         }
     }
 }

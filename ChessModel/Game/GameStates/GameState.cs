@@ -2,9 +2,14 @@
 {
     public abstract class GameState
     {
+        public event Action<Result> GameEnded;
+        
         public Board GameBoard { get; set; }
         public PlayerColor CurrentPlayer { get; set; }
         public Result? EndResult { get; protected set; } = null;
+        public int ColorsInPlay { get; set; }
+
+        protected int _reversableMoves = 0;
         
 
         /// <summary>
@@ -52,5 +57,12 @@
         /// Checks for a game over state
         /// </summary>
         protected abstract void CheckGameOver();
+
+        /// <summary>
+        /// Checks for the Fifty Move Rule state
+        /// </summary>
+        /// <returns>True if the count of reversable moves made by both players is 50</returns>
+        protected bool FiftyMoveRule(int colorsInPlay)
+            => _reversableMoves == 50 * colorsInPlay;
     }
 }

@@ -16,7 +16,8 @@
         /// Executes the current move on the given board
         /// </summary>
         /// <param name="board"></param>
-        public abstract void Execute(Board board, bool raiseCaptures = false);
+        /// <returns>True if a pawn was moved or a piece was captured</returns>
+        public abstract bool Execute(Board board, bool raiseCaptures = false);
 
         /// <summary>
         /// Checks the validity of a current move on check positions

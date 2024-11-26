@@ -15,16 +15,16 @@
             _capturedPos = capturePos;
         }
 
-        public override void Execute(Board board, bool raisingCaptures = false)
+        public override bool Execute(Board board, bool raisingCaptures = false)
         {
             Piece fromPiece = board[From];
             Piece capturedPiece = board[_capturedPos];
 
-            new NormalMove(From, To).Execute(board, raisingCaptures);
-            board[_capturedPos] = new EmptyPiece();
-
             if (raisingCaptures)
                 OnCapturedPiece(fromPiece, capturedPiece);
+
+            board[_capturedPos] = new EmptyPiece();
+            return new NormalMove(From, To).Execute(board, raisingCaptures);
         }
     }
 }

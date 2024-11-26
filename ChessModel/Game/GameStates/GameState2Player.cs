@@ -9,13 +9,19 @@
         {
             GameBoard = board;
             CurrentPlayer = player;
+            ColorsInPlay = 2;
         }
 
         public override void ExecuteMove(Move move)
         {
             // Execute move
             GameBoard.SetEnPassantSquare(CurrentPlayer, null);
-            move.Execute(GameBoard, true);
+            bool pawnMovedOrCapture = move.Execute(GameBoard, true);
+
+            if (pawnMovedOrCapture)
+                _reversableMoves = 0;
+            else
+                _reversableMoves++;
 
             // Update game state
             CurrentPlayer = PlayerManager.Next(CurrentPlayer);
@@ -31,9 +37,14 @@
                 else
                     EndResult = Result.Draw(EndReason.Stalemate);
             }
-            
-            if (GameBoard.InsufficientMaterial())
+            else if (GameBoard.InsufficientMaterial())
+            {
                 EndResult = Result.Draw(EndReason.InsufficientMaterial);
+            }
+            else if (FiftyMoveRule(ColorsInPlay))
+            {
+                EndResult = Result.Draw(EndReason.FiftyMoveRule);
+            }
         }
     }
 }

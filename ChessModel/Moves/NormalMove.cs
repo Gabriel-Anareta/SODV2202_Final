@@ -11,7 +11,7 @@
         public override Position From { get; } = from;
         public override Position To { get; } = to;
 
-        public override void Execute(Board board, bool raisingCaptures = false)
+        public override bool Execute(Board board, bool raisingCaptures = false)
         {
             Piece fromPiece = board[From];
             Piece toPiece = board[To];
@@ -21,6 +21,8 @@
 
             if (toPiece.Type != PieceType.None && raisingCaptures)
                 OnCapturedPiece(fromPiece, toPiece);
+
+            return toPiece.Type != PieceType.None || fromPiece.Type == PieceType.Pawn;
         }
     }
 }
