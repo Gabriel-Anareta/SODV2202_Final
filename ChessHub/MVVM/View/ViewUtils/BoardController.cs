@@ -15,6 +15,7 @@ namespace ChessClient.MVVM.View.ViewUtils
         private PromotionControl _promCtrl;
         private GameOverControl _gameOverCtrl;
         private BoardSquare[,] _pieces;
+        private BoardType _boardType;
         private int _squaresOnSide;
 
         public BoardController(
@@ -28,6 +29,8 @@ namespace ChessClient.MVVM.View.ViewUtils
         {
             _boundedForm = form;
             _boardDisplay = boardDisplay;
+            _gameOverCtrl = new GameOverControl();
+            _boardType = boardType;
 
             ViewModel = boardType switch
             {
@@ -206,6 +209,33 @@ namespace ChessClient.MVVM.View.ViewUtils
 
         private void ShowGameOver(Result result)
         {
+            PlayerColor winner;
+            switch (_boardType)
+            {
+                case BoardType.Board2Player:
+                    winner = ViewModel.GameState.EndResult.Winner;
+                    EndReason reason = ViewModel.GameState.EndResult.Reason;
+
+                    if (winner == PlayerColor.None)
+                        _gameOverCtrl.SetTitleMessage("Draw");
+                    else
+                        _gameOverCtrl.SetTitleMessage($"{winner} has won!");
+
+                    _gameOverCtrl.SetDetailsMessage($"{reason}");
+                    break;
+                case BoardType.Board4Player:
+                    var gameState = (GameState4Player)ViewModel.GameState;
+                    winner = gameState.GetWinner();
+
+                    if (winner == PlayerColor.None)
+                        _gameOverCtrl.SetDetailsMessage("Draw");
+                    else
+                        _gameOverCtrl.SetDetailsMessage($"{winner} has won!");
+
+                    _gameOverCtrl.SetTitleMessage("Game Over!");
+                    break;
+            }
+            
             _gameOverCtrl.Size = new Size(
                 _boardDisplay.Width * 3 / 4,
                 _boardDisplay.Height / 4
@@ -218,7 +248,7 @@ namespace ChessClient.MVVM.View.ViewUtils
         {
             control.Location = CenterControl(container, control);
 
-            container.Controls.Add(_promCtrl);
+            container.Controls.Add(control);
             control.BringToFront();
         }
 

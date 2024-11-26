@@ -15,16 +15,16 @@ namespace ChessHub
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new ChessClient.AppContext());
-            //Application.Run(new Chess2PlayerView(
-            //    ChessModel.PlayerColor.White, 
-            //    new ChessClient.Net.Server(), 
-            //    new List<string>() { "Hannah", "John" }
-            //));
-            Application.Run(new Chess4PlayerView(
-                ChessModel.PlayerColor.Red, 
-                new ChessClient.Net.Server(), 
-                new List<string>() { "Hannah", "John", "Yoru", "Onda" }
+            Application.Run(new Chess2PlayerView(
+                ChessModel.PlayerColor.White,
+                new ChessClient.Net.Server(),
+                new List<string>() { "Hannah", "John" }
             ));
+            //Application.Run(new Chess4PlayerView(
+            //    ChessModel.PlayerColor.Red, 
+            //    new ChessClient.Net.Server(), 
+            //    new List<string>() { "Hannah", "John", "Yoru", "Onda" }
+            //));
         }
     }
 }

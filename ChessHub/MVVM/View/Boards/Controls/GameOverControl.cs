@@ -16,5 +16,11 @@ namespace ChessClient.MVVM.View.Boards.Controls
         {
             InitializeComponent();
         }
+
+        public void SetTitleMessage(string message)
+            => lbl_GameOver.Text = message;
+
+        public void SetDetailsMessage(string message)
+            => lbl_EndDetails.Text = message;
     }
 }
