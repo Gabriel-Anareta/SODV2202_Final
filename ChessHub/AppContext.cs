@@ -109,15 +109,29 @@ namespace ChessClient
                 }
             }
 
-            foreach (ConnectingLobby lobby in _connectionLobbies)
-                lobby.InvokeOnThread(() => 
+            for (int i = 0; i < _connectionLobbies.Count; i++)
+            {
+                _connectionLobbies[i].InvokeOnThread(() =>
                 {
-                    lobby.StopTimer();
-                    lobby.Close();
+                    _gameBoards[i].Show();
+                    _connectionLobbies[i].StopTimer();
+                    _connectionLobbies[i].Close();
                 });
+        }
 
-            foreach (Form game in _gameBoards)
-                game.Show();
+            //foreach (ConnectingLobby lobby in _connectionLobbies)
+            //    lobby.InvokeOnThread(() => 
+            //    {
+            //        lobby.StopTimer();
+            //        lobby.Close();
+            //    });
+
+            //foreach (Form game in _gameBoards)
+            //    game.Show();
+            //game.InvokeOnThread(() =>
+            //{
+            //    game.ShowDialog();
+            //});
         }
     }
 }

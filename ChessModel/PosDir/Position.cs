@@ -51,9 +51,10 @@
 
         public static Position ToPosition(string pos)
         {
-            string[] args = pos.Split();
-            int file = (int)Enum.Parse(typeof(FileValue), args[0]);
-            int rank = int.Parse(args[1]);
+            char fileArg = pos[0];
+            string rankArg = pos.Substring(1);
+            int file = (int)Enum.Parse(typeof(FileValue), fileArg.ToString());
+            int rank = int.Parse(rankArg);
             return new Position(file, rank);
         }
 

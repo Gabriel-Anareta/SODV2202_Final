@@ -12,6 +12,8 @@
         {
             if (form.InvokeRequired)
                 form.Invoke(action);
+            else
+                action();
         }
     }
 }

@@ -156,7 +156,7 @@
             // 
             lbl_PlayerBlue.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lbl_PlayerBlue.AutoSize = true;
-            lbl_PlayerBlue.BackColor = Color.Blue;
+            lbl_PlayerBlue.BackColor = Color.FromArgb(52, 71, 255);
             lbl_PlayerBlue.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_PlayerBlue.ForeColor = Color.FromArgb(254, 254, 254);
             lbl_PlayerBlue.Location = new Point(10, 346);
@@ -172,7 +172,7 @@
             // 
             lbl_PlayerYellow.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lbl_PlayerYellow.AutoSize = true;
-            lbl_PlayerYellow.BackColor = Color.Yellow;
+            lbl_PlayerYellow.BackColor = Color.FromArgb(255, 222, 59);
             lbl_PlayerYellow.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_PlayerYellow.ForeColor = Color.FromArgb(254, 254, 254);
             lbl_PlayerYellow.Location = new Point(10, 234);
@@ -188,7 +188,7 @@
             // 
             lbl_PlayerGreen.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lbl_PlayerGreen.AutoSize = true;
-            lbl_PlayerGreen.BackColor = Color.Green;
+            lbl_PlayerGreen.BackColor = Color.FromArgb(0, 191, 63);
             lbl_PlayerGreen.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_PlayerGreen.ForeColor = Color.FromArgb(254, 254, 254);
             lbl_PlayerGreen.Location = new Point(10, 122);
@@ -204,7 +204,7 @@
             // 
             lbl_PlayerRed.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lbl_PlayerRed.AutoSize = true;
-            lbl_PlayerRed.BackColor = Color.Red;
+            lbl_PlayerRed.BackColor = Color.FromArgb(255, 31, 31);
             lbl_PlayerRed.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_PlayerRed.ForeColor = Color.FromArgb(254, 254, 254);
             lbl_PlayerRed.Location = new Point(10, 10);

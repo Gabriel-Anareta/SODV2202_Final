@@ -10,6 +10,7 @@ namespace ChessClient.Net
         opCode key:
         0 - connect client
         1 - broadcasted client connection
+        2 - broadcasted move
         5 - broadcasted message
         10 - broadcasted client disconnection
         20 - send required users to server
@@ -22,6 +23,7 @@ namespace ChessClient.Net
         public PacketReader PacketReader;
 
         public event Action ConnectedEvent;
+        public event Action MoveRecievedEvent;
         public event Action MessageRecievedEvent;
         public event Action UserDisconnectedEvent;
         public event Action StartGameEvent;
@@ -79,6 +81,9 @@ namespace ChessClient.Net
                     {
                         case 1:
                             ConnectedEvent?.Invoke();
+                            break;
+                        case 2:
+                            MoveRecievedEvent?.Invoke();
                             break;
                         case 5:
                             MessageRecievedEvent?.Invoke();

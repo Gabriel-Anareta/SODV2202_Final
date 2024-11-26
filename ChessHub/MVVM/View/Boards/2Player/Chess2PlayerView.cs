@@ -26,8 +26,20 @@ namespace ChessClient.MVVM.View._2Player
 
             Chess2PlayerViewModel viewModel = (Chess2PlayerViewModel)_boardController.ViewModel;
 
-            Binding blackBinding = new Binding("Text", viewModel, nameof(viewModel.UsernameBlack));
-            Binding whiteBinding = new Binding("Text", viewModel, nameof(viewModel.UsernameWhite));
+            Binding blackBinding = new Binding(
+                "Text", 
+                viewModel, 
+                nameof(viewModel.UsernameBlack), 
+                true, 
+                DataSourceUpdateMode.OnPropertyChanged
+            );
+            Binding whiteBinding = new Binding(
+                "Text", 
+                viewModel, 
+                nameof(viewModel.UsernameWhite), 
+                true, 
+                DataSourceUpdateMode.OnPropertyChanged
+            );
 
             lbl_PlayerBlack.DataBindings.Add(blackBinding);
             lbl_PlayerWhite.DataBindings.Add(whiteBinding);

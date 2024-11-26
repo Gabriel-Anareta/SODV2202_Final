@@ -32,39 +32,32 @@ namespace ChessClient.MVVM.View.ViewUtils
             _gameOverCtrl = new GameOverControl();
             _boardType = boardType;
 
-            ViewModel = boardType switch
+            Func<int, int, bool> skipTest = (file, rank) => false;
+            switch (boardType)
             {
-                BoardType.Board2Player => new Chess2PlayerViewModel(color, server)
-                {
-                    UsernameWhite = users[0],
-                    UsernameBlack = users[1]
-                },
-                BoardType.Board4Player => new Chess4PlayerViewModel(color, server) 
-                {
-                    UsernameRed = users[0],
-                    UsernameGreen = users[1],
-                    UsernameYellow = users[2],
-                    UsernameBlue = users[3]
-                },
-                _ => throw new Exception("you wanna explain?")
-            };
-
-            _squaresOnSide = boardType switch
-            {
-                BoardType.Board2Player => 8,
-                BoardType.Board4Player => 14,
-                _ => throw new Exception("you wanna explain?")
-            };
+                case BoardType.Board2Player:
+                    ViewModel = new Chess2PlayerViewModel(color, server)
+                    {
+                        UsernameWhite = $"{users[0]} (playing)",
+                        UsernameBlack = users[1]
+                    };
+                    _squaresOnSide = 8;
+                    break;
+                case BoardType.Board4Player:
+                    ViewModel = new Chess4PlayerViewModel(color, server)
+                    {
+                        UsernameRed = $"{users[0]} (playing)",
+                        UsernameGreen = users[1],
+                        UsernameYellow = users[2],
+                        UsernameBlue = users[3]
+                    };
+                    _squaresOnSide = 14;
+                    skipTest = (file, rank) => ((Chess4PlayerViewModel)ViewModel).IsDeadSpace(file, rank);
+                    break;
+            }
 
             _pieces = new BoardSquare[_squaresOnSide, _squaresOnSide];
             _promCtrl = new PromotionControl(color, ViewModel.PromotionSelected);
-
-            Func<int, int, bool> skipTest = boardType switch
-            {
-                BoardType.Board2Player => (file, rank) => false,
-                BoardType.Board4Player => (file, rank) => ((Chess4PlayerViewModel)ViewModel).IsDeadSpace(file, rank),
-                _ => throw new Exception("you wanna explain?")
-            };
 
             _boundedForm.Text = $"Player: {color} / Name: {server.Username}";
 

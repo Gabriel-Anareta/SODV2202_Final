@@ -25,10 +25,34 @@ namespace ChessClient.MVVM.View._4Player
 
             Chess4PlayerViewModel viewModel = (Chess4PlayerViewModel)_boardController.ViewModel;
 
-            Binding redBinding = new Binding("Text", viewModel, nameof(viewModel.UsernameRed));
-            Binding greenBinding = new Binding("Text", viewModel, nameof(viewModel.UsernameGreen));
-            Binding yellowBinding = new Binding("Text", viewModel, nameof(viewModel.UsernameYellow));
-            Binding blueBinding = new Binding("Text", viewModel, nameof(viewModel.UsernameBlue));
+            Binding nameRedBinding = new Binding(
+                "Text", 
+                viewModel, 
+                nameof(viewModel.UsernameRed), 
+                true, 
+                DataSourceUpdateMode.OnPropertyChanged
+            );
+            Binding nameGreenBinding = new Binding(
+                "Text", 
+                viewModel, 
+                nameof(viewModel.UsernameGreen), 
+                true, 
+                DataSourceUpdateMode.OnPropertyChanged
+            );
+            Binding nameYellowBinding = new Binding(
+                "Text", 
+                viewModel, 
+                nameof(viewModel.UsernameYellow), 
+                true, 
+                DataSourceUpdateMode.OnPropertyChanged
+            );
+            Binding nameBlueBinding = new Binding(
+                "Text", 
+                viewModel, 
+                nameof(viewModel.UsernameBlue), 
+                true, 
+                DataSourceUpdateMode.OnPropertyChanged
+            );
             Binding scoreRedBinding = new Binding(
                 "Text",
                 viewModel,
@@ -57,11 +81,46 @@ namespace ChessClient.MVVM.View._4Player
                 true,
                 DataSourceUpdateMode.OnPropertyChanged
             );
+            Binding colorRedBinding = new Binding(
+                "BackColor",
+                viewModel,
+                nameof(viewModel.ColorRed),
+                true,
+                DataSourceUpdateMode.OnPropertyChanged
+            );
+            Binding colorGreenBinding = new Binding(
+                "BackColor",
+                viewModel,
+                nameof(viewModel.ColorGreen),
+                true,
+                DataSourceUpdateMode.OnPropertyChanged
+            );
+            Binding colorYellowBinding = new Binding(
+                "BackColor",
+                viewModel,
+                nameof(viewModel.ColorYellow),
+                true,
+                DataSourceUpdateMode.OnPropertyChanged
+            );
+            Binding colorBlueBinding = new Binding(
+                "BackColor",
+                viewModel,
+                nameof(viewModel.ColorBlue),
+                true,
+                DataSourceUpdateMode.OnPropertyChanged
+            );
 
-            lbl_PlayerRed.DataBindings.Add(redBinding);
-            lbl_PlayerGreen.DataBindings.Add(greenBinding);
-            lbl_PlayerYellow.DataBindings.Add(yellowBinding);
-            lbl_PlayerBlue.DataBindings.Add(blueBinding);
+            lbl_PlayerRed.DataBindings.Add(nameRedBinding);
+            lbl_PlayerRed.DataBindings.Add(colorRedBinding);
+
+            lbl_PlayerGreen.DataBindings.Add(nameGreenBinding);
+            lbl_PlayerGreen.DataBindings.Add(colorGreenBinding);
+
+            lbl_PlayerYellow.DataBindings.Add(nameYellowBinding);
+            lbl_PlayerYellow.DataBindings.Add(colorYellowBinding);
+
+            lbl_PlayerBlue.DataBindings.Add(nameBlueBinding);
+            lbl_PlayerBlue.DataBindings.Add(colorBlueBinding);
 
             lbl_ScoreRed.DataBindings.Add(scoreRedBinding);
             lbl_ScoreGreen.DataBindings.Add(scoreGreenBinding);

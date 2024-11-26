@@ -83,6 +83,20 @@ namespace ChessServer
             }
         }
 
+        public static void BroadcastMove(string move)
+        {
+            foreach (Client user in _users)
+            {
+                if (user.Username == "App Context")
+                    continue;
+
+                PacketBuilder broadcastPacket = new PacketBuilder();
+                broadcastPacket.WriteOpCode(2);
+                broadcastPacket.WriteMessage(move);
+                user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
+            }
+        }
+
         public static void BroadcastDisconnect(Guid uid)
         {
             Client disconnectedUser = _users.Where(user => user.UID == uid).FirstOrDefault();

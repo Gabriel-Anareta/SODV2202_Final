@@ -43,9 +43,6 @@
         }
 
         public override string ToString()
-        {
-            string color = _color.ToString();
-            return $"{From}-{To}-DP-{color}";
-        }
+            => $"{From}-{To}-DP-{_color}";
     }
 }

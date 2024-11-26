@@ -45,6 +45,11 @@ namespace ChessServer
                     byte opCode = _packetReader.ReadByte();
                     switch (opCode)
                     {
+                        case 2:
+                            string move = _packetReader.ReadMessage();
+                            Console.WriteLine($"[{DateTime.Now}]: {move}");
+                            Program.BroadcastMove(move);
+                            break;
                         case 5:
                             string message = _packetReader.ReadMessage();
                             Console.WriteLine($"[{DateTime.Now}]: {Username} sent message: {message}");

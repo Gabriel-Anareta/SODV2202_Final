@@ -46,6 +46,23 @@ namespace ChessClient.MVVM.ViewModel
         public bool IsEmpty(Position pos)
             => GameState.GameBoard.IsEmptyPosition(pos);
 
+        protected abstract void DisplayPlayingUser();
+
+        protected string RemovePlaying(string username)
+            => username.Replace("(playing)", string.Empty).Trim();
+
+        protected void OnMoveRecieved()
+        {
+            string move = Server.PacketReader.ReadMessage();
+
+            string[] moveArgs = move.Split('-');
+            Position from = Position.ToPosition(moveArgs[0]);
+            if (GameState.GameBoard[from].Type == PieceType.None)
+                return;
+
+            HandleMove(move);
+        }
+
         protected void PieceSelected(object obj)
         {
             if (MenuOnScreen)
@@ -82,6 +99,13 @@ namespace ChessClient.MVVM.ViewModel
                     HandleMove(move);
         }
 
+        protected void OnPromotionSelected(PieceType piece)
+        {
+            MenuOnScreen = false;
+            ConfirmPromotion.Invoke();
+            HandleMove(new PawnPromotion(CurrentMove.From, CurrentMove.To, piece));
+        }
+
         protected void RaisePromotion(Move move)
         {
             CurrentMove = move;
@@ -92,6 +116,7 @@ namespace ChessClient.MVVM.ViewModel
         protected void HandleMove(string move)
         {
             GameState.ExecuteMove(move);
+            DisplayPlayingUser();
             if (GameState.IsGameOver())
                 ShowGameOver(GameState.EndResult);
         }
@@ -99,6 +124,8 @@ namespace ChessClient.MVVM.ViewModel
         protected void HandleMove(Move move)
         {
             GameState.ExecuteMove(move);
+            DisplayPlayingUser();
+            Server.SendMessageToServer(move.ToString(), 2);
             if (GameState.IsGameOver())
                 ShowGameOver(GameState.EndResult);
         }
