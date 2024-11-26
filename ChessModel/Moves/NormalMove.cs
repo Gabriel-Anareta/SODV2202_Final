@@ -24,5 +24,8 @@
 
             return toPiece.Type != PieceType.None || fromPiece.Type == PieceType.Pawn;
         }
+
+        public override string ToString()
+            => $"{From}-{To}";
     }
 }

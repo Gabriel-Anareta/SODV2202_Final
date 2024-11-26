@@ -26,5 +26,8 @@
             board[_capturedPos] = new EmptyPiece();
             return new NormalMove(From, To).Execute(board, raisingCaptures);
         }
+
+        public override string ToString()
+            => $"{From}-{To}-EP-{_capturedPos}";
     }
 }

@@ -38,5 +38,19 @@
                 _ => new Pawn(color)
             };
         }
+
+        public override string ToString()
+        {
+            char promotion = _promotedTo switch
+            {
+                PieceType.Queen => 'Q',
+                PieceType.Rook => 'R',
+                PieceType.Knight => 'K',
+                PieceType.Bishop => 'B',
+                PieceType.Pawn => 'P',
+            };
+            
+            return $"{From}-{To}-PP-{promotion}";
+        }
     }
 }

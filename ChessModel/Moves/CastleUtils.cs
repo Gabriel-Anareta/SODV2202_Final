@@ -5,6 +5,15 @@
         private static dynamic KSQS(this MoveType type, dynamic argKS, dynamic argQS)
             => type == MoveType.CastleKingSide ? argKS : argQS;
 
+        public static string CastleTypeAsString(this MoveType type)
+        {
+            return type switch
+            {
+                MoveType.CastleKingSide => "KS",
+                MoveType.CastleQueenSide => "QS"
+            };
+        }
+
         public static Direction CastleDir(this MoveType type, PlayerColor color)
         {
             return color switch

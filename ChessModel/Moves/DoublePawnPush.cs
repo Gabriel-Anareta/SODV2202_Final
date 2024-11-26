@@ -8,10 +8,13 @@
 
         public readonly Position EnPassantSquare;
 
+        private readonly PlayerColor _color;
+
         public DoublePawnPush(Position from, Position to, PlayerColor color)
         {
             From = from;
             To = to;
+            _color = color;
             EnPassantSquare = color switch
             {
                 PlayerColor.White => new Position(From.File, (From.Rank + To.Rank) / 2),
@@ -29,6 +32,12 @@
             board.SetEnPassantSquare(color, this);
 
             return new NormalMove(From, To).Execute(board);
+        }
+
+        public override string ToString()
+        {
+            char color = _color.ToString()[0];
+            return $"{From}-{To}-DP-{color}";
         }
     }
 }

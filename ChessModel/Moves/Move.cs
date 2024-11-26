@@ -34,5 +34,11 @@
 
         protected void OnCapturedPiece(Piece capturingPiece, Piece capturedPiece)
             => CapturedPieceEvent?.Invoke(capturingPiece, capturedPiece);
+
+        protected virtual string GetSpecialMoveInfo()
+            => string.Empty;
+
+        public override string ToString()
+            => $"{From}-{To}";
     }
 }

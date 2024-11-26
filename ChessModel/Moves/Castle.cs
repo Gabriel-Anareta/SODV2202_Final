@@ -9,6 +9,7 @@
         private readonly Direction _kingMoveDir;
         private readonly Position _rookFrom;
         private readonly Position _rookTo;
+        private readonly PlayerColor _color;
 
         public Castle(Position kingPos, MoveType castleType, PlayerColor color)
         {
@@ -49,6 +50,14 @@
             }
 
             return true;
+        }
+
+        public override string ToString()
+        {
+            string castleType = Type.CastleTypeAsString();
+            char color = _color.ToString()[0];
+
+            return $"{From}-{To}-{castleType}-{color}";
         }
     }
 }
