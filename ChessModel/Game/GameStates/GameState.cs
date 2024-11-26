@@ -51,6 +51,38 @@
         /// Executes the given move and updates the game state
         /// </summary>
         /// <param name="move"></param>
+        public void ExecuteMove(string move)
+        {
+            string[] args = move.Split('-');
+
+            if (args.Length == 2)
+            {
+                ExecuteMove(NormalMove.ToMove(args));
+                return;
+            }
+                
+            switch (args[2]) 
+            {
+                case "KS":
+                case "QS":
+                    ExecuteMove(Castle.ToCastle(args));
+                    break;
+                case "DP":
+                    ExecuteMove(DoublePawnPush.ToDoublePush(args));
+                    break;
+                case "EP":
+                    ExecuteMove(EnPassant.ToEnPassant(args));
+                    break;
+                case "PP":
+                    ExecuteMove(PawnPromotion.ToPromotion(args));
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Executes the given move and updates the game state
+        /// </summary>
+        /// <param name="move"></param>
         public abstract void ExecuteMove(Move move);
 
         /// <summary>

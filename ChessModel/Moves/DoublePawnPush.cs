@@ -34,9 +34,17 @@
             return new NormalMove(From, To).Execute(board);
         }
 
+        public static DoublePawnPush ToDoublePush(string[] pushArgs)
+        {
+            Position from = Position.ToPosition(pushArgs[0]);
+            Position to = Position.ToPosition(pushArgs[1]);
+            PlayerColor color = (PlayerColor)Enum.Parse(typeof(PlayerColor), pushArgs[3]);
+            return new DoublePawnPush(from, to, color);
+        }
+
         public override string ToString()
         {
-            char color = _color.ToString()[0];
+            string color = _color.ToString();
             return $"{From}-{To}-DP-{color}";
         }
     }

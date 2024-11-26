@@ -27,6 +27,14 @@
             return new NormalMove(From, To).Execute(board, raisingCaptures);
         }
 
+        public static EnPassant ToEnPassant(string[] enPassantArgs)
+        {
+            Position from = Position.ToPosition(enPassantArgs[0]);
+            Position to = Position.ToPosition(enPassantArgs[1]);
+            Position captured = Position.ToPosition(enPassantArgs[3]);
+            return new EnPassant(from, to, captured);
+        }
+
         public override string ToString()
             => $"{From}-{To}-EP-{_capturedPos}";
     }

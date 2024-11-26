@@ -52,10 +52,18 @@
             return true;
         }
 
+        public static Castle ToCastle(string[] castleArgs)
+        {
+            Position from = Position.ToPosition(castleArgs[0]);
+            MoveType type = castleArgs[2].StringAsCastleType();
+            PlayerColor color = (PlayerColor)Enum.Parse(typeof(PlayerColor), castleArgs[3]);
+            return new Castle(from, type, color);
+        }
+
         public override string ToString()
         {
             string castleType = Type.CastleTypeAsString();
-            char color = _color.ToString()[0];
+            string color = _color.ToString();
 
             return $"{From}-{To}-{castleType}-{color}";
         }

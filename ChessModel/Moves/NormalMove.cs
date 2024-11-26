@@ -25,7 +25,14 @@
             return toPiece.Type != PieceType.None || fromPiece.Type == PieceType.Pawn;
         }
 
+        public static NormalMove ToMove(string[] moveArgs)
+        {
+            Position from = Position.ToPosition(moveArgs[0]);
+            Position to = Position.ToPosition(moveArgs[1]);
+            return new NormalMove(from, to);
+        }
+
         public override string ToString()
-            => $"{From}-{To}";
+            => base.ToString();
     }
 }

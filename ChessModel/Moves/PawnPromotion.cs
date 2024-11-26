@@ -39,6 +39,21 @@
             };
         }
 
+        public static PawnPromotion ToPromotion(string[] promotionArgs)
+        {
+            Position from = Position.ToPosition(promotionArgs[0]);
+            Position to = Position.ToPosition(promotionArgs[1]);
+            PieceType type = promotionArgs[3] switch
+            {
+                "Q" => PieceType.Queen,
+                "R" => PieceType.Rook,
+                "K" => PieceType.Knight,
+                "B" => PieceType.Bishop,
+                "P" => PieceType.Pawn,
+            };
+            return new PawnPromotion(from, to, type);
+        }
+
         public override string ToString()
         {
             char promotion = _promotedTo switch

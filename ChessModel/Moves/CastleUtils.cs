@@ -14,6 +14,15 @@
             };
         }
 
+        public static MoveType StringAsCastleType(this string type)
+        {
+            return type switch
+            {
+                "KS" => MoveType.CastleKingSide,
+                "QS" => MoveType.CastleQueenSide
+            };
+        }
+
         public static Direction CastleDir(this MoveType type, PlayerColor color)
         {
             return color switch

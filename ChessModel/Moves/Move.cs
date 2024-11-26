@@ -1,4 +1,6 @@
-﻿namespace ChessModel
+﻿using System.Security.Policy;
+
+namespace ChessModel
 {
     /// <summary>
     /// Represents a move on a board
@@ -34,9 +36,6 @@
 
         protected void OnCapturedPiece(Piece capturingPiece, Piece capturedPiece)
             => CapturedPieceEvent?.Invoke(capturingPiece, capturedPiece);
-
-        protected virtual string GetSpecialMoveInfo()
-            => string.Empty;
 
         public override string ToString()
             => $"{From}-{To}";

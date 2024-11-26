@@ -89,6 +89,13 @@ namespace ChessClient.MVVM.ViewModel
             ChoosePromotion.Invoke();
         }
 
+        protected void HandleMove(string move)
+        {
+            GameState.ExecuteMove(move);
+            if (GameState.IsGameOver())
+                ShowGameOver(GameState.EndResult);
+        }
+
         protected void HandleMove(Move move)
         {
             GameState.ExecuteMove(move);

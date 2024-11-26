@@ -49,6 +49,14 @@
             return new Position(pos.File + dir.FileDelta, pos.Rank + dir.RankDelta);
         }
 
+        public static Position ToPosition(string pos)
+        {
+            string[] args = pos.Split();
+            int file = (int)Enum.Parse(typeof(FileValue), args[0]);
+            int rank = int.Parse(args[1]);
+            return new Position(file, rank);
+        }
+
         public override string ToString()
             => $"{(FileValue)File}{Rank}";
     }
