@@ -17,11 +17,10 @@
 
         public override bool Execute(Board board, bool raisingCaptures = false)
         {
-            Piece fromPiece = board[From];
             Piece capturedPiece = board[_capturedPos];
 
             if (raisingCaptures)
-                OnCapturedPiece(fromPiece, capturedPiece);
+                OnCapturedPiece(capturedPiece);
 
             board[_capturedPos] = new EmptyPiece();
             return new NormalMove(From, To).Execute(board, raisingCaptures);

@@ -8,8 +8,10 @@ namespace ChessClient.MVVM.ViewModel
     public class Chess4PlayerViewModel : ChessViewModel
     {
         public event Action<PlayerColor> PlayerEliminated;
-        
-        
+        public event Action ScoresUpdated;
+
+        #region Player Properties
+
         private string _usernameRed;
         public string UsernameRed 
         {
@@ -166,7 +168,7 @@ namespace ChessClient.MVVM.ViewModel
             }
         }
 
-
+        #endregion
 
         public Chess4PlayerViewModel(PlayerColor color, Server server)
         {
@@ -200,10 +202,16 @@ namespace ChessClient.MVVM.ViewModel
             ScoreBlue = "0";
 
             ((GameState4Player)GameState).PlayerEliminated += OnPlayerEliminated;
-            ((GameState4Player)GameState).PlayerScoreChanged += UpdateScores;
+            ((GameState4Player)GameState).ScoresChanged += OnScoresChanged;
         }
 
-        private void OnPlayerEliminated(PlayerColor player)
+        private void OnPlayerEliminated(PlayerColor color)
+            => PlayerEliminated?.Invoke(color);
+
+        private void OnScoresChanged()
+            => ScoresUpdated?.Invoke();
+
+        public void DisplayPlayerElimination(PlayerColor player)
         {
             GameState.ColorsInPlay--;
             
@@ -236,30 +244,35 @@ namespace ChessClient.MVVM.ViewModel
             }
         }
 
-
-        private void UpdateScores(PlayerColor color, string score)
+        public void UpdateScores()
         {
-            switch (color) 
-            {
-                case PlayerColor.Red:
-                    ScoreRed = score;
-                    break;
-                case PlayerColor.Green:
-                    ScoreGreen = score;
-                    break;
-                case PlayerColor.Yellow:
-                    ScoreYellow = score;
-                    break;
-                case PlayerColor.Blue:
-                    ScoreBlue = score;
-                    break;
-            }
+            GameState4Player gs4p = (GameState4Player)GameState;
+            ScoreRed = gs4p.PlayerStates[PlayerColor.Red].Score.ToString();
+            ScoreGreen = gs4p.PlayerStates[PlayerColor.Green].Score.ToString();
+            ScoreYellow = gs4p.PlayerStates[PlayerColor.Yellow].Score.ToString();
+            ScoreBlue = gs4p.PlayerStates[PlayerColor.Blue].Score.ToString();
+
+            //switch (color)
+            //{
+            //    case PlayerColor.Red:
+            //        ScoreRed = score;
+            //        break;
+            //    case PlayerColor.Green:
+            //        ScoreGreen = score;
+            //        break;
+            //    case PlayerColor.Yellow:
+            //        ScoreYellow = score;
+            //        break;
+            //    case PlayerColor.Blue:
+            //        ScoreBlue = score;
+            //        break;
+            //}
         }
 
         public bool IsDeadSpace(int file, int rank)
             => ((Board4Player)GameState.GameBoard).PositionInDeadSpace(new Position(file, rank));
 
-        protected override void DisplayPlayingUser()
+        public override void DisplayPlayingUser()
         {
             UsernameRed = RemovePlaying(UsernameRed);
             UsernameGreen = RemovePlaying(UsernameGreen);

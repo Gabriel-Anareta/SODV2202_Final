@@ -14,6 +14,11 @@ namespace ChessClient.MVVM.ViewModel
         protected List<string> Users;
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public Action<Move> MoveExecuted;
+        public Action<string> MoveScheduled;
+        public Action CurrentPlayerChanged;
+
         public Action<Dictionary<Position, Move>> HideHighlights;
         public Action<Dictionary<Position, Move>> ShowHighlights;
         public Action ChoosePromotion;
@@ -46,9 +51,12 @@ namespace ChessClient.MVVM.ViewModel
         public bool IsEmpty(Position pos)
             => GameState.GameBoard.IsEmptyPosition(pos);
 
-        protected abstract void DisplayPlayingUser();
+        private void OnCurrentPlayerChanged()
+            => CurrentPlayerChanged?.Invoke();
 
-        protected string RemovePlaying(string username)
+        public abstract void DisplayPlayingUser();
+
+        public string RemovePlaying(string username)
             => username.Replace("(playing)", string.Empty).Trim();
 
         protected void OnMoveRecieved()
@@ -60,7 +68,8 @@ namespace ChessClient.MVVM.ViewModel
             if (GameState.GameBoard[from].Type == PieceType.None)
                 return;
 
-            HandleMove(move);
+            OnMoveScheduled(move);
+            //HandleMove(move);
         }
 
         protected void PieceSelected(object obj)
@@ -96,14 +105,16 @@ namespace ChessClient.MVVM.ViewModel
                 if (move.Type == MoveType.PawnPromotion)
                     RaisePromotion(move);
                 else
-                    HandleMove(move);
+                    OnMoveExecuted(move);
+                    //HandleMove(move);
         }
 
         protected void OnPromotionSelected(PieceType piece)
         {
             MenuOnScreen = false;
             ConfirmPromotion.Invoke();
-            HandleMove(new PawnPromotion(CurrentMove.From, CurrentMove.To, piece));
+            OnMoveExecuted(new PawnPromotion(CurrentMove.From, CurrentMove.To, piece));
+            //HandleMove(new PawnPromotion(CurrentMove.From, CurrentMove.To, piece));
         }
 
         protected void RaisePromotion(Move move)
@@ -113,18 +124,24 @@ namespace ChessClient.MVVM.ViewModel
             ChoosePromotion.Invoke();
         }
 
-        protected void HandleMove(string move)
+        private void OnMoveExecuted(Move move)
+            => MoveExecuted?.Invoke(move);
+
+        private void OnMoveScheduled(string move)
+            => MoveScheduled.Invoke(move);
+
+        public void HandleMove(string move)
         {
             GameState.ExecuteMove(move);
-            DisplayPlayingUser();
+            OnCurrentPlayerChanged();
             if (GameState.IsGameOver())
                 ShowGameOver(GameState.EndResult);
         }
 
-        protected void HandleMove(Move move)
+        public void HandleMove(Move move)
         {
             GameState.ExecuteMove(move);
-            DisplayPlayingUser();
+            OnCurrentPlayerChanged();
             Server.SendMessageToServer(move.ToString(), 2);
             if (GameState.IsGameOver())
                 ShowGameOver(GameState.EndResult);

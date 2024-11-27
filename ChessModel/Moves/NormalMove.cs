@@ -20,7 +20,7 @@
             fromPiece.HasMoved = true;
 
             if (toPiece.Type != PieceType.None && raisingCaptures)
-                OnCapturedPiece(fromPiece, toPiece);
+                OnCapturedPiece(toPiece);
 
             return toPiece.Type != PieceType.None || fromPiece.Type == PieceType.Pawn;
         }

@@ -45,7 +45,10 @@ namespace ChessClient.MVVM.ViewModel
 
             PieceSelectedCommand = new RelayCommand(
                 obj => PieceSelected(obj),
-                obj => ClientColor == GameState.CurrentPlayer
+                obj =>
+                {
+                    return ClientColor == GameState.CurrentPlayer;
+                }
             );
 
             PromotionSelected = piece =>
@@ -56,7 +59,7 @@ namespace ChessClient.MVVM.ViewModel
             };
         }
 
-        protected override void DisplayPlayingUser()
+        public override void DisplayPlayingUser()
         {
             UsernameBlack = RemovePlaying(UsernameBlack);
             UsernameWhite = RemovePlaying(UsernameWhite);

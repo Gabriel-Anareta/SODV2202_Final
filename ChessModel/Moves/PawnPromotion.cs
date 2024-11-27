@@ -45,10 +45,10 @@
             Position to = Position.ToPosition(promotionArgs[1]);
             PieceType type = promotionArgs[3] switch
             {
-                "Q" => PieceType.Queen,
-                "R" => PieceType.Rook,
-                "K" => PieceType.Knight,
-                "B" => PieceType.Bishop,
+                "Q" => PieceType.PromotedQueen,
+                "R" => PieceType.PromotedRook,
+                "K" => PieceType.PromotedKnight,
+                "B" => PieceType.PromotedBishop,
                 "P" => PieceType.Pawn,
             };
             return new PawnPromotion(from, to, type);
@@ -58,10 +58,10 @@
         {
             char promotion = _promotedTo switch
             {
-                PieceType.Queen => 'Q',
-                PieceType.Rook => 'R',
-                PieceType.Knight => 'K',
-                PieceType.Bishop => 'B',
+                PieceType.PromotedQueen => 'Q',
+                PieceType.PromotedRook => 'R',
+                PieceType.PromotedKnight => 'K',
+                PieceType.PromotedBishop => 'B',
                 PieceType.Pawn => 'P',
             };
             

@@ -11,7 +11,7 @@ namespace ChessModel
         public abstract Position From { get; }
         public abstract Position To { get; }
 
-        public delegate void Capture(Piece capturingPiece, Piece capturedPiece);
+        public delegate void Capture(Piece capturedPiece);
         public static event Capture CapturedPieceEvent;
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace ChessModel
             return !copy.IsInCheck(color);
         }
 
-        protected void OnCapturedPiece(Piece capturingPiece, Piece capturedPiece)
-            => CapturedPieceEvent?.Invoke(capturingPiece, capturedPiece);
+        protected void OnCapturedPiece(Piece capturedPiece)
+            => CapturedPieceEvent?.Invoke(capturedPiece);
 
         public override string ToString()
             => $"{From}-{To}";

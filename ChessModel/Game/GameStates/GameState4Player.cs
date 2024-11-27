@@ -3,9 +3,11 @@
     public class GameState4Player : GameState
     {
         public event Action<PlayerColor> PlayerEliminated;
-        public event Action<PlayerColor, string> PlayerScoreChanged;
+        public event Action ScoresChanged;
         
         public Dictionary<PlayerColor, PlayerState> PlayerStates { get; set; }
+
+        private PieceType? _capturedPiece = null;
         
         public GameState4Player(Board4Player board, PlayerColor player)
         {
@@ -60,7 +62,15 @@
         {
             // Execute move
             GameBoard.SetEnPassantSquare(CurrentPlayer, null);
-            move.Execute(GameBoard, true);
+            bool pawnMovedOrCapture = move.Execute(GameBoard, true);
+
+            if (pawnMovedOrCapture)
+                _reversableMoves = 0;
+            else
+                _reversableMoves++;
+
+            if (_capturedPiece != null)
+                PlayerStates[CurrentPlayer].Score += ((PieceType)_capturedPiece).GetPiecePoints();
 
             Piece movingPiece = GameBoard[move.To];
 
@@ -88,6 +98,8 @@
                     CheckElimination(player, ref kingsCheckmated);
 
             AwardCheckmatePoints(kingsCheckmated);
+
+            ScoresChanged?.Invoke();
 
             // Update game state
             CheckGameOver();
@@ -137,7 +149,6 @@
                     continue;
 
                 PlayerStates[opponent].Score += 10;
-                PlayerScoreChanged?.Invoke(opponent, PlayerStates[opponent].Score.ToString());
             }
         }
 
@@ -165,8 +176,6 @@
                 default:
                     break;
             }
-
-            PlayerScoreChanged?.Invoke(color, PlayerStates[color].Score.ToString());
         }
 
         private void AwardCheckmatePoints(int checkmateCount)
@@ -176,14 +185,9 @@
             
             for (int i = 0; i < checkmateCount; i++)
                 PlayerStates[CurrentPlayer].Score += 20;
-
-            PlayerScoreChanged?.Invoke(CurrentPlayer, PlayerStates[CurrentPlayer].Score.ToString());
         }
 
-        private void OnCapturedPiece(Piece capturingPiece, Piece capturedPiece)
-        {
-            PlayerStates[capturingPiece.Color].Score += capturedPiece.Type.GetPiecePoints();
-            PlayerScoreChanged?.Invoke(CurrentPlayer, PlayerStates[CurrentPlayer].Score.ToString());
-        }
+        private void OnCapturedPiece(Piece capturedPiece)
+            => _capturedPiece = capturedPiece.Type;
     }
 }

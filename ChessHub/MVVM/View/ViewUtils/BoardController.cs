@@ -3,6 +3,7 @@ using ChessClient.MVVM.View.Controls;
 using ChessClient.MVVM.ViewModel;
 using ChessClient.Net;
 using ChessModel;
+using System.Drawing.Text;
 
 namespace ChessClient.MVVM.View.ViewUtils
 {
@@ -53,6 +54,9 @@ namespace ChessClient.MVVM.View.ViewUtils
                     };
                     _squaresOnSide = 14;
                     skipTest = (file, rank) => ((Chess4PlayerViewModel)ViewModel).IsDeadSpace(file, rank);
+
+                    ((Chess4PlayerViewModel)ViewModel).PlayerEliminated += UpdateEliminations;
+                    ((Chess4PlayerViewModel)ViewModel).ScoresUpdated += UpdateScores;
                     break;
             }
 
@@ -63,6 +67,9 @@ namespace ChessClient.MVVM.View.ViewUtils
 
             _boardDisplay.Paint += (obj, e) => DrawSquares(e, skipTest);
 
+            ViewModel.CurrentPlayerChanged += UpdateUsernames;
+            ViewModel.MoveExecuted += UpdateBoard;
+            ViewModel.MoveScheduled += UpdateBoard;
             ViewModel.ShowHighlights += ShowHighlights;
             ViewModel.HideHighlights += HideHighlights;
             ViewModel.ChoosePromotion += ShowPromotion;
@@ -72,6 +79,21 @@ namespace ChessClient.MVVM.View.ViewUtils
             InitializeBoard(skipTest);
             AdjustBoardSize();
         }
+
+        private void UpdateUsernames()
+            => _boundedForm.InvokeOnThread(() => ViewModel.DisplayPlayingUser());
+
+        private void UpdateBoard(string move)
+            => _boundedForm.InvokeOnThread(() => ViewModel.HandleMove(move));
+
+        private void UpdateBoard(Move move)
+            => _boundedForm.InvokeOnThread(() => ViewModel.HandleMove(move));
+
+        private void UpdateEliminations(PlayerColor color)
+            => _boundedForm.InvokeOnThread(() => ((Chess4PlayerViewModel)ViewModel).DisplayPlayerElimination(color));
+
+        private void UpdateScores()
+            => _boundedForm.InvokeOnThread(() => ((Chess4PlayerViewModel)ViewModel).UpdateScores());
 
         public void LoadBoard()
         {
@@ -239,10 +261,12 @@ namespace ChessClient.MVVM.View.ViewUtils
 
         private void AddControlToContainer(Control container, Control control)
         {
-            control.Location = CenterControl(container, control);
-
-            container.Controls.Add(control);
-            control.BringToFront();
+            _boundedForm.InvokeOnThread(() =>
+            {
+                control.Location = CenterControl(container, control);
+                container.Controls.Add(control);
+                control.BringToFront();
+            });
         }
 
         private Point CenterControl(Control container, Control control)

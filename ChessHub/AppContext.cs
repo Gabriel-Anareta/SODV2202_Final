@@ -22,19 +22,18 @@ namespace ChessClient
         private BoardType _selectedType;
         private int _requiredUsers;
 
-        private List<PlayerColor> _player4Colors = new List<PlayerColor>
+        private readonly List<PlayerColor> _player4Colors = new List<PlayerColor>
         {
             PlayerColor.Red,
             PlayerColor.Green,
             PlayerColor.Yellow,
             PlayerColor.Blue
         };
-        private List<PlayerColor> _player2Colors = new List<PlayerColor>
+        private readonly List<PlayerColor> _player2Colors = new List<PlayerColor>
         {
             PlayerColor.White,
             PlayerColor.Black
         };
-
 
         public AppContext()
         {
@@ -117,21 +116,7 @@ namespace ChessClient
                     _connectionLobbies[i].StopTimer();
                     _connectionLobbies[i].Close();
                 });
-        }
-
-            //foreach (ConnectingLobby lobby in _connectionLobbies)
-            //    lobby.InvokeOnThread(() => 
-            //    {
-            //        lobby.StopTimer();
-            //        lobby.Close();
-            //    });
-
-            //foreach (Form game in _gameBoards)
-            //    game.Show();
-            //game.InvokeOnThread(() =>
-            //{
-            //    game.ShowDialog();
-            //});
+            }
         }
     }
 }
