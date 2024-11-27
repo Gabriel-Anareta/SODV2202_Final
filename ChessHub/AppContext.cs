@@ -1,5 +1,4 @@
-﻿using ChessClient.MVVM.Model;
-using ChessClient.MVVM.View;
+﻿using ChessClient.MVVM.View;
 using ChessClient.MVVM.View._2Player;
 using ChessClient.MVVM.View._4Player;
 using ChessClient.MVVM.View.ConnectLobbies;

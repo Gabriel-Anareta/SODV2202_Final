@@ -39,10 +39,11 @@
 
             Board copy = board.Copy();
             Position KingPosInCopy = From;
+            List<Position> between = Type.BetweenPos(color, From);
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < between.Count; i++)
             {
-                new NormalMove(KingPosInCopy, KingPosInCopy + _kingMoveDir).Execute(copy);
+                new NormalMove(KingPosInCopy, between[i]).Execute(copy);
                 KingPosInCopy += _kingMoveDir;
 
                 if (copy.IsInCheck(color))

@@ -69,7 +69,6 @@ namespace ChessClient.MVVM.ViewModel
                 return;
 
             OnMoveScheduled(move);
-            //HandleMove(move);
         }
 
         protected void PieceSelected(object obj)
@@ -106,7 +105,6 @@ namespace ChessClient.MVVM.ViewModel
                     RaisePromotion(move);
                 else
                     OnMoveExecuted(move);
-                    //HandleMove(move);
         }
 
         protected void OnPromotionSelected(PieceType piece)
@@ -114,7 +112,6 @@ namespace ChessClient.MVVM.ViewModel
             MenuOnScreen = false;
             ConfirmPromotion.Invoke();
             OnMoveExecuted(new PawnPromotion(CurrentMove.From, CurrentMove.To, piece));
-            //HandleMove(new PawnPromotion(CurrentMove.From, CurrentMove.To, piece));
         }
 
         protected void RaisePromotion(Move move)

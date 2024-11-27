@@ -1,4 +1,7 @@
-﻿namespace ChessModel
+﻿using static System.Windows.Forms.AxHost;
+using System.ComponentModel;
+
+namespace ChessModel
 {
     /// <summary>
     /// Implements base board functionality and properties
@@ -88,8 +91,9 @@
         /// <returns>Returns true if the given player is in check</returns>
         public bool IsInCheck(PlayerColor player)
         {
-            foreach (PlayerColor opponent in player.Opponents())
-                if (PiecePositionsFor(opponent).Any(pos => this[pos].CanCaptureOpponentKing(pos, this, player)))
+            var opponents = player.Opponents();
+            for (int i = 0; i < opponents.Count; i++)
+                if (PiecePositionsFor(opponents[i]).Any(pos => this[pos].CanCaptureOpponentKing(pos, this, player)))
                     return true;
             return false;
         }

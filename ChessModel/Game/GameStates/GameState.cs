@@ -32,8 +32,7 @@
             if (GameBoard.IsEmptyPosition(pos) || GameBoard[pos].Color != color)
                 return Enumerable.Empty<Move>();
 
-            Piece piece = GameBoard[pos];
-            return piece.GetMoves(pos, GameBoard)
+            return GameBoard[pos].GetMoves(pos, GameBoard)
                 .Where(move => move.IsValidMove(GameBoard));
         }
 
