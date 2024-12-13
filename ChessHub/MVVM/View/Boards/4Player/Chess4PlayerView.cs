@@ -1,5 +1,4 @@
-﻿using ChessClient.MVVM.View.Controls;
-using ChessClient.MVVM.View.ViewUtils;
+﻿using ChessClient.MVVM.View.ViewUtils;
 using ChessClient.MVVM.ViewModel;
 using ChessClient.Net;
 using ChessModel;

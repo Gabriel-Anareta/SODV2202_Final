@@ -7,7 +7,6 @@
     {
         public override int FILES => 8;
         public override int RANKS => 8;
-        public override Binding2DArray<Piece> Pieces { get; set; }
 
         public Board2Player()
         {

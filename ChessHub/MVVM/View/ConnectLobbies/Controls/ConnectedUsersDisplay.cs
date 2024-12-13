@@ -12,6 +12,11 @@
         {
             InitializeComponent();
 
+            lv_ConnectedUsers.StateImageList = new ImageList();
+            lv_ConnectedUsers.StateImageList.ImageSize = new Size(1, 35);
+
+            column_empty.ImageIndex = 0;
+            column_Users.ImageIndex = 1;
             column_Users.Width = maxSize;
             AddUser += AddItemToList;
             ClearUsers += ClearItems;

@@ -1,7 +1,4 @@
-﻿
-using System.Security.AccessControl;
-
-namespace ChessModel
+﻿namespace ChessModel
 {
     /// <summary>
     /// Represents a queen - implements piece

@@ -1,9 +1,6 @@
 ﻿using ChessServer.Net.IO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ChessServer
@@ -23,7 +20,7 @@ namespace ChessServer
 
             _packetReader = new PacketReader(ClientSocket.GetStream());
             byte opCode = _packetReader.ReadByte();
-            // need to implement validation of opCode 
+            
             Username = _packetReader.ReadMessage();
 
             Console.WriteLine($"[{DateTime.Now}]: Client has connected with the username: {Username}");

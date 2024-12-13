@@ -1,7 +1,4 @@
-﻿using static System.Windows.Forms.AxHost;
-using System.ComponentModel;
-
-namespace ChessModel
+﻿namespace ChessModel
 {
     /// <summary>
     /// Implements base board functionality and properties
@@ -10,7 +7,7 @@ namespace ChessModel
     {
         public abstract int FILES { get; }
         public abstract int RANKS { get; }
-        public abstract Binding2DArray<Piece> Pieces { get; set; }
+        public Binding2DArray<Piece> Pieces { get; set; }
 
         protected Dictionary<PlayerColor, Move> _enPassantSquares;
 

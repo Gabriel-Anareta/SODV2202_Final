@@ -10,7 +10,7 @@ namespace ChessClient.MVVM.ViewModel
     {
         private Server _server;
 
-        public Action UsersChanged { get; set; } // currently used to u[date the user list
+        public Action UsersChanged { get; set; } // used to update the user list
         public List<UserModel> Users { get; set; }
 
         private string _username;

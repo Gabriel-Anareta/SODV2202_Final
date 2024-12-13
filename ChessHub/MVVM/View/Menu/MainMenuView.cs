@@ -1,6 +1,5 @@
 ﻿using ChessClient.MVVM.View.Menu.Controls;
 using ChessClient.MVVM.View.ViewUtils;
-using System.Windows.Forms;
 
 namespace ChessClient.MVVM.View.Menu
 {
@@ -29,7 +28,6 @@ namespace ChessClient.MVVM.View.Menu
 
             mainMenuControl = new MainMenuControl();
             mainMenuControl.StartClicked += OpenGameCollection;
-            mainMenuControl.HelpClicked += OpenInfoPage;
             mainMenuControl.Dock = DockStyle.Fill;
             mainMenuControl.SetEnabled(true);
 
@@ -37,7 +35,6 @@ namespace ChessClient.MVVM.View.Menu
             gameCollection.OptionSelected += CreateGameLobby;
             gameCollection.Left = (this.ClientSize.Width - gameCollection.Width) / 2;
             gameCollection.Top = (this.ClientSize.Height - gameCollection.Height) / 2;
-            //gameCollection.Margin = new Padding(50);
             gameCollection.SetEnabled(false);
         }
 

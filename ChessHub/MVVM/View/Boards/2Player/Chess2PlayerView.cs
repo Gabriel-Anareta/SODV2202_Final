@@ -1,8 +1,6 @@
 ﻿using ChessModel;
 using ChessClient.MVVM.ViewModel;
-using ChessClient.MVVM.View.Controls;
 using ChessClient.Net;
-using System.Drawing;
 using ChessClient.MVVM.View.ViewUtils;
 
 namespace ChessClient.MVVM.View._2Player

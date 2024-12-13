@@ -73,11 +73,12 @@
             lv_ConnectedUsers.Columns.AddRange(new ColumnHeader[] { column_empty, column_Users });
             lv_ConnectedUsers.Dock = DockStyle.Fill;
             lv_ConnectedUsers.ForeColor = Color.FromArgb(254, 254, 254);
-            lv_ConnectedUsers.HeaderStyle = ColumnHeaderStyle.None;
-            lv_ConnectedUsers.Location = new Point(3, 86);
+            lv_ConnectedUsers.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lv_ConnectedUsers.Location = new Point(0, 83);
+            lv_ConnectedUsers.Margin = new Padding(0);
             lv_ConnectedUsers.Name = "lv_ConnectedUsers";
             lv_ConnectedUsers.Scrollable = false;
-            lv_ConnectedUsers.Size = new Size(416, 211);
+            lv_ConnectedUsers.Size = new Size(422, 217);
             lv_ConnectedUsers.TabIndex = 1;
             lv_ConnectedUsers.UseCompatibleStateImageBehavior = false;
             lv_ConnectedUsers.View = System.Windows.Forms.View.Details;

@@ -3,7 +3,6 @@ using ChessClient.MVVM.View.Controls;
 using ChessClient.MVVM.ViewModel;
 using ChessClient.Net;
 using ChessModel;
-using System.Drawing.Text;
 
 namespace ChessClient.MVVM.View.ViewUtils
 {

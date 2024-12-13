@@ -1,5 +1,4 @@
 ﻿using ChessClient.Net.IO;
-using System;
 using System.Net.Sockets;
 
 namespace ChessClient.Net
@@ -14,6 +13,7 @@ namespace ChessClient.Net
         5 - broadcasted message
         10 - broadcasted client disconnection
         20 - send required users to server
+        21 - start game
          */
 
         private const int PORT = 5000;

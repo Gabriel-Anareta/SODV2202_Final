@@ -1,7 +1,6 @@
 ﻿using ChessClient.MVVM.ViewModel.Commands;
 using ChessClient.Net;
 using ChessModel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ChessClient.MVVM.ViewModel
 {
@@ -183,10 +182,7 @@ namespace ChessClient.MVVM.ViewModel
 
             PieceSelectedCommand = new RelayCommand(
                 obj => PieceSelected(obj),
-                obj => {
-                    return ClientColor == GameState.CurrentPlayer;
-                    //return true;
-                }
+                obj => ClientColor == GameState.CurrentPlayer
             );
 
             PromotionSelected = OnPromotionSelected;
@@ -251,22 +247,6 @@ namespace ChessClient.MVVM.ViewModel
             ScoreGreen = gs4p.PlayerStates[PlayerColor.Green].Score.ToString();
             ScoreYellow = gs4p.PlayerStates[PlayerColor.Yellow].Score.ToString();
             ScoreBlue = gs4p.PlayerStates[PlayerColor.Blue].Score.ToString();
-
-            //switch (color)
-            //{
-            //    case PlayerColor.Red:
-            //        ScoreRed = score;
-            //        break;
-            //    case PlayerColor.Green:
-            //        ScoreGreen = score;
-            //        break;
-            //    case PlayerColor.Yellow:
-            //        ScoreYellow = score;
-            //        break;
-            //    case PlayerColor.Blue:
-            //        ScoreBlue = score;
-            //        break;
-            //}
         }
 
         public bool IsDeadSpace(int file, int rank)

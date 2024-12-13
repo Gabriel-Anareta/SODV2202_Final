@@ -1,6 +1,4 @@
-﻿using System.Security.Policy;
-
-namespace ChessModel
+﻿namespace ChessModel
 {
     /// <summary>
     /// Represents a move on a board

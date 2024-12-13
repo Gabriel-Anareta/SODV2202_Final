@@ -3,15 +3,13 @@
     public partial class MainMenuControl : UserControl
     {
         public Action StartClicked { get; set; }
-        public Action HelpClicked { get; set; }
 
         public MainMenuControl()
         {
             InitializeComponent();
             lbl_Start.MouseHover += HighlightText;
-            lbl_Help.MouseHover += HighlightText;
             lbl_Start.MouseLeave += UnhighlightText;
-            lbl_Help.MouseLeave += UnhighlightText;
+            this.DoubleBuffered = true;
         }
 
         private void HighlightText(object? sender, EventArgs e)
@@ -32,8 +30,5 @@
 
         private void lbl_Start_Click(object sender, EventArgs e)
             => StartClicked?.Invoke();
-
-        private void lbl_Help_Click(object sender, EventArgs e)
-            => HelpClicked?.Invoke();
     }
 }

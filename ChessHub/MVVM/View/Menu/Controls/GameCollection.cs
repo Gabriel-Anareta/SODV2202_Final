@@ -11,6 +11,7 @@ namespace ChessClient.MVVM.View.Menu.Controls
             InitializeComponent();
             player2Option.Selected += OnOptionSelected;
             player4Option.Selected += OnOptionSelected;
+            this.DoubleBuffered = true;
         }
 
         private void OnOptionSelected(BoardType type)

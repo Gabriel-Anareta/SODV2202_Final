@@ -103,6 +103,11 @@
 
             // Update game state
             CheckGameOver();
+            SetNextPlayer();
+        }
+
+        private void SetNextPlayer()
+        {
             PlayerColor initial = CurrentPlayer;
             while (true)
             {
